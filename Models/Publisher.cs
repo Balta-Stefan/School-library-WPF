@@ -27,5 +27,10 @@ namespace School_library.Models
         {
             return HashCode.Combine(publisherID);
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }
