@@ -17,35 +17,61 @@
 
         <Grid Grid.Row="0" Margin="15,15,15,15">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Expander Grid.Row="0" Margin="0,0,0,30" BorderBrush="#424242" BorderThickness="2">
+                <Expander.Header>
+                    <TextBlock Foreground="Red" FontWeight="Bold">Click to show/hide filters...</TextBlock>
+                </Expander.Header>
+                <Grid Grid.Row="0" Margin="10,10,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0">Name</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="1"/>
-                <TextBlock Grid.Column="0" Grid.Row="2">Publisher</TextBlock>
-                <ComboBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Publishers}"/>
+                    <Grid.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="0,0,55,0"/>
+                        </Style>
+                    </Grid.Resources>
 
-                <TextBlock Grid.Column="1" Grid.Row="0">Genre</TextBlock>
-                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Genres}"/>
-                <TextBlock Grid.Column="1" Grid.Row="2">Number of copies</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="0">Name</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Number of total copies</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="3" Text="{Binding NumberOfCopiesFilter, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Button Grid.Column="1" Grid.Row="4" Background="#424242" Foreground="White" FontWeight="Bold">Search</Button>
-            </Grid>
+                    <TextBlock Grid.Column="1" Grid.Row="0">ISBN-10</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Isbn10Filter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2">ISBN-13</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Isbn13Filter}"/>
+                    
+                    <CheckBox Grid.Column="1" Grid.Row="4" Margin="0,20,0,0" HorizontalAlignment="Center" IsChecked="{Binding OnlyWithAvailableCopiesFilter}">Only with available copies</CheckBox>
+
+                    <TextBlock Grid.Column="2" Grid.Row="0">Genre</TextBlock>
+                    <ComboBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Genres}" SelectedIndex="{Binding SelectedGenreIndex}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="2">Publisher</TextBlock>
+                    <ComboBox Grid.Column="2" Grid.Row="3" ItemsSource="{Binding Publishers}" SelectedIndex="{Binding SelectedPublisherIndex}"/>
+
+                    <Grid Grid.Column="2" Grid.Row="4" Margin="0,15,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Margin="0,0,15,0" Background="#424242" Foreground="White" FontWeight="Bold" Padding="10,10,10,10">Search</Button>
+                        <Button Grid.Column="1" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding ClearBookFiltersCommand}">Clear filters</Button>
+                    </Grid>
+                </Grid>
+            </Expander>
 
             <ListBox Grid.Row="1" ItemsSource="{Binding Books}" HorizontalContentAlignment="Stretch" Background="Transparent">
                 <ListBox.ItemContainerStyle>
@@ -53,6 +79,7 @@
                         <Setter Property="Background" Value="white"/>
                         <Setter Property="Padding" Value="35,35,35,35"/>
                         <Setter Property="Margin" Value="0,0,0,10"/>
+                        <Setter Property="Focusable" Value="False"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
@@ -60,24 +87,41 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Rectangle Grid.Column="0" Fill="yellow"/>
-
-                            <StackPanel Grid.Column="1">
+                            <StackPanel Grid.Column="0">
                                 <WrapPanel>
                                     <TextBlock Text="Title: "/>
-                                    <TextBlock Text="{Binding bookTitle}"/>
+                                    <TextBlock Text="{Binding bookTitle}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="Author: "/>
-                                    <TextBlock Text="{Binding author.firstName}"/>
+                                    <TextBlock Text="{Binding author.firstName}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="ISBN-10: "/>
+                                    <TextBlock Text="{Binding isbn10}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="ISBN-13: "/>
+                                    <TextBlock Text="{Binding isbn13}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Publisher: "/>
+                                    <TextBlock Text="{Binding publisher}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Genre: "/>
+                                    <TextBlock Text="{Binding genre}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Number of copies: "/>
+                                    <TextBlock Text="{Binding numberOfCopies}" FontWeight="Regular"/>
                                 </WrapPanel>
                             </StackPanel>
 
-                            <Button Grid.Column="2" Background="#700101" Foreground="White" FontWeight="Bold">Change</Button>
+                            <Button Grid.Column="1" Background="#700101" Foreground="White" FontWeight="Bold" MinWidth="150" MaxHeight="50">Change</Button>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

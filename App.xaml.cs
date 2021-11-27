@@ -23,8 +23,8 @@ namespace School_library
             ObservableCollection<Publisher> publishers = new ObservableCollection<Publisher>();
             ObservableCollection<Genre> genres = new ObservableCollection<Genre>();
 
-            books.Add(new Book(1, "", "", "prva knjiga", 1, new Author(1, "Marko", "Markovic"), null, null));
-            books.Add(new Book(1, "", "", "druga knjiga", 1, new Author(1, "Zivko", "Zivkovic"), null, null));
+            books.Add(new Book(1, "prvi isbn13", "prvi isbn10", "prva knjiga", 1, new Author(1, "Marko", "Markovic"), new Publisher(1, "prvi izdavac"), new Genre(1, "prvi zanr"), 1));
+            books.Add(new Book(1, "drugi isbn13", "drugi isbn10", "druga knjiga", 1, new Author(1, "Zivko", "Zivkovic"), new Publisher(2, "Drugi izdavac"), new Genre(2, "drugi zanr"), 1));
 
             publishers.Add(new Publisher(1, "prvi izdavac"));
             publishers.Add(new Publisher(1, "drugi izdavac"));

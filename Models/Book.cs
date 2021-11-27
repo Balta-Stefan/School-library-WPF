@@ -17,7 +17,9 @@ namespace School_library.Models
         public Publisher publisher { get; private set; }
         public Genre genre { get; private set; }
 
-        public Book(int bookID, string isbn13, string isbn10, string bookTitle, short edition, Author author, Publisher publisher, Genre genre)
+        public int numberOfCopies { get; private set; }
+
+        public Book(int bookID, string isbn13, string isbn10, string bookTitle, short edition, Author author, Publisher publisher, Genre genre, int numberOfCopies)
         {
             this.bookID = bookID;
             this.isbn13 = isbn13;
@@ -27,6 +29,7 @@ namespace School_library.Models
             this.author = author;
             this.publisher = publisher;
             this.genre = genre;
+            this.numberOfCopies = numberOfCopies;
         }
 
         public override bool Equals(object? obj)
