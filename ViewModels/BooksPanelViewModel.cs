@@ -126,7 +126,7 @@ namespace School_library.ViewModels
             get { return isbn10Filter; }
             set
             {
-                isbn10Filter = value;
+                isbn10Filter = value.Trim();
                 filtersClear = false;
                 OnPropertyChange("Isbn10Filter");
             }
@@ -139,7 +139,7 @@ namespace School_library.ViewModels
             get { return isbn13Filter; }
             set
             {
-                isbn13Filter = value;
+                isbn13Filter = value.Trim();
                 filtersClear = false;
                 OnPropertyChange("Isbn13Filter");
             }
@@ -159,6 +159,9 @@ namespace School_library.ViewModels
 
         public void clearFilters()
         {
+            if (filtersClear == true)
+                return;
+
             NameFilter = string.Empty;
             NumberOfCopiesFilter = string.Empty;
             OnlyWithAvailableCopiesFilter = false;
