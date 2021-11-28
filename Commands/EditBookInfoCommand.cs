@@ -8,10 +8,9 @@ using System.Windows.Input;
 
 namespace School_library.Commands
 {
-    public class FilterBooksCommand : ICommand
+    public class EditBookInfoCommand : ICommand
     {
-        private BooksPanelViewModel booksViewModel;
-
+        private EditBookInfoViewModel editBookViewModel;
 
         public event EventHandler? CanExecuteChanged;
 
@@ -22,9 +21,9 @@ namespace School_library.Commands
 
         public void Execute(object? parameter)
         {
-            booksViewModel.filterBooks();
+            editBookViewModel.updateBookInfo();
         }
 
-        public FilterBooksCommand(BooksPanelViewModel booksViewModel) => this.booksViewModel = booksViewModel;
+        public EditBookInfoCommand(EditBookInfoViewModel editBookViewModel) => this.editBookViewModel = editBookViewModel;
     }
 }

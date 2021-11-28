@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="PanelBackgroundColor">#424242</Color>
+    <Color x:Key="TextBoxBackground">#424242</Color>
+    
     <Style x:Key="NavBar" TargetType="TabItem">
         <Setter Property="Template">
             <Setter.Value>

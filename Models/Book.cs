@@ -6,18 +6,99 @@ using System.Threading.Tasks;
 
 namespace School_library.Models
 {
-    public class Book
+    public class Book : ModelBase
     {
-        public int bookID { get; private set; }
-        public string isbn13 { get; private set; }
-        public string isbn10 { get; private set; }
-        public string bookTitle { get; private set; }
-        public short edition { get; private set; }
-        public Author author { get; private set; }
-        public Publisher publisher { get; private set; }
-        public Genre genre { get; private set; }
+        private int bookID;
+        public int BookID
+        {
+            get { return bookID; }
+            set
+            {
+                bookID = value;
+                OnPropertyChanged("BookID");
+            }
+        }
+        private string isbn13;
+        public string ISBN13
+        {
+            get { return isbn13; }
+            set
+            {
+                isbn13 = value;
+                OnPropertyChanged("ISBN13");
+            }
+        }
+        private string isbn10;
+        public string ISBN10
+        {
+            get { return isbn10; }
+            set
+            {
+                isbn10 = value;
+                OnPropertyChanged("ISBN10");
+            }
+        }
+        private string bookTitle;
+        public string BookTitle
+        {
+            get { return bookTitle; }
+            set
+            {
+                bookTitle = value;
+                OnPropertyChanged("BookTitle");
+            }
+        }
+        private short edition;
+        public short Edition
+        {
+            get { return edition; }
+            set
+            {
+                edition = value;
+                OnPropertyChanged("Edition");
+            }
+        }
+        private Author author;
+        public Author Author
+        {
+            get { return author; }
+            set
+            {
+                author = value;
+                OnPropertyChanged("Author");
+            }
+        }
+        private Publisher publisher;
+        public Publisher Publisher
+        {
+            get { return publisher; }
+            set
+            {
+                publisher = value;
+                OnPropertyChanged("Publisher");
+            }
+        }
+        private Genre genre;
+        public Genre Genre
+        {
+            get { return genre; }
+            set
+            {
+                genre = value;
+                OnPropertyChanged("Genre");
+            }
+        }
 
-        public int numberOfCopies { get; private set; }
+        private int numberOfCopies;
+        public int NumberOfCopies
+        {
+            get { return numberOfCopies; }
+            set
+            {
+                numberOfCopies = value;
+                OnPropertyChanged("NumberOfCopies");
+            }
+        }
 
         public Book(int bookID, string isbn13, string isbn10, string bookTitle, short edition, Author author, Publisher publisher, Genre genre, int numberOfCopies)
         {

@@ -8,17 +8,19 @@ namespace School_library.Models
 {
     public class BookCopy
     {
-        public int bookCopyID { get; private set; }
-        public BookCondition condition { get; private set; }
-        public DateTime deliveredAt { get; private set; }
-        public Book book { get; private set; }
+        public int bookCopyID { get; set; }
+        public BookCondition condition { get; set; }
+        public DateTime deliveredAt { get; set; }
+        public Book book { get; set; }
+        public bool available { get; set; }
 
-        public BookCopy(int bookCopyID, BookCondition condition, DateTime deliveredAt, Book book)
+        public BookCopy(int bookCopyID, BookCondition condition, DateTime deliveredAt, Book book, bool available)
         {
             this.bookCopyID = bookCopyID;
             this.condition = condition;
             this.deliveredAt = deliveredAt;
             this.book = book;
+            this.available = available;
         }
 
         public override bool Equals(object? obj)

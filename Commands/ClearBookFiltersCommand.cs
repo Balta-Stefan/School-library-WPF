@@ -24,9 +24,6 @@ namespace School_library.Commands
             booksViewModel.clearFilters();
         }
 
-        public ClearBookFiltersCommand(BooksPanelViewModel booksViewModel)
-        {
-            this.booksViewModel = booksViewModel;
-        }
+        public ClearBookFiltersCommand(BooksPanelViewModel booksViewModel) => this.booksViewModel = booksViewModel;
     }
 }

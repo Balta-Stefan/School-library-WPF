@@ -1,4 +1,5 @@
-﻿using School_library.Models;
+﻿using School_library.DAO;
+using School_library.Models;
 using School_library.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,15 @@ namespace School_library
     
     public partial class App : Application
     {
+        private const string connectionString = "Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
         protected override void OnStartup(StartupEventArgs e)
         {
-            ObservableCollection<Book> books = new ObservableCollection<Book>();
+            BookDAO bookDao = new BookDAO(connectionString);
+            PublisherDAO publisherDao = new PublisherDAO(connectionString);
+            GenreDAO genreDao = new GenreDAO(connectionString);
+            AuthorDAO authorDao = new AuthorDAO(connectionString);
+
+            /*ObservableCollection<Book> books = new ObservableCollection<Book>();
             ObservableCollection<Publisher> publishers = new ObservableCollection<Publisher>();
             ObservableCollection<Genre> genres = new ObservableCollection<Genre>();
 
@@ -30,10 +37,10 @@ namespace School_library
             publishers.Add(new Publisher(1, "drugi izdavac"));
 
             genres.Add(new Genre(1, "prvi zanr"));
-            genres.Add(new Genre(1, "drugi zanr"));
+            genres.Add(new Genre(1, "drugi zanr"));*/
 
 
-            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(books, publishers, genres);
+            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao);
 
             MainWindow mainWindow = new MainWindow()
             {
