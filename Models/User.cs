@@ -8,16 +8,16 @@ namespace School_library.Models
 {
     public class User
     {
-        public enum userTypes { LIBRARIAN, ACCOUNTANT, MEMBER}
+        public enum UserTypes { LIBRARIAN, ACCOUNTANT, MEMBER}
         public int userID { get; private set; }
         public string firstName { get; private set; }
         public string lastName { get; private set; }
         public string username { get; private set; }
         public string password { get; private set; }
 
-        public userTypes userType;
+        public UserTypes userType { get; }
 
-        public User(int userID, string firstName, string lastName, string username, string password, userTypes userType)
+        public User(int userID, string firstName, string lastName, string username, string password, UserTypes userType)
         {
             this.userID = userID;
             this.firstName = firstName;

@@ -29,6 +29,7 @@ namespace School_library
             PublisherDAO publisherDao = new PublisherDAO(connectionString);
             GenreDAO genreDao = new GenreDAO(connectionString);
             AuthorDAO authorDao = new AuthorDAO(connectionString);
+            UserDAO userDao = new UserDAO(connectionString);
 
             /*ObservableCollection<Book> books = new ObservableCollection<Book>();
             ObservableCollection<Publisher> publishers = new ObservableCollection<Publisher>();
@@ -58,7 +59,7 @@ namespace School_library
 
             TabItem membersTab = new TabItem();
             membersTab.Header = "Members";
-            MembersPanelViewModel membersViewModel = new MembersPanelViewModel();
+            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao);
             MembersPanel membersPanel = new MembersPanel()
             {
                 DataContext = membersViewModel

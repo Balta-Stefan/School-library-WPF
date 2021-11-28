@@ -8,7 +8,7 @@ namespace School_library.Models
 {
     public class Accountant : User
     {
-        public Accountant(int userID, string firstName, string lastName, string username, string password) : base(userID, firstName, lastName, username, password, User.userTypes.ACCOUNTANT)
+        public Accountant(int userID, string firstName, string lastName, string username, string password) : base(userID, firstName, lastName, username, password, User.UserTypes.ACCOUNTANT)
         {
         }
     }

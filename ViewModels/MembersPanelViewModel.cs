@@ -1,4 +1,5 @@
 ﻿using School_library.Commands;
+using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace School_library.ViewModels
 {
     public class MembersPanelViewModel : ViewModelBase
     {
+        private UserDAO userDao;
+
         private string firstName = string.Empty;
         public string FirstName
         {
@@ -34,31 +37,49 @@ namespace School_library.ViewModels
             }
         }
 
-        private string cardNumber = string.Empty;
+        private int cardNumber = -1;
         public string CardNumber
         {
-            get { return cardNumber; }
+            get 
+            {
+                if (cardNumber == -1)
+                    return string.Empty;
+                else
+                    return cardNumber.ToString();
+            }
             set
             {
-                cardNumber = value;
+                if(value.Equals(string.Empty))
+                {
+                    cardNumber = -1;
+                }
+                else
+                {
+                    try
+                    {
+                        cardNumber = Int32.Parse(value);
+                    }
+                    catch (Exception) { }
+                }
+               
                 OnPropertyChange("CardNumber");
             }
         }
 
-        private ObservableCollection<MemberTypes> types = new ObservableCollection<MemberTypes>();
-        public ObservableCollection<MemberTypes> MemberTypesList
+        private ObservableCollection<User.UserTypes> types = new ObservableCollection<User.UserTypes>();
+        public ObservableCollection<User.UserTypes> UserTypesList
         {
             get { return types; }
         }
 
-        private MemberTypes? selectedMemberType = null;
-        public MemberTypes? SelectedMemberType
+        private User.UserTypes? selectedMemberType = null;
+        public User.UserTypes? SelectedMemberType
         {
             get { return selectedMemberType; }
             set
             {
                 selectedMemberType = value;
-                if(value.Equals(MemberTypes.MEMBER) == false)
+                if(value.Equals(User.UserTypes.MEMBER) == false)
                 {
                     CardInputEnabled = false;
                     CardNumber = string.Empty;
@@ -82,13 +103,26 @@ namespace School_library.ViewModels
         }
        
         public ICommand ClearFilters { get; }
-        public MembersPanelViewModel()
+        public ICommand FilterMembers { get; }
+
+
+        private ObservableCollection<User> users = new ObservableCollection<User>();
+        public ObservableCollection<User> Users
         {
-            IEnumerable<MemberTypes> allTypes = Enum.GetValues(typeof(MemberTypes)).Cast<MemberTypes>();
-            foreach (MemberTypes t in allTypes) 
+            get { return users; }
+        }
+        public MembersPanelViewModel(UserDAO userDao)
+        {
+            IEnumerable<User.UserTypes> allTypes = Enum.GetValues(typeof(User.UserTypes)).Cast<User.UserTypes>();
+            foreach (User.UserTypes t in allTypes) 
                 types.Add(t);
 
             ClearFilters = new ClearMembersPanelFilters(this);
+            FilterMembers = new FilterMembersCommand(this);
+
+            this.userDao = userDao;
+
+            foreach (User u in userDao.getUsers()) users.Add(u);
         }
 
         public void clearFilters()
@@ -96,6 +130,53 @@ namespace School_library.ViewModels
             FirstName = LastName = CardNumber = string.Empty;
             SelectedMemberType = null;
             CardInputEnabled = true;
+
+            List<User> allUsers = userDao.getUsers();
+            users.Clear();
+            foreach (User u in allUsers) users.Add(u);
+        }
+
+        private bool areFiltersEmpty()
+        {
+            if (firstName.Equals(string.Empty) &&
+               lastName.Equals(string.Empty) &&
+               cardNumber.Equals(string.Empty) &&
+               selectedMemberType == null)
+                return true;
+            return false;
+        }
+
+        public void filterMembers()
+        {
+            if (areFiltersEmpty() == true)
+                return;
+
+            List<User> allUsers = userDao.getUsers();
+            users.Clear();
+
+            foreach(User u in allUsers)
+            {
+                if (firstName.Equals(string.Empty) == false && u.firstName.Equals(firstName) == false)
+                    continue;
+                if (lastName.Equals(string.Empty) == false && u.lastName.Equals(lastName) == false)
+                    continue;
+                if(CardNumber.Equals(string.Empty) == false)
+                {
+                    if (u.GetType() == typeof(Member))
+                    {
+                        Member mem = (Member)u;
+                        if (mem.userID != cardNumber)
+                            continue;
+                    }
+                    else
+                        continue;
+                }
+                if (selectedMemberType != null && u.userType.Equals(selectedMemberType) == false)
+                    continue;
+
+                users.Add(u);
+            }
+
         }
     }
 }

@@ -8,10 +8,9 @@ namespace School_library.Models
 {
     public class Member : User
     {
-        public int cardNumber { get; private set; }
-        public Member(int userID, string firstName, string lastName, string username, string password, int cardNumber) : base(userID, firstName, lastName, username, password, User.userTypes.MEMBER)
+        public Member(int userID, string firstName, string lastName, string username, string password) : base(userID, firstName, lastName, username, password, User.UserTypes.MEMBER)
         {
-            this.cardNumber = cardNumber;
+           
         }
     }
 }

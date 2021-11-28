@@ -54,16 +54,52 @@
                     <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding LastName}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="2">User type</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding MemberTypesList}" SelectedItem="{Binding SelectedMemberType}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding UserTypesList}" SelectedItem="{Binding SelectedMemberType}"/>
 
                     <TextBlock Grid.Column="3" Grid.Row="2">Card number</TextBlock>
-                    <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding CardInputEnabled}" Text="{Binding CardNumber}"/>
+                    <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding CardInputEnabled, UpdateSourceTrigger=PropertyChanged}" Text="{Binding CardNumber}"/>
 
-                 
-                    <Button Grid.Column="1" Grid.Row="4" Background="#424242" Foreground="White" FontWeight="Bold">Search</Button>
+
+                    <Button Grid.Column="1" Grid.Row="4" Background="#424242" Foreground="White" FontWeight="Bold" Command="{Binding FilterMembers}">Search</Button>
                     <Button Grid.Column="3" Grid.Row="4" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding ClearFilters}">Clear filters</Button>
                 </Grid>
             </Expander>
+
+            <ListBox Grid.Row="1" ItemsSource="{Binding Users}" HorizontalContentAlignment="Stretch" Background="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="white"/>
+                        <Setter Property="Padding" Value="35,35,35,35"/>
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                        <!--<Setter Property="Focusable" Value="False"/>-->
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <WrapPanel>
+                                    <TextBlock Text="User type: "/>
+                                    <TextBlock Text="{Binding userType}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="First name: "/>
+                                    <TextBlock Text="{Binding firstName}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Last name: "/>
+                                    <TextBlock Text="{Binding lastName}" FontWeight="Regular"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </Grid>
     </Grid>
 </UserControl>
