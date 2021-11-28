@@ -99,29 +99,29 @@ namespace School_library.ViewModels
             }
         }
 
-        private int selectedGenreIndex = -1;
+        private Genre? selectedGenre = null;
 
-        public int SelectedGenreIndex
+        public Genre? SelectedGenre
         {
-            get { return selectedGenreIndex; }
+            get { return selectedGenre; }
             set 
             {
                 filtersClear = false;
-                selectedGenreIndex = value;
-                OnPropertyChange("SelectedGenreIndex");
+                selectedGenre = value;
+                OnPropertyChange("SelectedGenre");
             }
         }
 
-        private int selectedPublisherIndex = -1;
+        private Publisher? selectedPublisher = null;
 
-        public int SelectedPublisherIndex
+        public Publisher? SelectedPublisher
         {
-            get { return selectedPublisherIndex; }
+            get { return selectedPublisher; }
             set
             {
                 filtersClear = false;
-                selectedPublisherIndex = value;
-                OnPropertyChange("SelectedPublisherIndex");
+                selectedPublisher = value;
+                OnPropertyChange("SelectedPublisher");
             }
         }
 
@@ -151,14 +151,15 @@ namespace School_library.ViewModels
             }
         }
 
-        private int selectedBookIndex = -1;
-        public int SelectedBookIndex
+        private Book? selectedBook = null;
+        public Book? SelectedBook
         {
-            get { return selectedBookIndex; }
+            get { return selectedBook; }
             set
             {
-                selectedBookIndex = value;
-                OnBookSelect();
+                selectedBook = value;
+                if(value != null)
+                    OnBookSelect();
                 //OnPropertyChange("SelectedBookIndex");
             }
         }
@@ -187,7 +188,8 @@ namespace School_library.ViewModels
             NameFilter = string.Empty;
             NumberOfCopiesFilter = string.Empty;
             OnlyWithAvailableCopiesFilter = false;
-            SelectedGenreIndex = SelectedPublisherIndex = - 1;
+            SelectedPublisher = null;
+            SelectedGenre = null;
             Isbn10Filter = Isbn13Filter = string.Empty;
 
             filtersClear = true;
@@ -199,9 +201,6 @@ namespace School_library.ViewModels
 
         private void OnBookSelect()
         {
-            Book selectedBook = books.ElementAt(selectedBookIndex);
-
-
             EditBookInfo editDataWindow = new EditBookInfo()
             {
                 DataContext = new EditBookInfoViewModel(bookDao, genreDao, publisherDao, authorDAO, selectedBook)
@@ -215,8 +214,8 @@ namespace School_library.ViewModels
                isbn13Filter.Equals(string.Empty) &&
                nameFilter.Equals(string.Empty) &&
                numberOfCopiesFilter == -1 &&
-               selectedPublisherIndex == -1 &&
-               selectedGenreIndex == -1 &&
+               selectedPublisher == null &&
+               selectedGenre == null &&
                onlyWithAvailableCopiesFilter == false)
                 return true;
             return false;
@@ -242,18 +241,10 @@ namespace School_library.ViewModels
                     continue;
                 if (numberOfCopiesFilter != -1 && b.NumberOfCopies != numberOfCopiesFilter)
                     continue;
-                if(selectedPublisherIndex != -1)
-                {
-                    Publisher selectedPublisher = publishers.ElementAt(selectedPublisherIndex);
-                    if (b.Publisher.Equals(selectedPublisher) == false)
-                        continue;
-                }
-                if(selectedGenreIndex != -1)
-                {
-                    Genre selectedGenre = genres.ElementAt(selectedGenreIndex);
-                    if (b.Genre.Equals(selectedGenre) == false)
-                        continue;
-                }
+                if(selectedPublisher != null && b.Publisher.Equals(selectedPublisher) == false)
+                    continue;
+                if(selectedGenre != null && b.Genre.Equals(selectedGenre) == false)
+                    continue;
                 if(onlyWithAvailableCopiesFilter == true)
                 {
                     bool hasAvailableCopies = false;
