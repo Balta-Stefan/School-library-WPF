@@ -1,0 +1,35 @@
+﻿<Window x:Class="School_library.Views.AddUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:School_library.Views"
+        mc:Ignorable="d"
+        Title="AddUserWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock>First name:</TextBlock>
+            <TextBox Text="{Binding FirstName}"/>
+
+            <TextBlock>Last name:</TextBlock>
+            <TextBox Text="{Binding LastName}"/>
+
+            <TextBlock>Username:</TextBlock>
+            <TextBox Text="{Binding Username}"/>
+
+            <TextBlock>Password:</TextBlock>
+            <TextBox Text="{Binding Password}"/>
+
+            <TextBlock>User type:</TextBlock>
+            <ComboBox ItemsSource="{Binding UserTypes}" SelectedItem="{Binding SelectedType}"/>
+
+            <Button Padding="13,13,13,13" Margin="0,20,0,0" Background="#700101" Foreground="White" FontWeight="Bold" Command="{Binding AddUserCommand}">Add new member</Button>
+        </StackPanel>
+    </Grid>
+</Window>

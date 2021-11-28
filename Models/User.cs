@@ -9,13 +9,14 @@ namespace School_library.Models
     public class User
     {
         public enum UserTypes { LIBRARIAN, ACCOUNTANT, MEMBER}
-        public int userID { get; private set; }
-        public string firstName { get; private set; }
-        public string lastName { get; private set; }
-        public string username { get; private set; }
-        public string password { get; private set; }
+        public int userID { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
 
-        public UserTypes userType { get; }
+        public UserTypes userType { get; set; }
+        public bool active { get; set; } = true;
 
         public User(int userID, string firstName, string lastName, string username, string password, UserTypes userType)
         {

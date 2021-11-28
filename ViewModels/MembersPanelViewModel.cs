@@ -1,6 +1,7 @@
 ﻿using School_library.Commands;
 using School_library.DAO;
 using School_library.Models;
+using School_library.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -101,13 +102,26 @@ namespace School_library.ViewModels
                 OnPropertyChange("CardInputEnabled");
             }
         }
-       
+
+        private UserViewModel? selectedUser = null;
+        public UserViewModel? SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                selectedUser = value;
+                userSelected();
+                OnPropertyChange("SelectedUser");
+            }
+        }
+
         public ICommand ClearFilters { get; }
         public ICommand FilterMembers { get; }
 
+        public OpenAddUserWindowCommand AddMemberCommand { get; }
 
-        private ObservableCollection<User> users = new ObservableCollection<User>();
-        public ObservableCollection<User> Users
+        private ObservableCollection<UserViewModel> users = new ObservableCollection<UserViewModel>();
+        public ObservableCollection<UserViewModel> Users
         {
             get { return users; }
         }
@@ -119,10 +133,11 @@ namespace School_library.ViewModels
 
             ClearFilters = new ClearMembersPanelFilters(this);
             FilterMembers = new FilterMembersCommand(this);
+            AddMemberCommand = new OpenAddUserWindowCommand(this, userDao);
 
             this.userDao = userDao;
 
-            foreach (User u in userDao.getUsers()) users.Add(u);
+            foreach (User u in userDao.getUsers()) users.Add(new UserViewModel(u, userDao));
         }
 
         public void clearFilters()
@@ -133,7 +148,7 @@ namespace School_library.ViewModels
 
             List<User> allUsers = userDao.getUsers();
             users.Clear();
-            foreach (User u in allUsers) users.Add(u);
+            foreach (User u in allUsers) users.Add(new UserViewModel(u, userDao));
         }
 
         private bool areFiltersEmpty()
@@ -174,8 +189,23 @@ namespace School_library.ViewModels
                 if (selectedMemberType != null && u.userType.Equals(selectedMemberType) == false)
                     continue;
 
-                users.Add(u);
+                users.Add(new UserViewModel(u, userDao));
             }
+
+        }
+    
+        public void addMember()
+        {
+            AddUserViewModel addUserViewModel = new AddUserViewModel(userDao, users);
+            AddUserWindow addUserWindow = new AddUserWindow()
+            {
+                DataContext = addUserViewModel
+            };
+            addUserWindow.ShowDialog();
+        }
+   
+        private void userSelected()
+        {
 
         }
     }
