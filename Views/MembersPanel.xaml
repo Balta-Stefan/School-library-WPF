@@ -37,6 +37,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -59,9 +60,10 @@
                     <TextBlock Grid.Column="3" Grid.Row="2">Card number</TextBlock>
                     <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding CardInputEnabled, UpdateSourceTrigger=PropertyChanged}" Text="{Binding CardNumber}"/>
 
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding OnlyActiveMembersFilter}" Content="Only active members" Margin="0,10,0,0"/>
 
-                    <Button Grid.Column="1" Grid.Row="4" Background="#424242" Foreground="White" FontWeight="Bold" Command="{Binding FilterMembers}">Search</Button>
-                    <Button Grid.Column="3" Grid.Row="4" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding ClearFilters}">Clear filters</Button>
+                    <Button Grid.Column="1" Grid.Row="5" Background="#424242" Foreground="White" FontWeight="Bold" Command="{Binding FilterMembers}">Search</Button>
+                    <Button Grid.Column="3" Grid.Row="5" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding ClearFilters}">Clear filters</Button>
                 </Grid>
             </Expander>
 

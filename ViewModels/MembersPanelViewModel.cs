@@ -103,6 +103,17 @@ namespace School_library.ViewModels
             }
         }
 
+        private bool onlyActiveMembers = false;
+        public bool OnlyActiveMembersFilter
+        {
+            get { return onlyActiveMembers; }
+            set
+            {
+                onlyActiveMembers = value;
+                OnPropertyChange("OnlyActiveMembersFilter");
+            }
+        }
+        
         private UserViewModel? selectedUser = null;
         public UserViewModel? SelectedUser
         {
@@ -145,6 +156,7 @@ namespace School_library.ViewModels
             FirstName = LastName = CardNumber = string.Empty;
             SelectedMemberType = null;
             CardInputEnabled = true;
+            OnlyActiveMembersFilter = false;
 
             List<User> allUsers = userDao.getUsers();
             users.Clear();
@@ -174,6 +186,8 @@ namespace School_library.ViewModels
                 if (firstName.Equals(string.Empty) == false && u.firstName.Equals(firstName) == false)
                     continue;
                 if (lastName.Equals(string.Empty) == false && u.lastName.Equals(lastName) == false)
+                    continue;
+                if (onlyActiveMembers == true && u.active == false)
                     continue;
                 if(CardNumber.Equals(string.Empty) == false)
                 {
