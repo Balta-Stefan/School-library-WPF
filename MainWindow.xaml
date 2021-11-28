@@ -19,8 +19,8 @@
 
 
     <Grid Background="#424242">
-        <TabControl ItemContainerStyle="{DynamicResource NavBar}" Name="TempTabControl" TabStripPlacement="Left">
-            <TabItem Header="Loans">
+        <TabControl ItemContainerStyle="{DynamicResource NavBar}" ItemsSource="{Binding tabs}" Name="TempTabControl" TabStripPlacement="Left">
+            <!--<TabItem Header="Loans">
                 
             </TabItem>
             <TabItem Header="Books">
@@ -29,18 +29,20 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Members">
-                <TextBlock Text="3rd"/>
+                <views:MembersPanel/>
             </TabItem>
             <TabItem Header="Publishers">
                 <TextBlock Text="4th"/>
             </TabItem>
+            <TabItem Header="Genres">
+                <TextBlock>Genres</TextBlock>
+            </TabItem>
             <TabItem Header="Settings">
-                <!--<views:SettingsView />-->
                 <StackPanel>
                     <Button Click="switchToDarkTheme">Dark theme</Button>
                     <Button Click="switchToLightTheme">Light theme</Button>
                 </StackPanel>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.15*"/>

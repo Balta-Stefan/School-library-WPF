@@ -1,6 +1,7 @@
 ﻿using School_library.DAO;
 using School_library.Models;
 using School_library.ViewModels;
+using School_library.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace School_library
 {
@@ -19,6 +21,8 @@ namespace School_library
     public partial class App : Application
     {
         private const string connectionString = "Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
+
+        public List<TabItem> tabs { get; } = new List<TabItem>();
         protected override void OnStartup(StartupEventArgs e)
         {
             BookDAO bookDao = new BookDAO(connectionString);
@@ -39,12 +43,51 @@ namespace School_library
             genres.Add(new Genre(1, "prvi zanr"));
             genres.Add(new Genre(1, "drugi zanr"));*/
 
+            TabItem loansTab = new TabItem();
+            loansTab.Header = "Loans";
+            loansTab.Content = "just loans";
 
+            TabItem booksTab = new TabItem();
+            booksTab.Header = "Books";
             BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao);
+            BooksPanelView booksView = new BooksPanelView()
+            {
+                DataContext = booksPanelViewModel
+            };
+            booksTab.Content = booksView;
+
+            TabItem membersTab = new TabItem();
+            membersTab.Header = "Members";
+            MembersPanelViewModel membersViewModel = new MembersPanelViewModel();
+            MembersPanel membersPanel = new MembersPanel()
+            {
+                DataContext = membersViewModel
+            };
+            membersTab.Content = membersPanel;
+
+            TabItem publishersTab = new TabItem();
+            publishersTab.Header = "Publishers";
+            publishersTab.Content = "Just publishers";
+
+            TabItem genresTab = new TabItem();
+            genresTab.Header = "Genres";
+            genresTab.Content = "Just genres";
+
+            TabItem settingsTab = new TabItem();
+            settingsTab.Header = "Settings";
+            settingsTab.Content = "Just settings";
+
+            
+            tabs.Add(loansTab);
+            tabs.Add(booksTab);
+            tabs.Add(membersTab);
+            tabs.Add(publishersTab);
+            tabs.Add(genresTab);
+            tabs.Add(settingsTab);
 
             MainWindow mainWindow = new MainWindow()
             {
-                DataContext = booksPanelViewModel
+                DataContext = this
             };
             mainWindow.Show();
 
