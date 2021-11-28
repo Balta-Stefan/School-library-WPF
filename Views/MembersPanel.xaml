@@ -73,46 +73,53 @@
                         <Setter Property="Background" Value="white"/>
                         <Setter Property="Padding" Value="35,35,35,35"/>
                         <Setter Property="Margin" Value="0,0,0,10"/>
+                        <Setter Property="BorderThickness" Value="3"/>
                         <!--<Setter Property="Focusable" Value="False"/>-->
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Active}" Value="true">
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Active}" Value="false">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="3" Name="ItemBorder">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
-                                    <WrapPanel>
-                                        <TextBlock Text="User type: "/>
-                                        <TextBlock Text="{Binding UserType}" FontWeight="Regular"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="First name: "/>
-                                        <TextBlock Text="{Binding FirstName}" FontWeight="Regular"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Last name: "/>
-                                        <TextBlock Text="{Binding LastName}" FontWeight="Regular"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Active:    "/>
-                                        <CheckBox IsChecked="{Binding Active}"/>
-                                    </WrapPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
+                            <StackPanel Grid.Column="0">
+                                <WrapPanel>
+                                    <TextBlock Text="User type: "/>
+                                    <TextBlock Text="{Binding UserType}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="First name: "/>
+                                    <TextBlock Text="{Binding FirstName}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Last name: "/>
+                                    <TextBlock Text="{Binding LastName}" FontWeight="Regular"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Active:    "/>
+                                    <CheckBox IsChecked="{Binding Active}"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Grid>
 
-                        <DataTemplate.Triggers>
+                        <!--<DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding Active}" Value="true">
-                                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="Black"/>
+                                <Setter Property="ListBoxItem.BorderBrush" Value="Black"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Active}" Value="false">
-                                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="Red"/>
+                                <Setter Property="ListBoxItem.BorderBrush" Value="Red"/>
                             </DataTrigger>
-                        </DataTemplate.Triggers>
+                        </DataTemplate.Triggers>-->
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
