@@ -74,6 +74,10 @@ namespace School_library
             genresTab.Header = "Genres";
             genresTab.Content = "Just genres";
 
+            TabItem authorsTab = new TabItem();
+            authorsTab.Header = "Authors";
+            authorsTab.Content = "Just authors";
+
             TabItem settingsTab = new TabItem();
             settingsTab.Header = "Settings";
             settingsTab.Content = "Just settings";
@@ -84,7 +88,9 @@ namespace School_library
             tabs.Add(membersTab);
             tabs.Add(publishersTab);
             tabs.Add(genresTab);
+            tabs.Add(authorsTab);
             tabs.Add(settingsTab);
+            
 
             MainWindow mainWindow = new MainWindow()
             {
