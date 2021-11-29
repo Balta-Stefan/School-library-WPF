@@ -1,0 +1,44 @@
+﻿<Window x:Class="School_library.Views.AddNewBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:School_library.Views"
+        mc:Ignorable="d"
+        Title="AddNewBookWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock>ISBN-10</TextBlock>
+            <TextBox Text="{Binding ISBN10}" />
+
+            <TextBlock >ISBN-13</TextBlock>
+            <TextBox Text="{Binding ISBN13}" />
+
+            <TextBlock >Title</TextBlock>
+            <TextBox Text="{Binding Title}" />
+
+            <TextBlock >Edition</TextBlock>
+            <TextBox Text="{Binding Edition}" />
+
+            <TextBlock >Author</TextBlock>
+            <ComboBox   ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
+
+            <TextBlock >Genre</TextBlock>
+            <ComboBox   ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>
+
+            <TextBlock >Publisher</TextBlock>
+            <ComboBox   ItemsSource="{Binding publishers}" SelectedItem="{Binding SelectedPublisher}"/>
+
+            <Button Background="#700101" Foreground="White" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
+        </StackPanel>
+    </Grid>
+</Window>

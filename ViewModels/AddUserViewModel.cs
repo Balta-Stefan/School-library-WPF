@@ -40,6 +40,16 @@ namespace School_library.ViewModels
 
         public void addUser()
         {
+            if (FirstName.Equals(string.Empty) ||
+                LastName.Equals(string.Empty) ||
+                Username.Equals(string.Empty) ||
+                Password.Equals(string.Empty) ||
+                SelectedType == null)
+            {
+                MessageBox.Show("You must fill all the fields and choose a user type.", "", MessageBoxButton.OK);
+                return;
+            }
+
             User? userToAdd = new User(-1, FirstName, LastName, Username, Password, SelectedType.Value);
             userToAdd = userDao.addUser(userToAdd);
 

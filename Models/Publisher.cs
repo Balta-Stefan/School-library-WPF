@@ -8,8 +8,8 @@ namespace School_library.Models
 {
     public class Publisher
     {
-        public int publisherID { get; private set; }
-        public string name { get; private set; }
+        public int publisherID { get; set; }
+        public string name { get; set; }
 
         public Publisher(int publisherID, string name)
         {

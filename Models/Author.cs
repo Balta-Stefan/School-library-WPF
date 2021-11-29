@@ -8,9 +8,9 @@ namespace School_library.Models
 {
     public class Author
     {
-        public int authorID { get; private set; }
-        public string firstName { get; private set; }
-        public string lastName { get; private set; }
+        public int authorID { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
 
         public Author(int authorID, string firstName, string lastName)
         {

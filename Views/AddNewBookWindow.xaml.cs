@@ -15,21 +15,13 @@ using System.Windows.Shapes;
 namespace School_library.Views
 {
     /// <summary>
-    /// Interaction logic for EditBookInfo.xaml
+    /// Interaction logic for AddNewBookWindow.xaml
     /// </summary>
-    public partial class EditBookInfo : Window
+    public partial class AddNewBookWindow : Window
     {
-        public EditBookInfo()
+        public AddNewBookWindow()
         {
             InitializeComponent();
-
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-        }
-
-        private void HandleEsc(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-                Close();
         }
     }
 }

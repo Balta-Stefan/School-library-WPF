@@ -15,6 +15,9 @@ namespace School_library.ViewModels
     public class EditBookInfoViewModel
     {
         public ObservableCollection<BookCopy> bookCopies { get; }
+        public ObservableCollection<BookCondition> bookConditions { get; }
+        public BookCondition? selectedCondition { get; set; } = null;
+        public DateTime? selectedDate { get; set; } = null;
         private Book book;
         private BookDAO bookDao;
 
@@ -99,12 +102,14 @@ namespace School_library.ViewModels
 
         public DeleteBookCopyCommand deleteCopyCommand { get; }
         public ICommand editBookInfoCommand { get; }
+        public ICommand addCopyCommand { get; }
         public bool copySelected { get; private set; } = false;
         public EditBookInfoViewModel(BookDAO bookDao, GenreDAO genreDAO, PublisherDAO publisherDao, AuthorDAO authorDAO, Book book)
         {
             this.bookDao = bookDao;
             this.book = book;
             this.bookCopies  = new ObservableCollection<BookCopy>(bookDao.getBookCopies(book));
+            this.bookConditions = new ObservableCollection<BookCondition>(bookDao.getBookConditions());
             this.genres = new ObservableCollection<Genre>(genreDAO.getGenres());
             this.publishers = new ObservableCollection<Publisher>(publisherDao.getPublishers());
             this.authors = new ObservableCollection<Author>(authorDAO.getAuthors());
@@ -115,11 +120,40 @@ namespace School_library.ViewModels
 
             deleteCopyCommand = new DeleteBookCopyCommand(this);
             editBookInfoCommand = new EditBookInfoCommand(this);
+            addCopyCommand = new AddBookCopyCommand(this);
 
             isbn10 = book.ISBN10;
             isbn13 = book.ISBN13;
             bookTitle = book.BookTitle;
             edition = book.Edition;
+        }
+
+        public void addCopy()
+        {
+            if(selectedCondition == null)
+            {
+                MessageBox.Show("A condition must be selected first!", "No condition specified", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (selectedDate == null)
+            {
+                MessageBox.Show("A date must be selected first!", "No date specified", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            BookCopy? newCopy = new BookCopy(-1, selectedCondition, selectedDate.Value, book, true);
+            newCopy = bookDao.addBookCopy(newCopy);
+
+            if(newCopy == null)
+            {
+                MessageBox.Show("Couldn't add the new copy", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("New copy added", "Success", MessageBoxButton.OK);
+                bookCopies.Add(newCopy);
+                book.NumberOfCopies++;
+            }
         }
 
         public void deleteCopy()

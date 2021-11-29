@@ -25,6 +25,12 @@ namespace School_library.ViewModels
         private ObservableCollection<Book> books;
         private ObservableCollection<Publisher> publishers;
         private ObservableCollection<Genre> genres;
+        private ObservableCollection<Author> authors;
+
+        public ObservableCollection<Author> Authors
+        {
+            get { return authors; }
+        }
 
         public ObservableCollection<Book> Books
         {
@@ -125,6 +131,18 @@ namespace School_library.ViewModels
             }
         }
 
+        private Author? selectedAuthor = null;
+        public Author? SelectedAuthor
+        {
+            get { return selectedAuthor; }
+            set
+            {
+                filtersClear = false;
+                selectedAuthor = value;
+                OnPropertyChange("SelectedAuthor");
+            }
+        }
+
         private string isbn10Filter = string.Empty;
 
         public string Isbn10Filter
@@ -165,12 +183,14 @@ namespace School_library.ViewModels
         }
         public ICommand FilterBooksCommand { get; }
         public ICommand ClearBookFiltersCommand { get; }
+        public ICommand BooksPanel_AddNewBookCommand { get; }
 
         public BooksPanelViewModel(BookDAO bookDao, PublisherDAO publisherDao, GenreDAO genreDao, AuthorDAO authorDAO)
         {
             this.books = new ObservableCollection<Book>(bookDao.getBooks());
             this.publishers = new ObservableCollection<Publisher>(publisherDao.getPublishers());
             this.genres = new ObservableCollection<Genre>(genreDao.getGenres());
+            this.authors = new ObservableCollection<Author>(authorDAO.getAuthors());
             this.bookDao = bookDao;
             this.publisherDao = publisherDao;
             this.genreDao = genreDao;
@@ -178,6 +198,19 @@ namespace School_library.ViewModels
 
             FilterBooksCommand = new FilterBooksCommand(this);
             ClearBookFiltersCommand = new ClearBookFiltersCommand(this);
+            BooksPanel_AddNewBookCommand = new BooksPanel_AddNewBookCommand(this);
+        }
+
+        public void openAddBookWindow()
+        {
+            AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(bookDao, genres, publishers, authors, books);
+
+            AddNewBookWindow window = new AddNewBookWindow()
+            {
+                DataContext = addBookViewModel
+            };
+
+            window.ShowDialog();
         }
 
         public void clearFilters()
@@ -191,6 +224,7 @@ namespace School_library.ViewModels
             SelectedPublisher = null;
             SelectedGenre = null;
             Isbn10Filter = Isbn13Filter = string.Empty;
+            SelectedAuthor = null;
 
             filtersClear = true;
 
@@ -216,7 +250,8 @@ namespace School_library.ViewModels
                numberOfCopiesFilter == -1 &&
                selectedPublisher == null &&
                selectedGenre == null &&
-               onlyWithAvailableCopiesFilter == false)
+               onlyWithAvailableCopiesFilter == false &&
+               selectedAuthor == null)
                 return true;
             return false;
         }
@@ -244,6 +279,8 @@ namespace School_library.ViewModels
                 if(selectedPublisher != null && b.Publisher.Equals(selectedPublisher) == false)
                     continue;
                 if(selectedGenre != null && b.Genre.Equals(selectedGenre) == false)
+                    continue;
+                if (selectedAuthor != null && b.Author.Equals(selectedAuthor) == false)
                     continue;
                 if(onlyWithAvailableCopiesFilter == true)
                 {

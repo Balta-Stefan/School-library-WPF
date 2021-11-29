@@ -74,7 +74,7 @@
                         <Setter Property="Padding" Value="35,35,35,35"/>
                         <Setter Property="Margin" Value="0,0,0,10"/>
                         <Setter Property="BorderThickness" Value="3"/>
-                        <!--<Setter Property="Focusable" Value="False"/>-->
+                        <Setter Property="Focusable" Value="False"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Active}" Value="true">
                                 <Setter Property="BorderBrush" Value="Black"/>
