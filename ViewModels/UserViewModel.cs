@@ -13,6 +13,25 @@ namespace School_library.ViewModels
         private User user;
         private UserDAO userDao;
 
+        private int userID;
+        public int UserID
+        {
+            get { return userID; }
+            set
+            {
+                user.userID = value;
+                if(userDao.updateUser(user) == true)
+                {
+                    userID = value;
+                    OnPropertyChange("UserID");
+                }
+                else
+                {
+                    user.userID = userID;
+                }
+            }
+        }
+
         private string firstName;
         public string FirstName
         {
@@ -138,6 +157,7 @@ namespace School_library.ViewModels
             password = user.password;
             userType = user.userType;
             active = user.active;
+            userID = user.userID;
         }
     }
 }

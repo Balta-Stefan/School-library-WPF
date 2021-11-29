@@ -38,7 +38,7 @@ namespace School_library.ViewModels
             }
         }
 
-        private int cardNumber = -1;
+        /*private int cardNumber = -1;
         public string CardNumber
         {
             get 
@@ -65,7 +65,7 @@ namespace School_library.ViewModels
                
                 OnPropertyChange("CardNumber");
             }
-        }
+        }*/
 
         private ObservableCollection<User.UserTypes> types = new ObservableCollection<User.UserTypes>();
         public ObservableCollection<User.UserTypes> UserTypesList
@@ -80,7 +80,7 @@ namespace School_library.ViewModels
             set
             {
                 selectedMemberType = value;
-                if(value.Equals(User.UserTypes.MEMBER) == false)
+                /*if(value.Equals(User.UserTypes.MEMBER) == false)
                 {
                     CardInputEnabled = false;
                     CardNumber = string.Empty;
@@ -88,11 +88,11 @@ namespace School_library.ViewModels
                 else
                 {
                     CardInputEnabled = true;
-                }
+                }*/
                 OnPropertyChange("SelectedMemberType");
             }
         }
-        private bool cardInputEnabled = true;
+        /*private bool cardInputEnabled = true;
         public bool CardInputEnabled
         {
             get { return cardInputEnabled; }
@@ -101,7 +101,7 @@ namespace School_library.ViewModels
                 cardInputEnabled = value;
                 OnPropertyChange("CardInputEnabled");
             }
-        }
+        }*/
 
         private bool onlyActiveMembers = false;
         public bool OnlyActiveMembersFilter
@@ -125,7 +125,32 @@ namespace School_library.ViewModels
                 OnPropertyChange("SelectedUser");
             }
         }
-
+        private int userID = -1;
+        public string UserID
+        {
+            get 
+            {
+                if (userID == -1)
+                    return string.Empty;
+                return userID.ToString();
+            }
+            set
+            {
+                if(value.Equals(string.Empty))
+                {
+                    userID = -1;
+                }
+                else
+                {
+                    try
+                    {
+                        userID = Int32.Parse(value);
+                    }
+                    catch (Exception) { }
+                }
+                OnPropertyChange("UserID");
+            }
+        }
         public ICommand ClearFilters { get; }
         public ICommand FilterMembers { get; }
 
@@ -153,9 +178,9 @@ namespace School_library.ViewModels
 
         public void clearFilters()
         {
-            FirstName = LastName = CardNumber = string.Empty;
+            FirstName = LastName = UserID = string.Empty;//CardNumber = string.Empty;
             SelectedMemberType = null;
-            CardInputEnabled = true;
+            //CardInputEnabled = true;
             OnlyActiveMembersFilter = false;
 
             List<User> allUsers = userDao.getUsers();
@@ -167,8 +192,9 @@ namespace School_library.ViewModels
         {
             if (firstName.Equals(string.Empty) &&
                lastName.Equals(string.Empty) &&
-               cardNumber.Equals(string.Empty) &&
-               selectedMemberType == null)
+               //cardNumber.Equals(string.Empty) &&
+               selectedMemberType == null &&
+               UserID.Equals(string.Empty))
                 return true;
             return false;
         }
@@ -183,13 +209,15 @@ namespace School_library.ViewModels
 
             foreach(User u in allUsers)
             {
+                if (userID != -1 && u.userID != userID)
+                    continue;
                 if (firstName.Equals(string.Empty) == false && u.firstName.Equals(firstName) == false)
                     continue;
                 if (lastName.Equals(string.Empty) == false && u.lastName.Equals(lastName) == false)
                     continue;
                 if (onlyActiveMembers == true && u.active == false)
                     continue;
-                if(CardNumber.Equals(string.Empty) == false)
+                /*if(CardNumber.Equals(string.Empty) == false)
                 {
                     if (u.GetType() == typeof(Member))
                     {
@@ -199,7 +227,7 @@ namespace School_library.ViewModels
                     }
                     else
                         continue;
-                }
+                }*/
                 if (selectedMemberType != null && u.userType.Equals(selectedMemberType) == false)
                     continue;
 

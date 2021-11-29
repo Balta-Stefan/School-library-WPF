@@ -123,5 +123,10 @@ namespace School_library.Models
         {
             return HashCode.Combine(bookID);
         }
+
+        public override string ToString()
+        {
+            return bookTitle;
+        }
     }
 }

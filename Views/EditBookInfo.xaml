@@ -102,6 +102,10 @@
                                 <TextBlock Text="Delivery date: "/>
                                 <TextBlock Text="{Binding deliveredAt}" FontWeight="Regular"/>
                             </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Available: "/>
+                                <CheckBox IsEnabled="False" IsChecked="{Binding available}" />
+                            </WrapPanel>
                         </StackPanel>
 
                         <!--<Button Grid.Column="1" Background="#700101" Foreground="White" FontWeight="Bold" MinWidth="150" MaxHeight="50" HorizontalAlignment="Right">Delete</Button>-->

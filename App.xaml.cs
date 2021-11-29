@@ -30,6 +30,7 @@ namespace School_library
             GenreDAO genreDao = new GenreDAO(connectionString);
             AuthorDAO authorDao = new AuthorDAO(connectionString);
             UserDAO userDao = new UserDAO(connectionString);
+            LoansDAO loansDao = new LoansDAO(connectionString);
 
             /*ObservableCollection<Book> books = new ObservableCollection<Book>();
             ObservableCollection<Publisher> publishers = new ObservableCollection<Publisher>();
@@ -46,7 +47,12 @@ namespace School_library
 
             TabItem loansTab = new TabItem();
             loansTab.Header = "Loans";
-            loansTab.Content = "just loans";
+            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao);
+            LoanView loanWiew = new LoanView()
+            {
+                DataContext = loansViewModel
+            };
+            loansTab.Content = loanWiew;
 
             TabItem booksTab = new TabItem();
             booksTab.Header = "Books";

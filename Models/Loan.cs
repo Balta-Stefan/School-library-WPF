@@ -8,17 +8,21 @@ namespace School_library.Models
 {
     public class Loan
     {
-        public int loanID { get; private set; }
-        public DateTime borrowDateTime { get; private set; }
-        public Librarian borrowedFromLibrarian { get; private set; }
-        public Member borrower { get; private set; }
+        public int loanID { get; set; }
+        public DateTime borrowDateTime { get; set; }
+        public Librarian borrowedFromLibrarian { get; set; }
+        public Member borrower { get; set; }
+        public BookCopy bookCopy { get; set; }
+        public Librarian? returnedToLibrarian { get; set; } = null;
+        public DateTime? returnDateTIme { get; set; } = null;
 
-        public Loan(int loanID, DateTime borrowDateTime, Librarian borrowedFromLibrarian, Member borrowerID)
+        public Loan(int loanID, DateTime borrowDateTime, Librarian borrowedFromLibrarian, Member borrowerID, BookCopy bookCopy)
         {
             this.loanID = loanID;
             this.borrowDateTime = borrowDateTime;
             this.borrowedFromLibrarian = borrowedFromLibrarian;
             this.borrower = borrowerID;
+            this.bookCopy = bookCopy;
         }
 
         public override bool Equals(object? obj)

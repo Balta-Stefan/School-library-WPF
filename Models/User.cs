@@ -38,5 +38,10 @@ namespace School_library.Models
         {
             return HashCode.Combine(userID);
         }
+
+        public override string ToString()
+        {
+            return firstName + " " + lastName;
+        }
     }
 }
