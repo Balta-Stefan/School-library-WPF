@@ -203,7 +203,7 @@ namespace School_library.ViewModels
 
         public void openAddBookWindow()
         {
-            AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(bookDao, genres, publishers, authors, books);
+            AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(bookDao, genres, publishers, authors, books, publisherDao, authorDAO, genreDao);
 
             AddNewBookWindow window = new AddNewBookWindow()
             {

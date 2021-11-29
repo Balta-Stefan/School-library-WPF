@@ -10,11 +10,43 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="3">
+            <Expander>
+                <Expander.Header>
+                    <TextBlock Foreground="Red" FontWeight="Bold">New author</TextBlock>
+                </Expander.Header>
+                <StackPanel>
+                    <TextBlock>First name:</TextBlock>
+                    <TextBox Text="{Binding NewAuthorFirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock>Last name:</TextBlock>
+                    <TextBox Text="{Binding NewAuthorLastName, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Expander>
+
+            <Expander>
+                <Expander.Header>
+                    <TextBlock Foreground="Red" FontWeight="Bold">New Genre</TextBlock>
+                </Expander.Header>
+                <StackPanel>
+                    <TextBlock>Genre name:</TextBlock>
+                    <TextBox Text="{Binding NewGenreName, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Expander>
+
+            <Expander>
+                <Expander.Header>
+                    <TextBlock Foreground="Red" FontWeight="Bold">New Publisher</TextBlock>
+                </Expander.Header>
+                <StackPanel>
+                    <TextBlock>Publisher name:</TextBlock>
+                    <TextBox Text="{Binding NewPublisherName, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
 
         <StackPanel Grid.Column="1">
             <TextBlock>ISBN-10</TextBlock>
@@ -30,7 +62,7 @@
             <TextBox Text="{Binding Edition}" />
 
             <TextBlock >Author</TextBlock>
-            <ComboBox   ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
+            <ComboBox ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
 
             <TextBlock >Genre</TextBlock>
             <ComboBox   ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>

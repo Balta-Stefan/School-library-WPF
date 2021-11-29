@@ -66,17 +66,6 @@ namespace School_library
             };
             membersTab.Content = membersPanel;
 
-            TabItem publishersTab = new TabItem();
-            publishersTab.Header = "Publishers";
-            publishersTab.Content = "Just publishers";
-
-            TabItem genresTab = new TabItem();
-            genresTab.Header = "Genres";
-            genresTab.Content = "Just genres";
-
-            TabItem authorsTab = new TabItem();
-            authorsTab.Header = "Authors";
-            authorsTab.Content = "Just authors";
 
             TabItem settingsTab = new TabItem();
             settingsTab.Header = "Settings";
@@ -86,9 +75,6 @@ namespace School_library
             tabs.Add(loansTab);
             tabs.Add(booksTab);
             tabs.Add(membersTab);
-            tabs.Add(publishersTab);
-            tabs.Add(genresTab);
-            tabs.Add(authorsTab);
             tabs.Add(settingsTab);
             
 
