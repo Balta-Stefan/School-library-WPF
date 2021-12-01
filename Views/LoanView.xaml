@@ -76,73 +76,79 @@
                 </Grid>
             </Expander>
 
-            <ListBox Grid.Row="1" Name="LoansListbox" ItemsSource="{Binding Loans}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" SelectedItem="{Binding SelectedLoan}">
+            <ListBox Grid.Row="1" Name="LoansListbox" ItemsSource="{Binding Loans}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="#dedede" SelectedItem="{Binding SelectedLoan}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Background" Value="white"/>
                         <Setter Property="Padding" Value="35,35,35,35"/>
                         <Setter Property="Margin" Value="0,0,0,10"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
+                        <!--<Setter Property="BorderBrush" Value="Black"/>-->
                         <Setter Property="BorderThickness" Value="2"/>
                         <Setter Property="Focusable" Value="False"/>
                         <!--<Setter Property="Focusable" Value="False"/>-->
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Style.Resources>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="0.2*"/>
-                            </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0">
-                                <WrapPanel>
-                                    <TextBlock Text="User ID: "/>
-                                    <TextBlock Text="{Binding Borrower.userID}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="First name: "/>
-                                    <TextBlock Text="{Binding Borrower.firstName}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Last name: "/>
-                                    <TextBlock Text="{Binding Borrower.lastName}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Copy ID: "/>
-                                    <TextBlock Text="{Binding BookCopy.bookCopyID}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Title: "/>
-                                    <TextBlock Text="{Binding BookCopy.book.BookTitle}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Borrowed from librarian: "/>
-                                    <TextBlock Text="{Binding BorrowedFromLibrarianFullName}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Borrowed at date: "/>
-                                    <TextBlock Text="{Binding BorrowDateTime}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Returned to librarian: "/>
-                                    <TextBlock Text="{Binding ReturnedToLibrarian}" FontWeight="Regular"/>
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Returned at date: "/>
-                                    <TextBlock Text="{Binding ReturnDateTIme}" FontWeight="Regular"/>
-                                </WrapPanel>
-                            </StackPanel>
+                        <StackPanel Grid.Column="0">
+                            <WrapPanel>
+                                <TextBlock Text="User ID: "/>
+                                <TextBlock Text="{Binding Borrower.userID}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="First name: "/>
+                                <TextBlock Text="{Binding Borrower.firstName}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Last name: "/>
+                                <TextBlock Text="{Binding Borrower.lastName}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Copy ID: "/>
+                                <TextBlock Text="{Binding BookCopy.bookCopyID}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Title: "/>
+                                <TextBlock Text="{Binding BookCopy.book.BookTitle}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Borrowed from librarian: "/>
+                                <TextBlock Text="{Binding BorrowedFromLibrarianFullName}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Borrowed at date: "/>
+                                <TextBlock Text="{Binding BorrowDateTime}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Returned to librarian: "/>
+                                <TextBlock Text="{Binding ReturnedToLibrarian}" FontWeight="Regular"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Returned at date: "/>
+                                <TextBlock Text="{Binding ReturnDateTIme}" FontWeight="Regular"/>
+                            </WrapPanel>
+                        </StackPanel>
 
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}">Return loan</Button>
-                            </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}">Return loan</Button>
+                        </Grid>
+
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

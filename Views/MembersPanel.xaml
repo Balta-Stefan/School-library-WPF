@@ -69,7 +69,7 @@
                 </Grid>
             </Expander>
 
-            <ListBox Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+            <ListBox Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="#dedede">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Background" Value="white"/>
@@ -77,9 +77,14 @@
                         <Setter Property="Margin" Value="0,0,0,10"/>
                         <Setter Property="BorderThickness" Value="3"/>
                         <Setter Property="Focusable" Value="False"/>
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Style.Resources>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Active}" Value="true">
-                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Active}" Value="false">
                                 <Setter Property="BorderBrush" Value="Red"/>

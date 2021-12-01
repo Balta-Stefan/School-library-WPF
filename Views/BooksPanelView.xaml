@@ -74,15 +74,20 @@
                 </Grid>
             </Expander>
 
-            <ListBox Grid.Row="1" ItemsSource="{Binding Books}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" SelectedItem="{Binding SelectedBook}">
+            <ListBox Grid.Row="1" ItemsSource="{Binding Books}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Background="#dedede" SelectedItem="{Binding SelectedBook}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Background" Value="white"/>
                         <Setter Property="Padding" Value="35,35,35,35"/>
                         <Setter Property="Margin" Value="0,0,0,10"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
+                        <!--<Setter Property="BorderBrush" Value="Black"/>-->
                         <Setter Property="BorderThickness" Value="2"/>
                         <!--<Setter Property="Focusable" Value="False"/>-->
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Style.Resources>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
