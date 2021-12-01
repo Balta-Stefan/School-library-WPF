@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Expander Grid.Row="0" Margin="0,0,0,30" BorderBrush="#424242" BorderThickness="2">
+            <Expander Grid.Row="0" Margin="0,0,0,30" BorderBrush="#424242" BorderThickness="0">
                 <Expander.Header>
                     <TextBlock Foreground="Red" FontWeight="Bold">Click to show/hide filters...</TextBlock>
                 </Expander.Header>
