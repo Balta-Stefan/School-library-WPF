@@ -44,9 +44,11 @@ namespace School_library
 
             genres.Add(new Genre(1, "prvi zanr"));
             genres.Add(new Genre(1, "drugi zanr"));*/
+            AccessText loansTabItemHotkey = new AccessText();
+            loansTabItemHotkey.Text = "_Loans";
 
             TabItem loansTab = new TabItem();
-            loansTab.Header = "Loans";
+            loansTab.Header = loansTabItemHotkey;//"_Loans";
             LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao);
             LoanView loanWiew = new LoanView()
             {
@@ -54,8 +56,10 @@ namespace School_library
             };
             loansTab.Content = loanWiew;
 
+            AccessText booksTabItemHotkey = new AccessText();
+            booksTabItemHotkey.Text = "_Books";
             TabItem booksTab = new TabItem();
-            booksTab.Header = "Books";
+            booksTab.Header = booksTabItemHotkey;//"_Books";
             BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao);
             BooksPanelView booksView = new BooksPanelView()
             {
@@ -63,8 +67,10 @@ namespace School_library
             };
             booksTab.Content = booksView;
 
+            AccessText membersTabItemHotkey = new AccessText();
+            membersTabItemHotkey.Text = "_Members";
             TabItem membersTab = new TabItem();
-            membersTab.Header = "Members";
+            membersTab.Header = membersTabItemHotkey;//"Members";
             MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao);
             MembersPanel membersPanel = new MembersPanel()
             {
@@ -72,9 +78,10 @@ namespace School_library
             };
             membersTab.Content = membersPanel;
 
-
+            AccessText settingsTabItemHotkey = new AccessText();
+            settingsTabItemHotkey.Text = "_Settings";
             TabItem settingsTab = new TabItem();
-            settingsTab.Header = "Settings";
+            settingsTab.Header = settingsTabItemHotkey;// "Settings";
             settingsTab.Content = "Just settings";
 
             
