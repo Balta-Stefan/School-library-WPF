@@ -11,14 +11,14 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Dark Theme\DarkTheme.xaml"/>
+                <ResourceDictionary Source="Themes\DarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
 
 
-    <Grid Background="#424242">
+
+    <Grid Background="{DynamicResource PanelBackgroundColor}">
         <TabControl ItemContainerStyle="{DynamicResource NavBar}" ItemsSource="{Binding tabs}" Name="TempTabControl" TabStripPlacement="Left">
             <!--<TabItem Header="Loans">
                 

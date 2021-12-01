@@ -22,6 +22,10 @@ namespace School_library
     {
         private const string connectionString = "Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
 
+        private LoanView loanWiew;
+        private BooksPanelView booksView;
+        private MembersPanel membersPanel;
+
         public List<TabItem> tabs { get; } = new List<TabItem>();
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -34,25 +38,14 @@ namespace School_library
             UserDAO userDao = new UserDAO(connectionString);
             LoansDAO loansDao = new LoansDAO(connectionString);
 
-            /*ObservableCollection<Book> books = new ObservableCollection<Book>();
-            ObservableCollection<Publisher> publishers = new ObservableCollection<Publisher>();
-            ObservableCollection<Genre> genres = new ObservableCollection<Genre>();
-
-            books.Add(new Book(1, "prvi isbn13", "prvi isbn10", "prva knjiga", 1, new Author(1, "Marko", "Markovic"), new Publisher(1, "prvi izdavac"), new Genre(1, "prvi zanr"), 1));
-            books.Add(new Book(1, "drugi isbn13", "drugi isbn10", "druga knjiga", 1, new Author(1, "Zivko", "Zivkovic"), new Publisher(2, "Drugi izdavac"), new Genre(2, "drugi zanr"), 1));
-
-            publishers.Add(new Publisher(1, "prvi izdavac"));
-            publishers.Add(new Publisher(1, "drugi izdavac"));
-
-            genres.Add(new Genre(1, "prvi zanr"));
-            genres.Add(new Genre(1, "drugi zanr"));*/
+           
             AccessText loansTabItemHotkey = new AccessText();
             loansTabItemHotkey.Text = "_Loans";
 
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
             LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao, loggedInUser);
-            LoanView loanWiew = new LoanView()
+            loanWiew = new LoanView()
             {
                 DataContext = loansViewModel
             };
@@ -63,7 +56,7 @@ namespace School_library
             TabItem booksTab = new TabItem();
             booksTab.Header = booksTabItemHotkey;//"_Books";
             BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao);
-            BooksPanelView booksView = new BooksPanelView()
+            booksView = new BooksPanelView()
             {
                 DataContext = booksPanelViewModel
             };
@@ -74,7 +67,7 @@ namespace School_library
             TabItem membersTab = new TabItem();
             membersTab.Header = membersTabItemHotkey;//"Members";
             MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao);
-            MembersPanel membersPanel = new MembersPanel()
+            membersPanel = new MembersPanel()
             {
                 DataContext = membersViewModel
             };
@@ -84,9 +77,11 @@ namespace School_library
             settingsTabItemHotkey.Text = "_Settings";
             TabItem settingsTab = new TabItem();
             settingsTab.Header = settingsTabItemHotkey;// "Settings";
-            settingsTab.Content = "Just settings";
+            SettingsView settingsView = new SettingsView();
+            settingsTab.Content = settingsView;
 
-            
+
+
             tabs.Add(loansTab);
             tabs.Add(booksTab);
             tabs.Add(membersTab);
@@ -100,6 +95,21 @@ namespace School_library
             mainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        public void changeTheme(ResourceDictionary dic)
+        {
+            this.Resources.MergedDictionaries.Clear();
+            this.Resources.MergedDictionaries.Add(dic);
+
+            loanWiew.Resources.MergedDictionaries.Clear();
+            loanWiew.Resources.MergedDictionaries.Add(dic);
+
+            booksView.Resources.MergedDictionaries.Clear();
+            booksView.Resources.MergedDictionaries.Add(dic);
+
+            membersPanel.Resources.MergedDictionaries.Clear();
+            membersPanel.Resources.MergedDictionaries.Add(dic);
         }
     }
 }

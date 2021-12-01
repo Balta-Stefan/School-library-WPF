@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:School_library.Views"
         mc:Ignorable="d"
         Title="AddNewLoanWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Themes\DarkTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -23,7 +30,7 @@
             <TextBlock>Copy</TextBlock>
             <ComboBox ItemsSource="{Binding Copies}" SelectedItem="{Binding SelectedCopy}"/>
 
-            <Button Padding="13,13,13,13" Margin="0,20,0,0" Background="#700101" Foreground="White" FontWeight="Bold" Command="{Binding addLoanCommand}">Add loan</Button>
+            <Button Padding="13,13,13,13" Margin="0,20,0,0" Background="{DynamicResource ImportantActionButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding addLoanCommand}">Add loan</Button>
         </StackPanel>
     </Grid>
 </Window>

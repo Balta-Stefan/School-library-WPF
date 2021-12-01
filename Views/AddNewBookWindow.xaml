@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:School_library.Views"
         mc:Ignorable="d"
         Title="AddNewBookWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Themes\DarkTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid Background="{DynamicResource PanelBackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -70,7 +78,7 @@
             <TextBlock >Publisher</TextBlock>
             <ComboBox   ItemsSource="{Binding publishers}" SelectedItem="{Binding SelectedPublisher}"/>
 
-            <Button Background="#700101" Foreground="White" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
+            <Button Background="{DynamicResource ImportantActionButtonColor}" Foreground="White" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
         </StackPanel>
     </Grid>
 </Window>
