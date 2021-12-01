@@ -167,6 +167,26 @@ namespace School_library.ViewModels
         }
         #endregion
 
+        public bool returnLoan(DateTime returnedDateTIme, Librarian returnedTo)
+        {
+            loan.returnDateTIme = returnedDateTIme;
+            loan.returnedToLibrarian = returnedTo;
+
+            if(loansDao.updateLoan(loan) == true)
+            {
+                returnDateTIme = returnedDateTIme;
+                returnedToLibrarian = returnedTo;
+                OnPropertyChange("ReturnDateTIme");
+                OnPropertyChange("ReturnedToLibrarian");
+                return true;
+            }
+            else
+            {
+                loan.returnedToLibrarian = returnedToLibrarian;
+                loan.returnDateTIme = returnDateTIme;
+                return false;
+            }
+        }
 
         public LoanViewModel(Loan loan, LoansDAO loansDao)
         {

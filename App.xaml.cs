@@ -25,6 +25,8 @@ namespace School_library
         public List<TabItem> tabs { get; } = new List<TabItem>();
         protected override void OnStartup(StartupEventArgs e)
         {
+            User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass");
+
             BookDAO bookDao = new BookDAO(connectionString);
             PublisherDAO publisherDao = new PublisherDAO(connectionString);
             GenreDAO genreDao = new GenreDAO(connectionString);
@@ -49,7 +51,7 @@ namespace School_library
 
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
-            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao);
+            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao, loggedInUser);
             LoanView loanWiew = new LoanView()
             {
                 DataContext = loansViewModel

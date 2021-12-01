@@ -1,12 +1,14 @@
 ﻿using School_library.Commands;
 using School_library.DAO;
 using School_library.Models;
+using School_library.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace School_library.ViewModels
@@ -16,6 +18,7 @@ namespace School_library.ViewModels
         private readonly LoansDAO loanDao;
         private readonly UserDAO userDao;
         private readonly BookDAO bookDao;
+        private readonly User loggedInUser;
 
 
         private LoanViewModel? selectedLoan = null;
@@ -94,6 +97,7 @@ namespace School_library.ViewModels
                     }
                     catch (Exception) { }
                 }
+                OnPropertyChange("UserID");
             }
         }
 
@@ -109,8 +113,8 @@ namespace School_library.ViewModels
 
         public ICommand clearLoansFiltersCommand { get; }
         public ICommand filterLoansCommand { get; }
-
-       
+        public ICommand openNewLoanWindowCommand { get; }
+        public ICommand returnLoanCommand { get; }
 
         public string FirstNameFilter
         {
@@ -227,11 +231,12 @@ namespace School_library.ViewModels
         
         #endregion
 
-        public LoansPanelViewModel(LoansDAO loanDao, UserDAO userDao, BookDAO bookDao)
+        public LoansPanelViewModel(LoansDAO loanDao, UserDAO userDao, BookDAO bookDao, User loggedInUser)
         {
             this.loanDao = loanDao;
             this.userDao = userDao;
             this.bookDao = bookDao;
+            this.loggedInUser = loggedInUser;
 
             books = new ObservableCollection<Book>(bookDao.getBooks());
 
@@ -248,6 +253,26 @@ namespace School_library.ViewModels
 
             clearLoansFiltersCommand = new ClearLoansFiltersCommand(this);
             filterLoansCommand = new FilterLoansCommand(this);
+            openNewLoanWindowCommand = new OpenNewLoanWindowCommand(this);
+            returnLoanCommand = new ReturnLoanCommand(this);
+        }
+
+        public void returnLoan(LoanViewModel selectedLoan)
+        {
+            if(selectedLoan.returnLoan(DateTime.Now, (Librarian)loggedInUser) == false)
+            {
+                MessageBox.Show("An error has occured while returning a loan", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void openNewLoanWindow()
+        {
+            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel((Librarian)loggedInUser, loanDao, userDao, books, Loans, bookDao);
+            AddNewLoanWindow newLoanWindow = new AddNewLoanWindow()
+            {
+                DataContext = newLoanViewModel
+            };
+            newLoanWindow.ShowDialog();
         }
 
         public void clearFilters()
@@ -258,25 +283,55 @@ namespace School_library.ViewModels
 
             ISBN10 = BookTitle = CopyID = LastNameFilter = FirstNameFilter = UserID = string.Empty;
             OnlyActive = OnlyInactive = OnlyUnreturned = false;
+
+            SelectedLoan = null;
+            SelectedMember = null;
         }
         public void filter()
         {
             Loans.Clear();
 
-            foreach(LoanViewModel l in Loans)
+            List<LoanViewModel> tempLoans = new List<LoanViewModel>();
+            foreach (Loan l in loanDao.getLoans()) tempLoans.Add(new LoanViewModel(l, loanDao));
+
+            foreach (LoanViewModel l in tempLoans)
             {
-                if (userID != -1 && l.Borrower.userID != userID)
-                    continue;
-                if (firstNameFilter.Equals(string.Empty) == false && l.Borrower.firstName.Equals(firstNameFilter) == false)
-                    continue;
-                if (lastNameFilter.Equals(string.Empty) == false && l.Borrower.lastName.Equals(lastNameFilter) == false)
-                    continue;
-                if (copyID != -1 && l.BookCopy.bookCopyID != copyID)
-                    continue;
-                if (bookTitle.Equals(string.Empty) == false && l.BookCopy.book.BookTitle.Equals(bookTitle) == false)
-                    continue;
-                if (isbn10.Equals(string.Empty) == false && l.BookCopy.book.ISBN10.Equals(isbn10) == false)
-                    continue;
+                if(selectedMember != null)
+                {
+                    if (l.Borrower.Equals(selectedMember) == false)
+                        continue;
+                }
+                else
+                {
+                    if (userID != -1)
+                    {
+                        if (l.Borrower.userID != userID)
+                            continue;
+                    }
+                    else
+                    {
+                        if (firstNameFilter.Equals(string.Empty) == false && l.Borrower.firstName.Equals(firstNameFilter) == false)
+                            continue;
+                        if (lastNameFilter.Equals(string.Empty) == false && l.Borrower.lastName.Equals(lastNameFilter) == false)
+                            continue;
+                    }
+                 
+                }
+                if(selectedBook != null)
+                {
+                    if (l.BookCopy.book.Equals(selectedBook) == false)
+                        continue;
+                }
+                else
+                {
+                    if (copyID != -1 && l.BookCopy.bookCopyID != copyID)
+                        continue;
+                    if (isbn10.Equals(string.Empty) == false && l.BookCopy.book.ISBN10.Equals(isbn10) == false)
+                        continue;
+                    if (bookTitle.Equals(string.Empty) == false && l.BookCopy.book.BookTitle.Equals(bookTitle) == false)
+                        continue;
+                }
+
                 if (onlyActive == true && l.Borrower.active == false)
                     continue;
                 if (onlyInactive == true && l.Borrower.active == true)

@@ -13,16 +13,18 @@ namespace School_library.Models
         public Librarian borrowedFromLibrarian { get; set; }
         public Member borrower { get; set; }
         public BookCopy bookCopy { get; set; }
-        public Librarian? returnedToLibrarian { get; set; } = null;
-        public DateTime? returnDateTIme { get; set; } = null;
+        public Librarian? returnedToLibrarian { get; set; }
+        public DateTime? returnDateTIme { get; set; }
 
-        public Loan(int loanID, DateTime borrowDateTime, Librarian borrowedFromLibrarian, Member borrowerID, BookCopy bookCopy)
+        public Loan(int loanID, DateTime borrowDateTime, Librarian borrowedFromLibrarian, Member borrowerID, BookCopy bookCopy, Librarian? returnedToLibrarian = null, DateTime? returnDateTIme = null)
         {
             this.loanID = loanID;
             this.borrowDateTime = borrowDateTime;
             this.borrowedFromLibrarian = borrowedFromLibrarian;
             this.borrower = borrowerID;
             this.bookCopy = bookCopy;
+            this.returnedToLibrarian = returnedToLibrarian;
+            this.returnDateTIme = returnDateTIme;
         }
 
         public override bool Equals(object? obj)

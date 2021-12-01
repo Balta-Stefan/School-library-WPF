@@ -33,5 +33,10 @@ namespace School_library.Models
         {
             return HashCode.Combine(bookCopyID);
         }
+
+        public override string ToString()
+        {
+            return bookCopyID.ToString();
+        }
     }
 }

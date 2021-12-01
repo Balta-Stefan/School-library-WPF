@@ -182,7 +182,7 @@ namespace School_library.DAO
                         int bookCopyID = result.GetInt32("bookCopyID");
                         BookCopy? copy = getBookCopy(bookCopyID);
 
-                        loans.Add(new Loan(loanID, borrowDateTime, borrowedFrom, borrower, copy));
+                        loans.Add(new Loan(loanID, borrowDateTime, borrowedFrom, borrower, copy, returnedTo, returnDateTime));
                     }
                 }
             }
