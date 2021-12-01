@@ -34,8 +34,18 @@ namespace School_library.ViewModels
         private User? selectedMember = null;
         private int userID = -1;
         private Book? selectedBook = null;
+        private bool onlyReturnedFilter = false;
 
         #region Properties
+        public bool OnlyReturnedFilter
+        {
+            get { return onlyReturnedFilter; }
+            set
+            {
+                onlyReturnedFilter = value;
+                OnPropertyChange("OnlyReturnedFilter");
+            }
+        }
         public ObservableCollection<User> members { get; } = new ObservableCollection<User>();
         public ObservableCollection<Book> books { get; }
         public Book? SelectedBook
@@ -282,7 +292,7 @@ namespace School_library.ViewModels
 
 
             ISBN10 = BookTitle = CopyID = LastNameFilter = FirstNameFilter = UserID = string.Empty;
-            OnlyActive = OnlyInactive = OnlyUnreturned = false;
+            OnlyActive = OnlyInactive = OnlyUnreturned = OnlyReturnedFilter = false;
 
             SelectedLoan = null;
             SelectedMember = null;
@@ -296,6 +306,8 @@ namespace School_library.ViewModels
 
             foreach (LoanViewModel l in tempLoans)
             {
+                if (onlyReturnedFilter == true && l.ReturnedToLibrarian == null)
+                    continue;
                 if(selectedMember != null)
                 {
                     if (l.Borrower.Equals(selectedMember) == false)

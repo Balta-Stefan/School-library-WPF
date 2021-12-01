@@ -42,6 +42,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="1" Grid.Row="0">Members</TextBlock>
@@ -68,8 +69,10 @@
                     <TextBlock Grid.Column="7" Grid.Row="2">ISBN-10</TextBlock>
                     <TextBox Grid.Column="7" Grid.Row="3" Text="{Binding ISBN10, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button Grid.Column="3" Grid.Row="4" Margin="0,15,0,0" Background="#424242" Foreground="White" FontWeight="Bold" Padding="10,10,10,10" Command="{Binding filterLoansCommand}">Search</Button>
-                    <Button Grid.Column="5" Grid.Row="4" Margin="0,15,0,0" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding clearLoansFiltersCommand}">Clear filters</Button>
+                    <CheckBox Grid.Column="3" Grid.Row="4" Margin="0,20,0,0" IsChecked="{Binding OnlyReturnedFilter}">Only returned</CheckBox>
+
+                    <Button Grid.Column="3" Grid.Row="5" Margin="0,15,0,0" Background="#424242" Foreground="White" FontWeight="Bold" Padding="10,10,10,10" Command="{Binding filterLoansCommand}">Search</Button>
+                    <Button Grid.Column="5" Grid.Row="5" Margin="0,15,0,0" Background="Navy" Foreground="White" FontWeight="Bold" Command="{Binding clearLoansFiltersCommand}">Clear filters</Button>
                 </Grid>
             </Expander>
 
