@@ -153,6 +153,9 @@
   <data name="AddNewBookButton" xml:space="preserve">
     <value>Dodaj novu knjigu</value>
   </data>
+  <data name="AddNewCopy" xml:space="preserve">
+    <value>Dodaj novi primjerak</value>
+  </data>
   <data name="AddNewMemberText" xml:space="preserve">
     <value>Dodaj novog člana</value>
   </data>
@@ -162,17 +165,44 @@
   <data name="AuthorTextBlock" xml:space="preserve">
     <value>Autor: </value>
   </data>
+  <data name="AvailableText" xml:space="preserve">
+    <value>Dostupno: </value>
+  </data>
   <data name="BooksTabName" xml:space="preserve">
     <value>_Knjige</value>
   </data>
   <data name="ClearFiltersButton" xml:space="preserve">
     <value>Obriši filtre</value>
   </data>
+  <data name="ConditionText" xml:space="preserve">
+    <value>Stanje: </value>
+  </data>
+  <data name="CopyAddedMessage" xml:space="preserve">
+    <value>Primjerak dodan.</value>
+  </data>
+  <data name="CouldntAddCopy" xml:space="preserve">
+    <value>Primjerak nije mogao biti dodan.</value>
+  </data>
   <data name="DarkThemeText" xml:space="preserve">
     <value>Mračno</value>
   </data>
+  <data name="DeleteSelectedCopy" xml:space="preserve">
+    <value>Ukloni odabrani primjerak</value>
+  </data>
+  <data name="DeliveryDateText" xml:space="preserve">
+    <value>Dostavljeno datuma: </value>
+  </data>
+  <data name="EditBookWindowName" xml:space="preserve">
+    <value>Izmjena podataka knjige</value>
+  </data>
+  <data name="EditButton" xml:space="preserve">
+    <value>Izmijeni</value>
+  </data>
   <data name="EditionTextblock" xml:space="preserve">
     <value>Izdanje: </value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Greška</value>
   </data>
   <data name="GenreNameTextblock" xml:space="preserve">
     <value>Ime žanra: </value>
@@ -258,6 +288,9 @@
   <data name="NewPublisherExpander" xml:space="preserve">
     <value>Novi izdavač</value>
   </data>
+  <data name="NoConditionSpecified" xml:space="preserve">
+    <value>Stanje nije odabrano</value>
+  </data>
   <data name="NumberOfCopiesTextBlock" xml:space="preserve">
     <value>Broj kopija: </value>
   </data>
@@ -278,6 +311,15 @@
   </data>
   <data name="SearchButton" xml:space="preserve">
     <value>Traži</value>
+  </data>
+  <data name="SelectConditionMessage" xml:space="preserve">
+    <value>Morate prvo odabrati stanje!</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Izaberite datum</value>
+  </data>
+  <data name="SelectDateMessage" xml:space="preserve">
+    <value>Datum mora biti odabran!</value>
   </data>
   <data name="SettingsTabName" xml:space="preserve">
     <value>P_ostavke</value>

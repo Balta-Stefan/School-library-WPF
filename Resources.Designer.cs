@@ -169,6 +169,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new copy.
+        /// </summary>
+        public static string AddNewCopy {
+            get {
+                return ResourceManager.GetString("AddNewCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new member.
         /// </summary>
         public static string AddNewMemberText {
@@ -196,6 +205,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available: .
+        /// </summary>
+        public static string AvailableText {
+            get {
+                return ResourceManager.GetString("AvailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Books.
         /// </summary>
         public static string BooksTabName {
@@ -214,6 +232,33 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Condition: .
+        /// </summary>
+        public static string ConditionText {
+            get {
+                return ResourceManager.GetString("ConditionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy added..
+        /// </summary>
+        public static string CopyAddedMessage {
+            get {
+                return ResourceManager.GetString("CopyAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t add copy..
+        /// </summary>
+        public static string CouldntAddCopy {
+            get {
+                return ResourceManager.GetString("CouldntAddCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dark theme.
         /// </summary>
         public static string DarkThemeText {
@@ -223,11 +268,56 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete selected copy.
+        /// </summary>
+        public static string DeleteSelectedCopy {
+            get {
+                return ResourceManager.GetString("DeleteSelectedCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery date: .
+        /// </summary>
+        public static string DeliveryDateText {
+            get {
+                return ResourceManager.GetString("DeliveryDateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit book info.
+        /// </summary>
+        public static string EditBookWindowName {
+            get {
+                return ResourceManager.GetString("EditBookWindowName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EditButton {
+            get {
+                return ResourceManager.GetString("EditButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edition: .
         /// </summary>
         public static string EditionTextblock {
             get {
                 return ResourceManager.GetString("EditionTextblock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -484,6 +574,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Condition not specified.
+        /// </summary>
+        public static string NoConditionSpecified {
+            get {
+                return ResourceManager.GetString("NoConditionSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of copies: .
         /// </summary>
         public static string NumberOfCopiesTextBlock {
@@ -543,6 +642,33 @@ namespace School_library {
         public static string SearchButton {
             get {
                 return ResourceManager.GetString("SearchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A condition must be selected!.
+        /// </summary>
+        public static string SelectConditionMessage {
+            get {
+                return ResourceManager.GetString("SelectConditionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a date.
+        /// </summary>
+        public static string SelectDate {
+            get {
+                return ResourceManager.GetString("SelectDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date must be selected!.
+        /// </summary>
+        public static string SelectDateMessage {
+            get {
+                return ResourceManager.GetString("SelectDateMessage", resourceCulture);
             }
         }
         

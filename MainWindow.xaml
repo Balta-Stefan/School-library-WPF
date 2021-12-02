@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:School_library" 
         xmlns:views="clr-namespace:School_library.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="LibPF" Height="720" Width="1280" WindowState="Maximized">
 
     <Window.Resources>
         <ResourceDictionary>

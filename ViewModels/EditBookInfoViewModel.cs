@@ -17,7 +17,7 @@ namespace School_library.ViewModels
         public ObservableCollection<BookCopy> bookCopies { get; }
         public ObservableCollection<BookCondition> bookConditions { get; }
         public BookCondition? selectedCondition { get; set; } = null;
-        public DateTime? selectedDate { get; set; } = null;
+        public DateTime? selectedDate { get; set; } = DateTime.Now;
         private Book book;
         private BookDAO bookDao;
 
@@ -132,12 +132,12 @@ namespace School_library.ViewModels
         {
             if(selectedCondition == null)
             {
-                MessageBox.Show("A condition must be selected first!", "No condition specified", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.SelectConditionMessage, School_library.Resources.NoConditionSpecified, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (selectedDate == null)
             {
-                MessageBox.Show("A date must be selected first!", "No date specified", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.SelectDateMessage, "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -146,11 +146,11 @@ namespace School_library.ViewModels
 
             if(newCopy == null)
             {
-                MessageBox.Show("Couldn't add the new copy", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.CouldntAddCopy, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("New copy added", "Success", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.CopyAddedMessage, "", MessageBoxButton.OK);
                 bookCopies.Add(newCopy);
                 book.NumberOfCopies++;
             }

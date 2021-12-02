@@ -153,6 +153,9 @@
   <data name="AddNewBookButton" xml:space="preserve">
     <value>Add new book</value>
   </data>
+  <data name="AddNewCopy" xml:space="preserve">
+    <value>Add new copy</value>
+  </data>
   <data name="AddNewMemberText" xml:space="preserve">
     <value>Add new member</value>
   </data>
@@ -162,17 +165,44 @@
   <data name="AuthorTextBlock" xml:space="preserve">
     <value>Author: </value>
   </data>
+  <data name="AvailableText" xml:space="preserve">
+    <value>Available: </value>
+  </data>
   <data name="BooksTabName" xml:space="preserve">
     <value>Books</value>
   </data>
   <data name="ClearFiltersButton" xml:space="preserve">
     <value>Clear filters</value>
   </data>
+  <data name="ConditionText" xml:space="preserve">
+    <value>Condition: </value>
+  </data>
+  <data name="CopyAddedMessage" xml:space="preserve">
+    <value>Copy added.</value>
+  </data>
+  <data name="CouldntAddCopy" xml:space="preserve">
+    <value>Couldn't add copy.</value>
+  </data>
   <data name="DarkThemeText" xml:space="preserve">
     <value>Dark theme</value>
   </data>
+  <data name="DeleteSelectedCopy" xml:space="preserve">
+    <value>Delete selected copy</value>
+  </data>
+  <data name="DeliveryDateText" xml:space="preserve">
+    <value>Delivery date: </value>
+  </data>
+  <data name="EditBookWindowName" xml:space="preserve">
+    <value>Edit book info</value>
+  </data>
+  <data name="EditButton" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="EditionTextblock" xml:space="preserve">
     <value>Edition: </value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="GenreNameTextblock" xml:space="preserve">
     <value>Genre name: </value>
@@ -258,6 +288,9 @@
   <data name="NewPublisherExpander" xml:space="preserve">
     <value>New publisher</value>
   </data>
+  <data name="NoConditionSpecified" xml:space="preserve">
+    <value>Condition not specified</value>
+  </data>
   <data name="NumberOfCopiesTextBlock" xml:space="preserve">
     <value>Number of copies: </value>
   </data>
@@ -278,6 +311,15 @@
   </data>
   <data name="SearchButton" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SelectConditionMessage" xml:space="preserve">
+    <value>A condition must be selected!</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Select a date</value>
+  </data>
+  <data name="SelectDateMessage" xml:space="preserve">
+    <value>Date must be selected!</value>
   </data>
   <data name="SettingsTabName" xml:space="preserve">
     <value>Settings</value>

@@ -180,8 +180,13 @@ namespace School_library.ViewModels
             {
                 selectedBook = value;
                 if(value != null)
+                {
                     OnBookSelect();
-                //OnPropertyChange("SelectedBookIndex");
+                    selectedBook = null;
+                    OnPropertyChange("SelectedBook");
+                    return;
+                }
+                OnPropertyChange("SelectedBook");
             }
         }
         public ICommand FilterBooksCommand { get; }
