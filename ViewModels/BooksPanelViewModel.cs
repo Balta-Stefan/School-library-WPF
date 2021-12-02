@@ -244,6 +244,7 @@ namespace School_library.ViewModels
             {
                 DataContext = new EditBookInfoViewModel(bookDao, genreDao, publisherDao, authorDAO, selectedBook)
             };
+            foreach (var c in resourceDictionary) editDataWindow.Resources.MergedDictionaries.Add(c);
             editDataWindow.ShowDialog();
         }
 

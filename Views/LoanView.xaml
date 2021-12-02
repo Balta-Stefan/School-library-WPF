@@ -27,7 +27,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}">Add loan</Button>
+            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}" Content="Add loan">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
 
         <Grid Grid.Row="0" Margin="15,15,15,15">
