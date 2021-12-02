@@ -53,7 +53,13 @@ namespace School_library.ViewModels
 
                 Copies.Clear();
                 if(value != null)
-                    foreach (BookCopy bc in bookDao.getBookCopies(value)) Copies.Add(bc);
+                {
+                    foreach (BookCopy bc in bookDao.getBookCopies(value))
+                    {
+                        if(bc.available == true)
+                            Copies.Add(bc);
+                    }
+                }
             }
         }
 
