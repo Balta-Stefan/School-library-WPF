@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_library.Views"
+        xmlns:p="clr-namespace:School_library"
         mc:Ignorable="d"
-        Title="AddNewBookWindow" Height="450" Width="800">
+        Title="{x:Static p:Resources.AddNewBookButton}" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,32 +26,32 @@
         <StackPanel Grid.Column="3">
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New author</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.NewAuthorExpander}"/>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">First name:</TextBlock>
+                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_firstName}"/>
                     <TextBox Text="{Binding NewAuthorFirstName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Last name:</TextBlock>
+                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_lastName}"/>
                     <TextBox Text="{Binding NewAuthorLastName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
 
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New Genre</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.NewGenreExpander}"/>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}">Genre name:</TextBlock>
+                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.GenreNameTextblock}"/>
                     <TextBox Text="{Binding NewGenreName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
 
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New Publisher</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.NewPublisherExpander}"/>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}">Publisher name:</TextBlock>
+                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.PublisherNameTextblock}"/>
                     <TextBox Text="{Binding NewPublisherName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
@@ -63,22 +64,22 @@
             <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-13</TextBlock>
             <TextBox Text="{Binding ISBN13}" />
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Title</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_bookTitle}"/>
             <TextBox Text="{Binding Title}" />
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Edition</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.EditionTextblock}"/>
             <TextBox Text="{Binding Edition}" />
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Author</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.AuthorTextBlock}"/>
             <ComboBox ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Genre</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.GenreNameTextblock}"/>
             <ComboBox   ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Publisher</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.PublisherTextBlock}"/>
             <ComboBox   ItemsSource="{Binding publishers}" SelectedItem="{Binding SelectedPublisher}"/>
 
-            <Button Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
+            <Button Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}" Content="{x:Static p:Resources.AddNewBookButton}"/>
         </StackPanel>
     </Grid>
 </Window>

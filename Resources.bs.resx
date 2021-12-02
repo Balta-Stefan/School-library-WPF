@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActiveCheckboxText" xml:space="preserve">
+    <value>Aktivan</value>
+  </data>
+  <data name="AddLoanWindow_book" xml:space="preserve">
+    <value>Knjiga</value>
+  </data>
+  <data name="AddLoanWindow_copy" xml:space="preserve">
+    <value>Kopija</value>
+  </data>
+  <data name="AddLoanWindow_Error" xml:space="preserve">
+    <value>Greška</value>
+  </data>
+  <data name="AddLoanWindow_ErrorWhileAdding" xml:space="preserve">
+    <value>Desila se greška prilikom dodavanja</value>
+  </data>
+  <data name="AddLoanWindow_LoanAdded" xml:space="preserve">
+    <value>Zaduženje uspješno dodano</value>
+  </data>
+  <data name="AddLoanWindow_LoanSuccess" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="AddLoanWindow_member" xml:space="preserve">
+    <value>Član</value>
+  </data>
+  <data name="AddLoanWindow_mustSelectCopy" xml:space="preserve">
+    <value>Morate odabrati kopiju</value>
+  </data>
+  <data name="AddLoanWindow_mustSelectMember" xml:space="preserve">
+    <value>Morate odabrati člana</value>
+  </data>
+  <data name="AddLoanWindow_userInactiveMessage" xml:space="preserve">
+    <value>Odabrani član je neaktivan</value>
+  </data>
+  <data name="AddNewBookButton" xml:space="preserve">
+    <value>Dodaj novu knjigu</value>
+  </data>
+  <data name="AddNewMemberText" xml:space="preserve">
+    <value>Dodaj novog člana</value>
+  </data>
+  <data name="AddUserFormRequirementsMessage" xml:space="preserve">
+    <value>Morate ispuniti sva polja i odabrati tip korisnika</value>
+  </data>
+  <data name="AuthorTextBlock" xml:space="preserve">
+    <value>Autor: </value>
+  </data>
+  <data name="BooksTabName" xml:space="preserve">
+    <value>_Knjige</value>
+  </data>
+  <data name="ClearFiltersButton" xml:space="preserve">
+    <value>Obriši filtre</value>
+  </data>
+  <data name="DarkThemeText" xml:space="preserve">
+    <value>Mračno</value>
+  </data>
+  <data name="EditionTextblock" xml:space="preserve">
+    <value>Izdanje: </value>
+  </data>
+  <data name="GenreNameTextblock" xml:space="preserve">
+    <value>Ime žanra: </value>
+  </data>
+  <data name="GenreTextBlock" xml:space="preserve">
+    <value>Žanr: </value>
+  </data>
+  <data name="LightThemeText" xml:space="preserve">
+    <value>Svijetlo</value>
+  </data>
+  <data name="LoansTabName" xml:space="preserve">
+    <value>_Zaduživanja</value>
+  </data>
+  <data name="Loans_AddLoanButton" xml:space="preserve">
+    <value>Zaduži</value>
+  </data>
+  <data name="Loans_BooksTextBlock" xml:space="preserve">
+    <value>Knjige</value>
+  </data>
+  <data name="Loans_BookTitle" xml:space="preserve">
+    <value>Naziv knjige</value>
+  </data>
+  <data name="Loans_BorrowedAtDate" xml:space="preserve">
+    <value>Posuđeno: </value>
+  </data>
+  <data name="Loans_BorrowedFrom" xml:space="preserve">
+    <value>Posuđeno od: </value>
+  </data>
+  <data name="Loans_CopyID" xml:space="preserve">
+    <value>ID kopije</value>
+  </data>
+  <data name="Loans_FirstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="Loans_LastName" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="Loans_listbox_bookTitle" xml:space="preserve">
+    <value>Naziv knjige: </value>
+  </data>
+  <data name="Loans_listbox_copyID" xml:space="preserve">
+    <value>ID kopije: </value>
+  </data>
+  <data name="Loans_listbox_firstName" xml:space="preserve">
+    <value>Ime: </value>
+  </data>
+  <data name="Loans_listbox_lastName" xml:space="preserve">
+    <value>Prezime: </value>
+  </data>
+  <data name="Loans_listbox_returnedAt" xml:space="preserve">
+    <value>Vraćeno dana: </value>
+  </data>
+  <data name="Loans_listbox_userID" xml:space="preserve">
+    <value>ID korisnika: </value>
+  </data>
+  <data name="Loans_MembersTextBlock" xml:space="preserve">
+    <value>Članovi</value>
+  </data>
+  <data name="Loans_OnlyReturned" xml:space="preserve">
+    <value>Samo vraćeno</value>
+  </data>
+  <data name="Loans_ReturnDate" xml:space="preserve">
+    <value>Vraćeno datuma: </value>
+  </data>
+  <data name="Loans_ReturnedTo" xml:space="preserve">
+    <value>Vraćeno: </value>
+  </data>
+  <data name="Loans_returnLoan" xml:space="preserve">
+    <value>Razduži</value>
+  </data>
+  <data name="Loans_UserID" xml:space="preserve">
+    <value>ID korisnika</value>
+  </data>
+  <data name="MembersTabName" xml:space="preserve">
+    <value>Č_lanovi</value>
+  </data>
+  <data name="NewAuthorExpander" xml:space="preserve">
+    <value>Novi autor</value>
+  </data>
+  <data name="NewGenreExpander" xml:space="preserve">
+    <value>Novi žanr</value>
+  </data>
+  <data name="NewPublisherExpander" xml:space="preserve">
+    <value>Novi izdavač</value>
+  </data>
+  <data name="NumberOfCopiesTextBlock" xml:space="preserve">
+    <value>Broj kopija: </value>
+  </data>
+  <data name="OnlyActiveMembers" xml:space="preserve">
+    <value>Samo aktivni članovi</value>
+  </data>
+  <data name="OnlyWithAvailableCopiesText" xml:space="preserve">
+    <value>Samo sa raspoloživim primjercima</value>
+  </data>
+  <data name="PasswordText" xml:space="preserve">
+    <value>Lozinka: </value>
+  </data>
+  <data name="PublisherNameTextblock" xml:space="preserve">
+    <value>Ime izdavača: </value>
+  </data>
+  <data name="PublisherTextBlock" xml:space="preserve">
+    <value>Izdavač: </value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Traži</value>
+  </data>
+  <data name="SettingsTabName" xml:space="preserve">
+    <value>P_ostavke</value>
+  </data>
+  <data name="ShowHideFilters" xml:space="preserve">
+    <value>Kliknite za pokazivanje filtera...</value>
+  </data>
+  <data name="ThemesText" xml:space="preserve">
+    <value>Teme</value>
+  </data>
+  <data name="UserAddedMessage" xml:space="preserve">
+    <value>Korisnik uspješno dodan.</value>
+  </data>
+  <data name="UsernameText" xml:space="preserve">
+    <value>Korisničko ime: </value>
+  </data>
+  <data name="UserNotAddedError" xml:space="preserve">
+    <value>Desila se greška prilikom dodavanja korisnika.</value>
+  </data>
+  <data name="UserTypeText" xml:space="preserve">
+    <value>Tip korisnika: </value>
+  </data>
+</root>

@@ -32,7 +32,7 @@ namespace School_library.ViewModels
                 // if the selected member is inactive, disable the button and display a message
                 if(value != null && value.active == false)
                 {
-                    MessageBox.Show("Selected member is inactive", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(School_library.Resources.AddLoanWindow_userInactiveMessage, "", MessageBoxButton.OK, MessageBoxImage.Warning);
                     selectedMember = null;
                     OnPropertyChange("SelectedMember");
                     return;
@@ -100,12 +100,12 @@ namespace School_library.ViewModels
         {
             if(selectedMember == null)
             {
-                MessageBox.Show("You must select a member", "", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.AddLoanWindow_mustSelectMember, "", MessageBoxButton.OK);
                 return;
             }
             if(selectedCopy == null)
             {
-                MessageBox.Show("You must select a copy", "", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.AddLoanWindow_mustSelectCopy, "", MessageBoxButton.OK);
                 return;
             }
 
@@ -114,12 +114,12 @@ namespace School_library.ViewModels
 
             if(newLoan == null)
             {
-                MessageBox.Show("An error has occured while adding a loan", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.AddLoanWindow_ErrorWhileAdding, School_library.Resources.AddLoanWindow_Error, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
                 loans.Add(new LoanViewModel(newLoan, loanDao));
-                MessageBox.Show("A loan has been added", "Success", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.AddLoanWindow_LoanAdded, School_library.Resources.AddLoanWindow_LoanSuccess, MessageBoxButton.OK);
 
                 SelectedBook = null;
                 SelectedCopy = null;

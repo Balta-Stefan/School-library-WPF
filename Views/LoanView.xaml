@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:School_library.Views"
+             xmlns:p="clr-namespace:School_library"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -27,7 +28,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}" Content="Add loan">
+            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}" Content="{x:Static p:Resources.Loans_AddLoanButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -44,7 +45,7 @@
 
             <Expander Grid.Row="0" Margin="0,0,0,30" BorderBrush="#424242" BorderThickness="0">
                 <Expander.Header>
-                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">Click to show/hide filters...</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.ShowHideFilters}"/>
                 </Expander.Header>
                 <Grid Grid.Row="0" Margin="10,10,10,10">
                     <Grid.ColumnDefinitions>
@@ -67,34 +68,34 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">Members</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_MembersTextBlock}"/>
                     <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding members}" SelectedItem="{Binding SelectedMember}"/>
 
-                    <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">User ID</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_UserID}"/>
                     <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding UserID, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <TextBlock Grid.Column="5" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">First name</TextBlock>
+                    <TextBlock Grid.Column="5" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_FirstName}"/>
                     <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding FirstNameFilter, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <TextBlock Grid.Column="7" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">Last name</TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_LastName}"/>
                     <TextBox Grid.Column="7" Grid.Row="1" Text="{Binding LastNameFilter, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">Books</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_BooksTextBlock}"/>
                     <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding books}" SelectedItem="{Binding SelectedBook}"/>
 
-                    <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">Copy ID</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_CopyID}"/>
                     <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding CopyID}"/>
 
-                    <TextBlock Grid.Column="5" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">Book title</TextBlock>
+                    <TextBlock Grid.Column="5" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_BookTitle}"/>
                     <TextBox Grid.Column="5" Grid.Row="3" Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Column="7" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-10</TextBlock>
                     <TextBox Grid.Column="7" Grid.Row="3" Text="{Binding ISBN10, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <CheckBox Grid.Column="3" Grid.Row="4" Margin="0,20,0,0" IsChecked="{Binding OnlyReturnedFilter}" Foreground="{DynamicResource TextBlockForegroundColor}">Only returned</CheckBox>
+                    <CheckBox Grid.Column="3" Grid.Row="4" Margin="0,20,0,0" IsChecked="{Binding OnlyReturnedFilter}" Foreground="{DynamicResource TextBlockForegroundColor}" Content="{x:Static p:Resources.Loans_OnlyReturned}"/>
 
-                    <Button Grid.Column="3" Grid.Row="5" Margin="0,15,0,0" Background="{DynamicResource FilterButtonColor}" Foreground="White" FontWeight="Bold" Padding="10,10,10,10" Command="{Binding filterLoansCommand}">Search</Button>
-                    <Button Grid.Column="5" Grid.Row="5" Margin="0,15,0,0" Background="{DynamicResource ClearFiltersButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding clearLoansFiltersCommand}">Clear filters</Button>
+                    <Button Grid.Column="3" Grid.Row="5" Margin="0,15,0,0" Background="{DynamicResource FilterButtonColor}" Foreground="White" FontWeight="Bold" Padding="10,10,10,10" Command="{Binding filterLoansCommand}" Content="{x:Static p:Resources.SearchButton}"/>
+                    <Button Grid.Column="5" Grid.Row="5" Margin="0,15,0,0" Background="{DynamicResource ClearFiltersButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding clearLoansFiltersCommand}" Content="{x:Static p:Resources.ClearFiltersButton}"/>
                 </Grid>
             </Expander>
 
@@ -125,39 +126,39 @@
 
                         <StackPanel Grid.Column="0">
                             <WrapPanel>
-                                <TextBlock Text="User ID: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_userID}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                  <TextBlock Text="{Binding Borrower.userID}" FontWeight="Regular"  Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="First name: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                <TextBlock Text="{x:Static p:Resources.Loans_listbox_firstName}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                 <TextBlock Text="{Binding Borrower.firstName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="Last name: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_lastName}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                 <TextBlock Text="{Binding Borrower.lastName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="Copy ID: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_copyID}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                 <TextBlock Text="{Binding BookCopy.bookCopyID}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="Title: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_bookTitle}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                 <TextBlock Text="{Binding BookCopy.book.BookTitle}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="Borrowed from librarian: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_BorrowedFrom}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                 <TextBlock Text="{Binding BorrowedFromLibrarianFullName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                    <TextBlock Text="Borrowed at date: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_BorrowedAtDate}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                     <TextBlock Text="{Binding BorrowDateTime}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                    <TextBlock Text="Returned to librarian: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_ReturnedTo}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                     <TextBlock Text="{Binding ReturnedToLibrarian}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                    <TextBlock Text="Returned at date: " Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_returnedAt}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                                     <TextBlock Text="{Binding ReturnDateTIme}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                         </StackPanel>
@@ -168,8 +169,8 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}">Return loan</Button>
-                        </Grid>
+                                <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}" Content="{x:Static p:Resources.Loans_returnLoan}"/>
+                            </Grid>
 
                         </Grid>
                     </DataTemplate>

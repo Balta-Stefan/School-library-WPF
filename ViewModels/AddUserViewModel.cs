@@ -46,7 +46,7 @@ namespace School_library.ViewModels
                 Password.Equals(string.Empty) ||
                 SelectedType == null)
             {
-                MessageBox.Show("You must fill all the fields and choose a user type.", "", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.AddUserFormRequirementsMessage, "", MessageBoxButton.OK);
                 return;
             }
 
@@ -55,12 +55,12 @@ namespace School_library.ViewModels
 
             if (userToAdd == null)
             {
-                MessageBox.Show("User not added", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.UserNotAddedError, School_library.Resources.AddLoanWindow_Error, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
                 users.Add(new UserViewModel(userToAdd, userDao));
-                MessageBox.Show("User added", "User added", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.UserAddedMessage, "", MessageBoxButton.OK);
             }
         }
     }

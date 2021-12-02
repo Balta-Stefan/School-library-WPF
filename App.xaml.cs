@@ -30,6 +30,8 @@ namespace School_library
         public List<TabItem> tabs { get; } = new List<TabItem>();
         protected override void OnStartup(StartupEventArgs e)
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
+
             User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass");
 
             BookDAO bookDao = new BookDAO(connectionString);
@@ -41,7 +43,7 @@ namespace School_library
 
            
             AccessText loansTabItemHotkey = new AccessText();
-            loansTabItemHotkey.Text = "_Loans";
+            loansTabItemHotkey.Text = School_library.Resources.LoansTabName;
 
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
@@ -51,7 +53,7 @@ namespace School_library
             loansTab.Content = loanWiew;
 
             AccessText booksTabItemHotkey = new AccessText();
-            booksTabItemHotkey.Text = "_Books";
+            booksTabItemHotkey.Text = School_library.Resources.BooksTabName;
             TabItem booksTab = new TabItem();
             booksTab.Header = booksTabItemHotkey;//"_Books";
             booksView = new BooksPanelView();
@@ -60,7 +62,7 @@ namespace School_library
             booksTab.Content = booksView;
 
             AccessText membersTabItemHotkey = new AccessText();
-            membersTabItemHotkey.Text = "_Members";
+            membersTabItemHotkey.Text = School_library.Resources.MembersTabName;
             TabItem membersTab = new TabItem();
             membersTab.Header = membersTabItemHotkey;//"Members";
             membersPanel = new MembersPanel();
@@ -69,7 +71,7 @@ namespace School_library
             membersTab.Content = membersPanel;
 
             AccessText settingsTabItemHotkey = new AccessText();
-            settingsTabItemHotkey.Text = "_Settings";
+            settingsTabItemHotkey.Text = School_library.Resources.SettingsTabName;
             TabItem settingsTab = new TabItem();
             settingsTab.Header = settingsTabItemHotkey;// "Settings";
             SettingsView settingsView = new SettingsView();

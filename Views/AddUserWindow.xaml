@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_library.Views"
+        xmlns:p="clr-namespace:School_library"
         mc:Ignorable="d"
-        Title="AddUserWindow" Height="450" Width="800">
+        Title="{x:Static p:Resources.AddNewMemberText}" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,22 +22,22 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">First name:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_firstName}"/>
             <TextBox Text="{Binding FirstName}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Last name:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_lastName}"/>
             <TextBox Text="{Binding LastName}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Username:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.UsernameText}"/>
             <TextBox Text="{Binding Username}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Password:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.PasswordText}"/>
             <TextBox Text="{Binding Password}"/>
 
-            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">User type:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.UserTypeText}"/>
             <ComboBox ItemsSource="{Binding UserTypes}" SelectedItem="{Binding SelectedType}"/>
 
-            <Button Padding="13,13,13,13" Margin="0,20,0,0" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding AddUserCommand}">Add new member</Button>
+            <Button Padding="13,13,13,13" Margin="0,20,0,0" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding AddUserCommand}" Content="{x:Static p:Resources.AddNewMemberText}"/>
         </StackPanel>
     </Grid>
 </Window>

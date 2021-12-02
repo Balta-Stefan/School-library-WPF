@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:School_library.Views"
+             xmlns:p="clr-namespace:School_library"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -27,7 +28,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding AddMemberCommand}" Content="Add new member">
+            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding AddMemberCommand}" Content="{x:Static p:Resources.AddNewMemberText}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -44,7 +45,7 @@
 
             <Expander Grid.Row="0" Margin="0,0,0,30" BorderBrush="#424242" BorderThickness="0">
                 <Expander.Header>
-                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">Click to show/hide filters...</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.ShowHideFilters}"/>
                 </Expander.Header>
                 <Grid Grid.Row="0" Margin="10,10,10,10">
                     <Grid.ColumnDefinitions>
@@ -70,24 +71,27 @@
                         </Style>
                     </Grid.Resources>
 
-                    <TextBlock Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">First name</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_firstName}"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding FirstName}"/>
 
-                    <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}">Last name</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_lastName}"/>
                     <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding LastName}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">User type</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.UserTypeText}"/>
                     <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding UserTypesList}" SelectedItem="{Binding SelectedMemberType}"/>
 
                     <!--<TextBlock Grid.Column="3" Grid.Row="2">Card number</TextBlock>
                     <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding CardInputEnabled, UpdateSourceTrigger=PropertyChanged}" Text="{Binding CardNumber}"/>-->
-                    <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">User ID</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_userID}"/>
                     <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding UserID}"/>
 
-                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding OnlyActiveMembersFilter}" Content="Only active members" Margin="0,10,0,0"  Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding OnlyActiveMembersFilter}" Margin="0,10,0,0" Foreground="{DynamicResource TextBlockForegroundColor}">
+                        <TextBlock Text="{x:Static p:Resources.OnlyActiveMembers}" TextWrapping="Wrap"/>
+                    </CheckBox>
+                    
 
-                    <Button Grid.Column="1" Grid.Row="5" Background="{DynamicResource FilterButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding FilterMembers}">Search</Button>
-                    <Button Grid.Column="3" Grid.Row="5" Background="{DynamicResource ClearFiltersButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding ClearFilters}">Clear filters</Button>
+                    <Button Grid.Column="1" Grid.Row="5" Background="{DynamicResource FilterButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding FilterMembers}" Content="{x:Static p:Resources.SearchButton}"/>
+                    <Button Grid.Column="3" Grid.Row="5" Background="{DynamicResource ClearFiltersButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding ClearFilters}" Content="{x:Static p:Resources.ClearFiltersButton}"/>
                 </Grid>
             </Expander>
 
@@ -124,23 +128,23 @@
 
                             <StackPanel Grid.Column="0">
                                 <WrapPanel>
-                                    <TextBlock Text="User type: "/>
+                                    <TextBlock Text="{x:Static p:Resources.UserTypeText}"/>
                                     <TextBlock Text="{Binding UserType}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
-                                    <TextBlock Text="First name: "/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_firstName}"/>
                                     <TextBlock Text="{Binding FirstName}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
-                                    <TextBlock Text="Last name: "/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_lastName}"/>
                                     <TextBlock Text="{Binding LastName}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
-                                    <TextBlock Text="User ID:"/>
+                                    <TextBlock Text="{x:Static p:Resources.Loans_listbox_userID}"/>
                                     <TextBlock Text="{Binding UserID}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
-                                    <TextBlock Text="Active:    "/>
+                                    <TextBlock Text="{x:Static p:Resources.ActiveCheckboxText}"/>
                                     <CheckBox IsChecked="{Binding Active}"/>
                                 </WrapPanel>
                             </StackPanel>
