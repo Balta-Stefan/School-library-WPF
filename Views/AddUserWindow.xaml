@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Background="{DynamicResource PanelBackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -21,22 +21,22 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock>First name:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">First name:</TextBlock>
             <TextBox Text="{Binding FirstName}"/>
 
-            <TextBlock>Last name:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Last name:</TextBlock>
             <TextBox Text="{Binding LastName}"/>
 
-            <TextBlock>Username:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Username:</TextBlock>
             <TextBox Text="{Binding Username}"/>
 
-            <TextBlock>Password:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Password:</TextBlock>
             <TextBox Text="{Binding Password}"/>
 
-            <TextBlock>User type:</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">User type:</TextBlock>
             <ComboBox ItemsSource="{Binding UserTypes}" SelectedItem="{Binding SelectedType}"/>
 
-            <Button Padding="13,13,13,13" Margin="0,20,0,0" Background="{DynamicResource ImportantActionButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding AddUserCommand}">Add new member</Button>
+            <Button Padding="13,13,13,13" Margin="0,20,0,0" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding AddUserCommand}">Add new member</Button>
         </StackPanel>
     </Grid>
 </Window>

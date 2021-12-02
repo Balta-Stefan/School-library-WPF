@@ -22,7 +22,7 @@
             </Style>
         </Grid.Resources>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Themes:</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextBlockForegroundColor}">Themes:</TextBlock>
             <Button Background="#424242" Foreground="White" Click="activateDark">Dark theme</Button>
             <Button Background="White" Click="activateLight">Light theme</Button>
         </StackPanel> 

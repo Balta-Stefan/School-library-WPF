@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace School_library.ViewModels
@@ -26,6 +27,8 @@ namespace School_library.ViewModels
         private ObservableCollection<Publisher> publishers;
         private ObservableCollection<Genre> genres;
         private ObservableCollection<Author> authors;
+
+        private Collection<ResourceDictionary> resourceDictionary;
 
         public ObservableCollection<Author> Authors
         {
@@ -185,7 +188,7 @@ namespace School_library.ViewModels
         public ICommand ClearBookFiltersCommand { get; }
         public ICommand BooksPanel_AddNewBookCommand { get; }
 
-        public BooksPanelViewModel(BookDAO bookDao, PublisherDAO publisherDao, GenreDAO genreDao, AuthorDAO authorDAO)
+        public BooksPanelViewModel(BookDAO bookDao, PublisherDAO publisherDao, GenreDAO genreDao, AuthorDAO authorDAO, Collection<ResourceDictionary> resourceDictionary)
         {
             this.books = new ObservableCollection<Book>(bookDao.getBooks());
             this.publishers = new ObservableCollection<Publisher>(publisherDao.getPublishers());
@@ -195,6 +198,7 @@ namespace School_library.ViewModels
             this.publisherDao = publisherDao;
             this.genreDao = genreDao;
             this.authorDAO = authorDAO;
+            this.resourceDictionary = resourceDictionary;
 
             FilterBooksCommand = new FilterBooksCommand(this);
             ClearBookFiltersCommand = new ClearBookFiltersCommand(this);
@@ -209,6 +213,7 @@ namespace School_library.ViewModels
             {
                 DataContext = addBookViewModel
             };
+            foreach (var c in resourceDictionary) window.Resources.MergedDictionaries.Add(c);
 
             window.ShowDialog();
         }

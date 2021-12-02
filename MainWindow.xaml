@@ -18,48 +18,7 @@
 
 
 
-    <Grid Background="{DynamicResource PanelBackgroundColor}">
-        <TabControl ItemContainerStyle="{DynamicResource NavBar}" ItemsSource="{Binding tabs}" Name="TempTabControl" TabStripPlacement="Left">
-            <!--<TabItem Header="Loans">
-                
-            </TabItem>
-            <TabItem Header="Books">
-                <Grid Background="#dedede">
-                    <views:BooksPanelView />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Members">
-                <views:MembersPanel/>
-            </TabItem>
-            <TabItem Header="Publishers">
-                <TextBlock Text="4th"/>
-            </TabItem>
-            <TabItem Header="Genres">
-                <TextBlock>Genres</TextBlock>
-            </TabItem>
-            <TabItem Header="Settings">
-                <StackPanel>
-                    <Button Click="switchToDarkTheme">Dark theme</Button>
-                    <Button Click="switchToLightTheme">Light theme</Button>
-                </StackPanel>
-            </TabItem>-->
-        </TabControl>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.15*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Name="NavigationBar" Grid.Column="0" Background="#424242">
-            <Button>Search</Button>
-            <Button>Books</Button>
-            <Button>Add loan</Button>
-            <Button>Publishers</Button>
-            <Button>Members</Button>
-            <Button>Settings</Button>
-        </StackPanel>
-
-        <Grid Name="ContentGrid" Grid.Column="1" Background="#dedede">
-            
-        </Grid>-->
+    <Grid Name="MainWindowMainGrid" Background="{DynamicResource NavBarBackgroundColor}">
+        <TabControl Background="{DynamicResource PanelBackgroundColor}" ItemContainerStyle="{DynamicResource NavBar}" ItemsSource="{Binding tabs}" Name="TempTabControl" TabStripPlacement="Left" Padding="0"/>
     </Grid>
- </Window>
+</Window>

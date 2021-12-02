@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace School_library.ViewModels
@@ -15,6 +16,8 @@ namespace School_library.ViewModels
     public class MembersPanelViewModel : ViewModelBase
     {
         private UserDAO userDao;
+
+        private Collection<ResourceDictionary> resourceDictionaries;
 
         private string firstName = string.Empty;
         public string FirstName
@@ -161,8 +164,10 @@ namespace School_library.ViewModels
         {
             get { return users; }
         }
-        public MembersPanelViewModel(UserDAO userDao)
+        public MembersPanelViewModel(UserDAO userDao, Collection<ResourceDictionary> resourceDictionaries)
         {
+            this.resourceDictionaries = resourceDictionaries;
+
             IEnumerable<User.UserTypes> allTypes = Enum.GetValues(typeof(User.UserTypes)).Cast<User.UserTypes>();
             foreach (User.UserTypes t in allTypes) 
                 types.Add(t);
@@ -243,6 +248,7 @@ namespace School_library.ViewModels
             {
                 DataContext = addUserViewModel
             };
+            foreach (var c in resourceDictionaries) addUserWindow.Resources.MergedDictionaries.Add(c);
             addUserWindow.ShowDialog();
         }
    

@@ -20,6 +20,7 @@ namespace School_library.ViewModels
         private readonly BookDAO bookDao;
         private readonly User loggedInUser;
 
+        private Collection<ResourceDictionary> resourceDictionary;
 
         private LoanViewModel? selectedLoan = null;
 
@@ -241,12 +242,13 @@ namespace School_library.ViewModels
         
         #endregion
 
-        public LoansPanelViewModel(LoansDAO loanDao, UserDAO userDao, BookDAO bookDao, User loggedInUser)
+        public LoansPanelViewModel(LoansDAO loanDao, UserDAO userDao, BookDAO bookDao, User loggedInUser, Collection<ResourceDictionary> resourceDictionary)
         {
             this.loanDao = loanDao;
             this.userDao = userDao;
             this.bookDao = bookDao;
             this.loggedInUser = loggedInUser;
+            this.resourceDictionary = resourceDictionary;
 
             books = new ObservableCollection<Book>(bookDao.getBooks());
 
@@ -282,6 +284,8 @@ namespace School_library.ViewModels
             {
                 DataContext = newLoanViewModel
             };
+            newLoanWindow.Resources.MergedDictionaries.Clear();
+            foreach (var c in resourceDictionary) newLoanWindow.Resources.MergedDictionaries.Add(c);
             newLoanWindow.ShowDialog();
         }
 

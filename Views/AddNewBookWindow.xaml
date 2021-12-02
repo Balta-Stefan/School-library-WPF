@@ -25,60 +25,60 @@
         <StackPanel Grid.Column="3">
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="Red" FontWeight="Bold">New author</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New author</TextBlock>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock>First name:</TextBlock>
+                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">First name:</TextBlock>
                     <TextBox Text="{Binding NewAuthorFirstName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock>Last name:</TextBlock>
+                    <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Last name:</TextBlock>
                     <TextBox Text="{Binding NewAuthorLastName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
 
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="Red" FontWeight="Bold">New Genre</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New Genre</TextBlock>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock>Genre name:</TextBlock>
+                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}">Genre name:</TextBlock>
                     <TextBox Text="{Binding NewGenreName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
 
             <Expander>
                 <Expander.Header>
-                    <TextBlock Foreground="Red" FontWeight="Bold">New Publisher</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold">New Publisher</TextBlock>
                 </Expander.Header>
                 <StackPanel>
-                    <TextBlock>Publisher name:</TextBlock>
+                    <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}">Publisher name:</TextBlock>
                     <TextBox Text="{Binding NewPublisherName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Expander>
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <TextBlock>ISBN-10</TextBlock>
+            <TextBlock  Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-10</TextBlock>
             <TextBox Text="{Binding ISBN10}" />
 
-            <TextBlock >ISBN-13</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-13</TextBlock>
             <TextBox Text="{Binding ISBN13}" />
 
-            <TextBlock >Title</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Title</TextBlock>
             <TextBox Text="{Binding Title}" />
 
-            <TextBlock >Edition</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Edition</TextBlock>
             <TextBox Text="{Binding Edition}" />
 
-            <TextBlock >Author</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Author</TextBlock>
             <ComboBox ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
 
-            <TextBlock >Genre</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Genre</TextBlock>
             <ComboBox   ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>
 
-            <TextBlock >Publisher</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Publisher</TextBlock>
             <ComboBox   ItemsSource="{Binding publishers}" SelectedItem="{Binding SelectedPublisher}"/>
 
-            <Button Background="{DynamicResource ImportantActionButtonColor}" Foreground="White" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
+            <Button Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold"  Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding addBookCommand}">Add book</Button>
         </StackPanel>
     </Grid>
 </Window>

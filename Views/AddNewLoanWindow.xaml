@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Background="{DynamicResource PanelBackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -21,16 +21,16 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1">
-            <TextBlock>Member</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Member</TextBlock>
             <ComboBox ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedMember}" IsTextSearchEnabled="True"/>
 
-            <TextBlock>Book</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Book</TextBlock>
             <ComboBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}"/>
 
-            <TextBlock>Copy</TextBlock>
+            <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}">Copy</TextBlock>
             <ComboBox ItemsSource="{Binding Copies}" SelectedItem="{Binding SelectedCopy}"/>
 
-            <Button Padding="13,13,13,13" Margin="0,20,0,0" Background="{DynamicResource ImportantActionButtonColor}" Foreground="White" FontWeight="Bold" Command="{Binding addLoanCommand}">Add loan</Button>
+            <Button Padding="13,13,13,13" Margin="0,20,0,0" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding addLoanCommand}">Add loan</Button>
         </StackPanel>
     </Grid>
 </Window>

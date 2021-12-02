@@ -25,6 +25,7 @@ namespace School_library
         private LoanView loanWiew;
         private BooksPanelView booksView;
         private MembersPanel membersPanel;
+        private MainWindow mainWindow;
 
         public List<TabItem> tabs { get; } = new List<TabItem>();
         protected override void OnStartup(StartupEventArgs e)
@@ -44,33 +45,27 @@ namespace School_library
 
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
-            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao, loggedInUser);
-            loanWiew = new LoanView()
-            {
-                DataContext = loansViewModel
-            };
+            loanWiew = new LoanView();
+            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao, loggedInUser, loanWiew.Resources.MergedDictionaries);
+            loanWiew.DataContext = loansViewModel;
             loansTab.Content = loanWiew;
 
             AccessText booksTabItemHotkey = new AccessText();
             booksTabItemHotkey.Text = "_Books";
             TabItem booksTab = new TabItem();
             booksTab.Header = booksTabItemHotkey;//"_Books";
-            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao);
-            booksView = new BooksPanelView()
-            {
-                DataContext = booksPanelViewModel
-            };
+            booksView = new BooksPanelView();
+            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao, booksView.Resources.MergedDictionaries);
+            booksView.DataContext = booksPanelViewModel;
             booksTab.Content = booksView;
 
             AccessText membersTabItemHotkey = new AccessText();
             membersTabItemHotkey.Text = "_Members";
             TabItem membersTab = new TabItem();
             membersTab.Header = membersTabItemHotkey;//"Members";
-            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao);
-            membersPanel = new MembersPanel()
-            {
-                DataContext = membersViewModel
-            };
+            membersPanel = new MembersPanel();
+            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao, membersPanel.Resources.MergedDictionaries);
+            membersPanel.DataContext = membersViewModel;
             membersTab.Content = membersPanel;
 
             AccessText settingsTabItemHotkey = new AccessText();
@@ -88,11 +83,12 @@ namespace School_library
             tabs.Add(settingsTab);
             
 
-            MainWindow mainWindow = new MainWindow()
+            mainWindow = new MainWindow()
             {
                 DataContext = this
             };
             mainWindow.Show();
+        
 
             base.OnStartup(e);
         }
@@ -110,6 +106,12 @@ namespace School_library
 
             membersPanel.Resources.MergedDictionaries.Clear();
             membersPanel.Resources.MergedDictionaries.Add(dic);
+
+            mainWindow.TempTabControl.Resources.MergedDictionaries.Clear();
+            mainWindow.TempTabControl.Resources.MergedDictionaries.Add(dic);
+
+            mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Clear();
+            mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Add(dic);
         }
     }
 }
