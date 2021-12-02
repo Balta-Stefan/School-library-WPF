@@ -24,7 +24,7 @@ namespace School_library
     
     public partial class App : Application
     {
-        private string connectionString = "";//"Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
+        private string? connectionString = null;//"Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
 
         private LoanView loanWiew;
         private BooksPanelView booksView;
@@ -92,6 +92,12 @@ namespace School_library
         protected override void OnStartup(StartupEventArgs e)
         {
             loadResources();
+            
+            if(connectionString == null)
+            {
+                MessageBox.Show(School_library.Resources.AppInitFailed, "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             //User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass", "", "");
 
             BookDAO bookDao = new BookDAO(connectionString);

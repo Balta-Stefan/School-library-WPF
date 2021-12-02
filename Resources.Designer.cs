@@ -196,6 +196,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application initialization has failed.Couldn&apos;t find config file..
+        /// </summary>
+        public static string AppInitFailed {
+            get {
+                return ResourceManager.GetString("AppInitFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author: .
         /// </summary>
         public static string AuthorTextBlock {

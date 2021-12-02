@@ -162,6 +162,9 @@
   <data name="AddUserFormRequirementsMessage" xml:space="preserve">
     <value>You must fill all the fields and choose a user type.</value>
   </data>
+  <data name="AppInitFailed" xml:space="preserve">
+    <value>Application initialization has failed.Couldn't find config file.</value>
+  </data>
   <data name="AuthorTextBlock" xml:space="preserve">
     <value>Author: </value>
   </data>
