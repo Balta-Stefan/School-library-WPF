@@ -8,7 +8,7 @@ namespace School_library.Models
 {
     public class Member : User
     {
-        public Member(int userID, string firstName, string lastName, string username, string password) : base(userID, firstName, lastName, username, password, User.UserTypes.MEMBER)
+        public Member(int userID, string firstName, string lastName, string username, string password, string? localization, string? theme) : base(userID, firstName, lastName, username, password, User.UserTypes.MEMBER, localization, theme)
         {
            
         }

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace School_library
 {
@@ -28,11 +30,30 @@ namespace School_library
         private MainWindow mainWindow;
 
         public List<TabItem> tabs { get; } = new List<TabItem>();
+
+        private User? login(UserDAO userDao)
+        {
+            ObservableCollection<LanguageAndFlag> flags = new ObservableCollection<LanguageAndFlag>();
+
+            flags.Add(new LanguageAndFlag("en", @"..\Resources\English.jpg"));
+            flags.Add(new LanguageAndFlag("bs", @"..\Resources\Bosanski.png"));
+
+
+            LoginViewModel loginViewModel = new LoginViewModel(userDao, flags);
+            LoginWindow loginWindow = new LoginWindow
+            {
+                DataContext = loginViewModel
+            };
+            loginWindow.ShowDialog();
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(loginViewModel.selectedLanguage.language);
+
+            return loginViewModel.user;
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
 
-            User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass");
+            //User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass", "", "");
 
             BookDAO bookDao = new BookDAO(connectionString);
             PublisherDAO publisherDao = new PublisherDAO(connectionString);
@@ -41,7 +62,12 @@ namespace School_library
             UserDAO userDao = new UserDAO(connectionString);
             LoansDAO loansDao = new LoansDAO(connectionString);
 
-           
+            User? loggedInUser = login(userDao);
+            if (loggedInUser == null)
+                return;
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
+
+
             AccessText loansTabItemHotkey = new AccessText();
             loansTabItemHotkey.Text = School_library.Resources.LoansTabName;
 
@@ -90,7 +116,7 @@ namespace School_library
                 DataContext = this
             };
             mainWindow.Show();
-        
+
 
             base.OnStartup(e);
         }
@@ -115,5 +141,6 @@ namespace School_library
             mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Clear();
             mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Add(dic);
         }
+
     }
 }

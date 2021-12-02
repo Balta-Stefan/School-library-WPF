@@ -210,6 +210,9 @@
   <data name="GenreTextBlock" xml:space="preserve">
     <value>Žanr: </value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Unesena lozinka je neispravna!</value>
+  </data>
   <data name="LightThemeText" xml:space="preserve">
     <value>Svijetlo</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="UserAddedMessage" xml:space="preserve">
     <value>Korisnik uspješno dodan.</value>
+  </data>
+  <data name="UsernameDoesntExist" xml:space="preserve">
+    <value>Dato korisničko ime ne postoji!</value>
   </data>
   <data name="UsernameText" xml:space="preserve">
     <value>Korisničko ime: </value>

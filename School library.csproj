@@ -20,11 +20,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Bosanski.png" />
+    <None Remove="Resources\English.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Remove="Themes\DarkTheme.xaml" />
     <Page Remove="Themes\LightTheme.xaml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Bosanski.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\English.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Themes\DarkTheme.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

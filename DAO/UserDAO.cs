@@ -17,10 +17,63 @@ namespace School_library.DAO
         private const string addAccountantQuery = "INSERT INTO Accountants(userID) VALUES(@userID)";
         private const string addMemberQuery = "INSERT INTO Members(userID) VALUES(@userID)";
         private const string updateUserQuery = "UPDATE Users SET firstName=@firstName, lastName=@lastName, username=@username, password=@password, userType=@userType, active=@active WHERE userID=@userID";
+        private const string getUserQuery = "SELECT * FROM Users WHERE username=@username";
         //private const string getMemberCardQuery = "SELECT cardNumber FROM Members WHERE userID=@userID";
 
         public UserDAO(string connectionString) => this.connectionString = connectionString;
 
+        public User? getUser(string username)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    MySqlCommand query = connection.CreateCommand();
+                    query.CommandText = getUserQuery;
+
+                    MySqlParameter usernameParam = new MySqlParameter("username", MySqlDbType.String);
+                    usernameParam.Value = username;
+                    query.Parameters.Add(usernameParam);
+
+                    using (MySqlDataReader result = query.ExecuteReader())
+                    {
+                        while (result.Read())
+                        {
+                            int userID = result.GetInt32("userID");
+                            string firstName = result.GetString("firstName");
+                            string lastName = result.GetString("lastName");
+                            string password = result.GetString("password");
+                            string userTypeString = result.GetString("userType");
+                            bool active = result.GetBoolean("active");
+
+                            string? localization = null;
+                            int localizationColumn = result.GetOrdinal("localization");
+                            if(result.IsDBNull(localizationColumn) == false)
+                            {
+                                localization = result.GetString("localization");
+                            }
+
+                            string? theme = null;
+                            int themeColumn = result.GetOrdinal("theme");
+                            if(result.IsDBNull(themeColumn) == false)
+                            {
+                                theme = result.GetString("theme");
+                            }
+
+
+                            User.UserTypes userType = (User.UserTypes)Enum.Parse(typeof(User.UserTypes), userTypeString);
+
+                            User user = new User(userID, firstName, lastName, username, password, userType, localization, theme);
+                            return user;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { return null; }
+            return null;
+        }
         public List<User> getUsers()
         {
             List<User> users = new List<User>();
@@ -45,17 +98,31 @@ namespace School_library.DAO
                         string userType = result.GetString("userType");
                         bool isActive = result.GetBoolean("active");
 
+                        string? localization = null;
+                        int localizationColumn = result.GetOrdinal("localization");
+                        if (result.IsDBNull(localizationColumn) == false)
+                        {
+                            localization = result.GetString("localization");
+                        }
+
+                        string? theme = null;
+                        int themeColumn = result.GetOrdinal("theme");
+                        if (result.IsDBNull(themeColumn) == false)
+                        {
+                            theme = result.GetString("theme");
+                        }
+
                         User.UserTypes userTypeEnum = (User.UserTypes)Enum.Parse(typeof(User.UserTypes), userType);
 
                         if(userTypeEnum.Equals(User.UserTypes.MEMBER))
                         {
-                            Member member = new Member(userID, firstName, lastName, userName, password);
+                            Member member = new Member(userID, firstName, lastName, userName, password, localization, theme);
                             member.active = isActive;
                             users.Add(member);
                         }
                         else
                         {
-                            User user = new User(userID, firstName, lastName, userName, password, userTypeEnum);
+                            User user = new User(userID, firstName, lastName, userName, password, userTypeEnum, localization, theme);
                             user.active = isActive;
                             users.Add(user);
                         }

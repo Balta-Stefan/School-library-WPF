@@ -50,7 +50,7 @@ namespace School_library.ViewModels
                 return;
             }
 
-            User? userToAdd = new User(-1, FirstName, LastName, Username, Password, SelectedType.Value);
+            User? userToAdd = new User(-1, FirstName, LastName, Username, Password, SelectedType.Value, null, null);
             userToAdd = userDao.addUser(userToAdd);
 
             if (userToAdd == null)

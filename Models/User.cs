@@ -17,8 +17,10 @@ namespace School_library.Models
 
         public UserTypes userType { get; set; }
         public bool active { get; set; } = true;
+        public string? localization { get; set; }
+        public string? theme { get; set; }
 
-        public User(int userID, string firstName, string lastName, string username, string password, UserTypes userType)
+        public User(int userID, string firstName, string lastName, string username, string password, UserTypes userType, string? localization, string? theme)
         {
             this.userID = userID;
             this.firstName = firstName;
@@ -26,6 +28,8 @@ namespace School_library.Models
             this.username = username;
             this.password = password;
             this.userType = userType;
+            this.localization = localization;
+            this.theme = theme;
         }
 
         public override bool Equals(object? obj)

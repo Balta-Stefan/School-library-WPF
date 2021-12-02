@@ -256,7 +256,7 @@ namespace School_library.ViewModels
             foreach (Loan l in loanDao.getLoans())
                 Loans.Add(new LoanViewModel(l, loanDao));
 
-                List<User> users = userDao.getUsers();
+            List<User> users = userDao.getUsers();
             foreach(User u in users)
             {
                 if (u.userType.Equals(User.UserTypes.MEMBER))

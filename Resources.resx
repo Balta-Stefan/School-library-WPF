@@ -210,6 +210,9 @@
   <data name="GenreTextBlock" xml:space="preserve">
     <value>Genre: </value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Given password is incorrect!</value>
+  </data>
   <data name="LightThemeText" xml:space="preserve">
     <value>Light theme</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="UserAddedMessage" xml:space="preserve">
     <value>User has been added.</value>
+  </data>
+  <data name="UsernameDoesntExist" xml:space="preserve">
+    <value>Given username doesn't exist!</value>
   </data>
   <data name="UsernameText" xml:space="preserve">
     <value>Username: </value>

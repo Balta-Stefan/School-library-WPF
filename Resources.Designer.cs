@@ -340,6 +340,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Given password is incorrect!.
+        /// </summary>
+        public static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Light theme.
         /// </summary>
         public static string LightThemeText {
@@ -705,6 +714,15 @@ namespace School_library {
         public static string UserAddedMessage {
             get {
                 return ResourceManager.GetString("UserAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Given username doesn&apos;t exist!.
+        /// </summary>
+        public static string UsernameDoesntExist {
+            get {
+                return ResourceManager.GetString("UsernameDoesntExist", resourceCulture);
             }
         }
         

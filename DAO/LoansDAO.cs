@@ -40,7 +40,7 @@ namespace School_library.DAO
                         string firstName = result.GetString("firstName");
                         string lastName = result.GetString("lastName");
 
-                        Librarian lib = new Librarian(librarianID, firstName, lastName, string.Empty, string.Empty);
+                        Librarian lib = new Librarian(librarianID, firstName, lastName, string.Empty, string.Empty, null, null);
                         return lib;
                     }
                 }
@@ -68,7 +68,7 @@ namespace School_library.DAO
                         string firstName = result.GetString("firstName");
                         string lastName = result.GetString("lastName");
 
-                        Member mem = new Member(memberID, firstName, lastName, string.Empty, string.Empty);
+                        Member mem = new Member(memberID, firstName, lastName, string.Empty, string.Empty, null, null);
                         return mem;
                     }
                 }

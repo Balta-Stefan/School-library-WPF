@@ -8,7 +8,7 @@ namespace School_library.Models
 {
     public class Librarian : User
     {
-        public Librarian(int userID, string firstName, string lastName, string username, string password) : base(userID, firstName, lastName, username, password, User.UserTypes.LIBRARIAN)
+        public Librarian(int userID, string firstName, string lastName, string username, string password, string? localization, string? theme) : base(userID, firstName, lastName, username, password, User.UserTypes.LIBRARIAN, localization, theme)
         {
         }
 
