@@ -27,7 +27,7 @@ namespace School_library.Views
             InitializeComponent();
         }
 
-        private void activateDark(object sender, RoutedEventArgs e)
+        /*private void activateDark(object sender, RoutedEventArgs e)
         {
             using (FileStream fs = new FileStream(@"Themes\DarkTheme.xaml", FileMode.Open))
             {
@@ -50,6 +50,6 @@ namespace School_library.Views
                 App tmp = (App)DataContext;
                 tmp.changeTheme(dic);
             }
-        }
+        }*/
     }
 }

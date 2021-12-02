@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -22,37 +24,74 @@ namespace School_library
     
     public partial class App : Application
     {
-        private const string connectionString = "Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
+        private string connectionString = "";//"Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
 
         private LoanView loanWiew;
         private BooksPanelView booksView;
         private MembersPanel membersPanel;
         private MainWindow mainWindow;
+        private SettingsView settingsView;
 
         public List<TabItem> tabs { get; } = new List<TabItem>();
 
+        private void loadResources()
+        {
+            connectionString = ConfigurationManager.AppSettings["connection_string"];
+        }
         private User? login(UserDAO userDao)
         {
             ObservableCollection<LanguageAndFlag> flags = new ObservableCollection<LanguageAndFlag>();
 
-            flags.Add(new LanguageAndFlag("en", @"..\Resources\English.jpg"));
             flags.Add(new LanguageAndFlag("bs", @"..\Resources\Bosanski.png"));
+            flags.Add(new LanguageAndFlag("en", @"..\Resources\English.jpg"));
 
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
 
             LoginViewModel loginViewModel = new LoginViewModel(userDao, flags);
             LoginWindow loginWindow = new LoginWindow
             {
                 DataContext = loginViewModel
             };
+            
+
             loginWindow.ShowDialog();
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(loginViewModel.selectedLanguage.language);
+            loginViewModel.user.localization = loginViewModel.selectedLanguage.language;
 
             return loginViewModel.user;
         }
+
+        private void setTheme(string theme)
+        {
+            if (theme == null)
+                return;
+            if(theme.Equals("dark"))
+            {
+                using (FileStream fs = new FileStream(@"Themes\DarkTheme.xaml", FileMode.Open))
+                {
+                    ResourceDictionary dic = (ResourceDictionary)XamlReader.Load(fs);
+                    Resources.MergedDictionaries.Clear();
+                    Resources.MergedDictionaries.Add(dic);
+
+                    changeTheme(dic);
+                }
+            }
+            else if(theme.Equals("light"))
+            {
+                using (FileStream fs = new FileStream(@"Themes\LightTheme.xaml", FileMode.Open))
+                {
+                    ResourceDictionary dic = (ResourceDictionary)XamlReader.Load(fs);
+                    Resources.MergedDictionaries.Clear();
+                    Resources.MergedDictionaries.Add(dic);
+
+                    changeTheme(dic);
+                }
+            }
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
-
+            loadResources();
             //User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass", "", "");
 
             BookDAO bookDao = new BookDAO(connectionString);
@@ -100,7 +139,11 @@ namespace School_library
             settingsTabItemHotkey.Text = School_library.Resources.SettingsTabName;
             TabItem settingsTab = new TabItem();
             settingsTab.Header = settingsTabItemHotkey;// "Settings";
-            SettingsView settingsView = new SettingsView();
+            SettingsViewModel settingsViewModel = new SettingsViewModel(userDao, loggedInUser, this);
+            settingsView = new SettingsView()
+            {
+                DataContext = settingsViewModel
+            };
             settingsTab.Content = settingsView;
 
 
@@ -115,6 +158,7 @@ namespace School_library
             {
                 DataContext = this
             };
+            setTheme(loggedInUser.theme);
             mainWindow.Show();
 
 
@@ -137,6 +181,9 @@ namespace School_library
 
             mainWindow.TempTabControl.Resources.MergedDictionaries.Clear();
             mainWindow.TempTabControl.Resources.MergedDictionaries.Add(dic);
+
+            settingsView.Resources.MergedDictionaries.Clear();
+            settingsView.Resources.MergedDictionaries.Add(dic);
 
             mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Clear();
             mainWindow.MainWindowMainGrid.Resources.MergedDictionaries.Add(dic);

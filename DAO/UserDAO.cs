@@ -16,7 +16,7 @@ namespace School_library.DAO
         private const string addUserQuery = "INSERT INTO Users(firstName, lastName, username, password, userType) VALUES(@firstName, @lastName, @username, @password, @userType)";
         private const string addAccountantQuery = "INSERT INTO Accountants(userID) VALUES(@userID)";
         private const string addMemberQuery = "INSERT INTO Members(userID) VALUES(@userID)";
-        private const string updateUserQuery = "UPDATE Users SET firstName=@firstName, lastName=@lastName, username=@username, password=@password, userType=@userType, active=@active WHERE userID=@userID";
+        private const string updateUserQuery = "UPDATE Users SET firstName=@firstName, lastName=@lastName, username=@username, password=@password, userType=@userType, active=@active, localization=@localization, theme=@theme WHERE userID=@userID";
         private const string getUserQuery = "SELECT * FROM Users WHERE username=@username";
         //private const string getMemberCardQuery = "SELECT cardNumber FROM Members WHERE userID=@userID";
 
@@ -172,6 +172,14 @@ namespace School_library.DAO
                     MySqlParameter userIDParam = new MySqlParameter("userID", MySqlDbType.Int32);
                     userIDParam.Value = user.userID;
                     query.Parameters.Add(userIDParam);
+
+                    MySqlParameter localizationParam = new MySqlParameter("localization", MySqlDbType.String);
+                    localizationParam.Value = user.localization;
+                    query.Parameters.Add(localizationParam);
+
+                    MySqlParameter themeParam = new MySqlParameter("theme", MySqlDbType.String);
+                    themeParam.Value = user.theme;
+                    query.Parameters.Add(themeParam);
 
 
                     int rowsAffected = query.ExecuteNonQuery();

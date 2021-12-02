@@ -24,8 +24,8 @@
         </Grid.Resources>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.ThemesText}"/>
-            <Button Background="#424242" Foreground="White" Click="activateDark" Content="{x:Static p:Resources.DarkThemeText}"/>
-            <Button Background="White" Click="activateLight" Content="{x:Static p:Resources.LightThemeText}"/>
+            <Button Background="#424242" Foreground="White" Command="{Binding ChangeThemeCommand}" CommandParameter="dark" Content="{x:Static p:Resources.DarkThemeText}"/>
+            <Button Background="White" Command="{Binding ChangeThemeCommand}" CommandParameter="light" Content="{x:Static p:Resources.LightThemeText}"/>
         </StackPanel> 
     </Grid>
 </UserControl>
