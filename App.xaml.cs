@@ -56,6 +56,9 @@ namespace School_library
 
             loginWindow.ShowDialog();
 
+            if (loginViewModel.user == null)
+                return null;
+
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(loginViewModel.selectedLanguage.language);
             loginViewModel.user.localization = loginViewModel.selectedLanguage.language;
 
