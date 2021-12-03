@@ -35,5 +35,13 @@ namespace School_library.Views
             if (viewModel.user != null)
                 Close();
         }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                LoginButtonClick(null, null);
+            }
+        }
     }
 }
