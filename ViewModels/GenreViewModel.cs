@@ -11,6 +11,14 @@ namespace School_library.ViewModels
     {
         private Genre genre;
 
+        public override string ToString()
+        {
+            return genre.ToString();
+        }
+        public Genre Genre
+        {
+            get { return genre; }
+        }
         public string GenreName
         {
             get { return genre.GenreName; }

@@ -223,6 +223,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The book has been added..
+        /// </summary>
+        public static string BookAdded {
+            get {
+                return ResourceManager.GetString("BookAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Books.
         /// </summary>
         public static string BooksTabName {
@@ -268,11 +277,47 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t add new author!.
+        /// </summary>
+        public static string CouldntAddNewAuthor {
+            get {
+                return ResourceManager.GetString("CouldntAddNewAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t add the book!.
+        /// </summary>
+        public static string CouldntAddNewBook {
+            get {
+                return ResourceManager.GetString("CouldntAddNewBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t add new genre!.
+        /// </summary>
+        public static string couldntAddNewGenre {
+            get {
+                return ResourceManager.GetString("couldntAddNewGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dark theme.
         /// </summary>
         public static string DarkThemeText {
             get {
                 return ResourceManager.GetString("DarkThemeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inputs must not be empty!.
+        /// </summary>
+        public static string DataInputsEmpty {
+            get {
+                return ResourceManager.GetString("DataInputsEmpty", resourceCulture);
             }
         }
         
@@ -574,11 +619,29 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All fields for the new author must be filled out.
+        /// </summary>
+        public static string NewAuthorEmptyInputs {
+            get {
+                return ResourceManager.GetString("NewAuthorEmptyInputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New author.
         /// </summary>
         public static string NewAuthorExpander {
             get {
                 return ResourceManager.GetString("NewAuthorExpander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All fields for the new genre must be filled out!.
+        /// </summary>
+        public static string NewGenreEmptyInputs {
+            get {
+                return ResourceManager.GetString("NewGenreEmptyInputs", resourceCulture);
             }
         }
         
@@ -597,6 +660,24 @@ namespace School_library {
         public static string NewPublisherExpander {
             get {
                 return ResourceManager.GetString("NewPublisherExpander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All fields for the new publisher must be filled out!.
+        /// </summary>
+        public static string NewPublisherFieldsEmpty {
+            get {
+                return ResourceManager.GetString("NewPublisherFieldsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t add new publisher!.
+        /// </summary>
+        public static string NewPublisherNotAdded {
+            get {
+                return ResourceManager.GetString("NewPublisherNotAdded", resourceCulture);
             }
         }
         

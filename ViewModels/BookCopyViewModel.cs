@@ -16,6 +16,10 @@ namespace School_library.ViewModels
             get { return copy; }
         }
 
+        public int BookCopyId
+        {
+            get { return copy.BookCopyId; }
+        }
         public DateTime? DeliveredAt
         {
             get { return copy.DeliveredAt; }

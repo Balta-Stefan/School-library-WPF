@@ -171,6 +171,9 @@
   <data name="AvailableText" xml:space="preserve">
     <value>Dostupno: </value>
   </data>
+  <data name="BookAdded" xml:space="preserve">
+    <value>Nova knjiga je uspješno dodana.</value>
+  </data>
   <data name="BooksTabName" xml:space="preserve">
     <value>_Knjige</value>
   </data>
@@ -186,8 +189,20 @@
   <data name="CouldntAddCopy" xml:space="preserve">
     <value>Primjerak nije mogao biti dodan.</value>
   </data>
+  <data name="CouldntAddNewAuthor" xml:space="preserve">
+    <value>Dodavanje novog autora neuspješno</value>
+  </data>
+  <data name="CouldntAddNewBook" xml:space="preserve">
+    <value>Dodavanje nove knjige neuspješno</value>
+  </data>
+  <data name="couldntAddNewGenre" xml:space="preserve">
+    <value>Dodavanje novog žanra neuspješno</value>
+  </data>
   <data name="DarkThemeText" xml:space="preserve">
     <value>Mračno</value>
+  </data>
+  <data name="DataInputsEmpty" xml:space="preserve">
+    <value>Polja ne smiju biti prazna!</value>
   </data>
   <data name="DeleteSelectedCopy" xml:space="preserve">
     <value>Ukloni odabrani primjerak</value>
@@ -288,14 +303,26 @@
   <data name="MembersTabName" xml:space="preserve">
     <value>Č_lanovi</value>
   </data>
+  <data name="NewAuthorEmptyInputs" xml:space="preserve">
+    <value>Sva polja za novog autora moraju biti ispunjena!</value>
+  </data>
   <data name="NewAuthorExpander" xml:space="preserve">
     <value>Novi autor</value>
+  </data>
+  <data name="NewGenreEmptyInputs" xml:space="preserve">
+    <value>Sva polja za novi žanr moraju biti ispunjena!</value>
   </data>
   <data name="NewGenreExpander" xml:space="preserve">
     <value>Novi žanr</value>
   </data>
   <data name="NewPublisherExpander" xml:space="preserve">
     <value>Novi izdavač</value>
+  </data>
+  <data name="NewPublisherFieldsEmpty" xml:space="preserve">
+    <value>Sva polja za novog izdavača moraju biti ispunjena!</value>
+  </data>
+  <data name="NewPublisherNotAdded" xml:space="preserve">
+    <value>Dodavanje novog izdavača neuspješno</value>
   </data>
   <data name="NoConditionSpecified" xml:space="preserve">
     <value>Stanje nije odabrano</value>

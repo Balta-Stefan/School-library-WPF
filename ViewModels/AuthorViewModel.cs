@@ -11,6 +11,14 @@ namespace School_library.ViewModels
     {
         private Author author;
 
+        public override string ToString()
+        {
+            return author.ToString();
+        }
+        public Author Author
+        {
+            get { return author; }
+        }
         public int AuthorId 
         {
             get { return author.AuthorId; }

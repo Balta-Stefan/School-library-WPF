@@ -14,7 +14,7 @@ namespace School_library.ViewModels
     public class AddNewBookViewModel : ViewModelBase
     {
         private readonly mydbContext dbContext;
-        private ObservableCollection<Book> books;
+        private ObservableCollection<BookViewModel> books;
 
         private string isbn10 = string.Empty;
         public string ISBN10
@@ -60,10 +60,10 @@ namespace School_library.ViewModels
             }
         }
 
-        public ObservableCollection<Author> authors { get; }
+        public ObservableCollection<AuthorViewModel> authors { get; }
         
-        private Author? selectedAuthor = null;
-        public Author? SelectedAuthor 
+        private AuthorViewModel? selectedAuthor = null;
+        public AuthorViewModel? SelectedAuthor 
         {
             get { return selectedAuthor; }
             set
@@ -76,10 +76,10 @@ namespace School_library.ViewModels
             }
         }
 
-        public ObservableCollection<Publisher> publishers { get; }
+        public ObservableCollection<PublisherViewModel> publishers { get; }
 
-        private Publisher? selectedPublisher = null;
-        public Publisher? SelectedPublisher
+        private PublisherViewModel? selectedPublisher = null;
+        public PublisherViewModel? SelectedPublisher
         {
             get { return selectedPublisher; }
             set
@@ -91,9 +91,9 @@ namespace School_library.ViewModels
             }
         }
 
-        public ObservableCollection<Genre> genres { get; }
-        private Genre? selectedGenre = null;
-        public Genre? SelectedGenre 
+        public ObservableCollection<GenreViewModel> genres { get; }
+        private GenreViewModel? selectedGenre = null;
+        public GenreViewModel? SelectedGenre 
         {
             get { return selectedGenre; }
             set
@@ -159,10 +159,10 @@ namespace School_library.ViewModels
         
         public ICommand addBookCommand { get; }
         public AddNewBookViewModel(mydbContext dbContext,
-            ObservableCollection<Genre> genres, 
-            ObservableCollection<Publisher> publishers,
-            ObservableCollection<Author> authors,
-            ObservableCollection<Book> books)
+            ObservableCollection<GenreViewModel> genres, 
+            ObservableCollection<PublisherViewModel> publishers,
+            ObservableCollection<AuthorViewModel> authors,
+            ObservableCollection<BookViewModel> books)
         {
             this.dbContext = dbContext;
             this.genres = genres;
@@ -184,21 +184,21 @@ namespace School_library.ViewModels
                 isbn13.Equals(string.Empty) ||
                 isbn10.Equals(string.Empty)))
             {
-                MessageBox.Show("All fields must be filled out!", "", MessageBoxButton.OK);
+                MessageBox.Show(School_library.Resources.DataInputsEmpty, "", MessageBoxButton.OK);
                 return;
             }
 
             Publisher? pub;
-            Genre? genre;
+            Genre genre;
             Author? author;
 
             if (SelectedAuthor != null)
-                author = selectedAuthor;
+                author = selectedAuthor.Author;
             else
             {
                 if(newAuthorFirstName.Equals(string.Empty) || newAuthorLastName.Equals(string.Empty))
                 {
-                    MessageBox.Show("All fields for the new author must be filled out!", "", MessageBoxButton.OK);
+                    MessageBox.Show(School_library.Resources.NewAuthorEmptyInputs, "", MessageBoxButton.OK);
                     return;
                 }
                 author = new Author()
@@ -206,6 +206,7 @@ namespace School_library.ViewModels
                     FirstName = newAuthorFirstName,
                     LastName = newAuthorLastName
                 };
+
                 dbContext.Authors.Add(author);
                 try
                 {
@@ -213,18 +214,18 @@ namespace School_library.ViewModels
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("Couldn't add new author!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(School_library.Resources.CouldntAddNewAuthor, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
 
             if (selectedGenre != null)
-                genre = selectedGenre;
+                genre = selectedGenre.Genre;
             else
             {
                 if (newGenreName.Equals(string.Empty))
                 {
-                    MessageBox.Show("All fields for the new genre must be filled out!", "", MessageBoxButton.OK);
+                    MessageBox.Show(School_library.Resources.NewGenreEmptyInputs, "", MessageBoxButton.OK);
                     return;
                 }
                 genre = new Genre()
@@ -239,18 +240,18 @@ namespace School_library.ViewModels
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("Couldn't add new genre!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(School_library.Resources.couldntAddNewGenre, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
 
             if (selectedPublisher != null)
-                pub = selectedPublisher;
+                pub = selectedPublisher.Publisher;
             else
             {
                 if (newPublisherName.Equals(string.Empty))
                 {
-                    MessageBox.Show("All fields for the new publisher must be filled out!", "", MessageBoxButton.OK);
+                    MessageBox.Show(School_library.Resources.NewPublisherFieldsEmpty, "", MessageBoxButton.OK);
                     return;
                 }
                 pub = new Publisher()
@@ -264,7 +265,7 @@ namespace School_library.ViewModels
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("Couldn't add new publisher!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(School_library.Resources.NewPublisherNotAdded, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -281,19 +282,19 @@ namespace School_library.ViewModels
                 NumberOfCopies = 1
             };
 
-            dbContext.Books.Add(newBook);
             try
             {
+                dbContext.Books.Add(newBook);
                 dbContext.SaveChanges();
             }
             catch(Exception)
             {
-                MessageBox.Show("Couldn't add the book!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.CouldntAddNewBook, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            books.Add(newBook);
-            MessageBox.Show("Book Added", "", MessageBoxButton.OK);
+            books.Add(new BookViewModel(newBook));
+            MessageBox.Show(School_library.Resources.BookAdded, "", MessageBoxButton.OK);
         }
     }
 }

@@ -11,6 +11,10 @@ namespace School_library.ViewModels
     {
         private Book book;
 
+        public Book Book
+        {
+            get { return book; }
+        }
         public int BookId 
         {
             get { return book.BookId; }

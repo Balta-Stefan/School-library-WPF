@@ -11,15 +11,15 @@ using System.Windows.Input;
 
 namespace School_library.ViewModels
 {
-    public class EditBookInfoViewModel
+    public class EditBookInfoViewModel : ViewModelBase
     {
         private readonly mydbContext dbContext;
 
-        public ObservableCollection<BookCopy> bookCopies { get; }
-        public ObservableCollection<BookCondition> bookConditions { get; }
-        public BookCondition? selectedCondition { get; set; } = null;
+        public ObservableCollection<BookCopyViewModel> bookCopies { get; } = new ObservableCollection<BookCopyViewModel>();
+        public ObservableCollection<BookConditionViewModel> bookConditions { get; } = new ObservableCollection<BookConditionViewModel>();
+        public BookConditionViewModel? selectedCondition { get; set; } = null;
         public DateTime? selectedDate { get; set; } = DateTime.Now;
-        private Book book;
+        private BookViewModel book;
 
         private string bookTitle;
         public string BookTitle
@@ -63,60 +63,78 @@ namespace School_library.ViewModels
             }
         }
 
-        public ObservableCollection<Genre> genres { get; }
-        public ObservableCollection<Publisher> publishers { get; }
-        public ObservableCollection<Author> authors { get; }
+        public ObservableCollection<GenreViewModel> genres { get; } = new ObservableCollection<GenreViewModel>();
+        public ObservableCollection<PublisherViewModel> publishers { get; } = new ObservableCollection<PublisherViewModel>();
+        public ObservableCollection<AuthorViewModel> authors { get; } = new ObservableCollection<AuthorViewModel>();
 
-        private int selectedCopyIndex = -1;
-        public int SelectedCopyIndex
+        private BookCopyViewModel? selectedCopy = null;
+        public BookCopyViewModel? SelectedCopy
         {
-            get { return selectedCopyIndex; }
+            get { return selectedCopy; }
             set
             {
-                selectedCopyIndex = value;
-                copySelected = true;
-                deleteCopyCommand.executeChanged();
+                selectedCopy = value;
+                OnPropertyChange("SelectedCopy");
+            }
+        }
+        private GenreViewModel? selectedGenre = null;
+        public GenreViewModel? SelectedGenre
+        {
+            get { return selectedGenre; }
+            set
+            {
+                selectedGenre = value;
+                OnPropertyChange("SelectedGenre");
             }
         }
 
-        private int selectedGenreIndex = -1;
-        public int SelectedGenreIndex
+        private AuthorViewModel? selectedAuthor = null;
+        public AuthorViewModel? SelectedAuthor
         {
-            get { return selectedGenreIndex; }
-            set { selectedGenreIndex = value; }
+            get { return selectedAuthor; }
+            set
+            {
+                selectedAuthor = value;
+                OnPropertyChange("SelectedAuthor");
+            }
         }
 
-        private int selectedAuthorIndex = -1;
-        public int SelectedAuthorIndex
+        private PublisherViewModel? selectedPublisher = null;
+        public PublisherViewModel? SelectedPublisher
         {
-            get { return selectedAuthorIndex; }
-            set { selectedAuthorIndex = value; }
+            get { return selectedPublisher; }
+            set
+            {
+                selectedPublisher = value;
+                OnPropertyChange("SelectedPublisher");
+            }
         }
-
-        private int selectedPublisherIndex = -1;
-        public int SelectedPublisherIndex
-        {
-            get { return selectedPublisherIndex; }
-            set { selectedPublisherIndex = value; }
-        }
-
+        
         public DeleteBookCopyCommand deleteCopyCommand { get; }
         public ICommand editBookInfoCommand { get; }
         public ICommand addCopyCommand { get; }
         public bool copySelected { get; private set; } = false;
-        public EditBookInfoViewModel(mydbContext dbContext, Book book)
+        public EditBookInfoViewModel(mydbContext dbContext, BookViewModel book)
         {
             this.dbContext = dbContext;
             this.book = book;
-            this.bookCopies  = new ObservableCollection<BookCopy>(dbContext.BookCopies.ToList());
-            this.bookConditions = new ObservableCollection<BookCondition>(dbContext.BookConditions.ToList());
-            this.genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
-            this.publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
-            this.authors = new ObservableCollection<Author>(dbContext.Authors.ToList());
 
-            selectedGenreIndex = genres.IndexOf(book.GenreNavigation);
-            selectedAuthorIndex = authors.IndexOf(book.Author);
-            selectedPublisherIndex = publishers.IndexOf(book.Publisher);
+            foreach (Genre g in dbContext.Genres.ToList()) genres.Add(new GenreViewModel(g));
+            foreach (Publisher g in dbContext.Publishers.ToList()) publishers.Add(new PublisherViewModel(g));
+            foreach (Author g in dbContext.Authors.ToList()) authors.Add(new AuthorViewModel(g));
+            foreach (BookCondition g in dbContext.BookConditions.ToList()) bookConditions.Add(new BookConditionViewModel(g));
+            foreach (BookCopy g in dbContext.BookCopies.ToList()) bookCopies.Add(new BookCopyViewModel(g));
+
+            SelectedAuthor = new AuthorViewModel(book.Author);
+            SelectedGenre = new GenreViewModel(book.GenreNavigation);
+            SelectedPublisher = new PublisherViewModel(book.Publisher);
+
+            /*genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
+            publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
+            authors = new ObservableCollection<Author>(dbContext.Authors.ToList());
+            bookConditions = new ObservableCollection<BookCondition>(dbContext.BookConditions.ToList());
+            bookCopies = new ObservableCollection<BookCopy>(dbContext.BookCopies.ToList());*/
+
 
             deleteCopyCommand = new DeleteBookCopyCommand(this);
             editBookInfoCommand = new EditBookInfoCommand(this);
@@ -143,9 +161,9 @@ namespace School_library.ViewModels
 
             BookCopy newCopy = new BookCopy()
             {
-                Condition = selectedCondition,
+                Condition = selectedCondition.BookCondition,
                 DeliveredAt = selectedDate.Value,
-                Book = book
+                Book = book.Book
             };
 
             dbContext.BookCopies.Add(newCopy);
@@ -162,22 +180,20 @@ namespace School_library.ViewModels
             }
            
             MessageBox.Show(School_library.Resources.CopyAddedMessage, "", MessageBoxButton.OK);
-            bookCopies.Add(newCopy);
+            bookCopies.Add(new BookCopyViewModel(newCopy));
             book.NumberOfCopies++;
             
         }
 
         public void deleteCopy()
         {
-            BookCopy selectedCopy = bookCopies.ElementAt(selectedCopyIndex);
-
-            dbContext.BookCopies.Remove(selectedCopy);
+            dbContext.BookCopies.Remove(selectedCopy.BookCopy);
             try
             {
                 dbContext.SaveChanges();
                 book.NumberOfCopies--;
-                bookCopies.RemoveAt(selectedCopyIndex);
-                selectedCopyIndex = -1;
+                bookCopies.Remove(selectedCopy);
+                SelectedCopy = null;
 
                 copySelected = false;
                 deleteCopyCommand.executeChanged();
@@ -187,17 +203,13 @@ namespace School_library.ViewModels
 
         public void updateBookInfo()
         {
-            Author selectedAuthor = authors.ElementAt(selectedAuthorIndex);
-            Genre selectedGenre = genres.ElementAt(selectedGenreIndex);
-            Publisher selectedPublisher = publishers.ElementAt(selectedPublisherIndex);
-
             book.Isbn13 = isbn13;
             book.Isbn10 = isbn10;
             book.BookTitle = bookTitle;
             book.Edition = edition;
-            book.Author = selectedAuthor;
-            book.Publisher = selectedPublisher;
-            book.GenreNavigation = selectedGenre;
+            book.Author = selectedAuthor.Author;
+            book.Publisher = selectedPublisher.Publisher;
+            book.GenreNavigation = selectedGenre.Genre;
 
             try
             {

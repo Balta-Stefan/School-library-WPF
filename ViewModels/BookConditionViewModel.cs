@@ -12,6 +12,10 @@ namespace School_library.ViewModels
     {
         private BookCondition condition;
 
+        public BookCondition BookCondition
+        {
+            get { return condition; }
+        }
         public int ConditionId
         {
             get { return condition.ConditionId; }

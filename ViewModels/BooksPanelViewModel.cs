@@ -19,30 +19,30 @@ namespace School_library.ViewModels
 
         private bool filtersClear = true;
 
-        private ObservableCollection<Book> books;
-        private ObservableCollection<Publisher> publishers;
-        private ObservableCollection<Genre> genres;
-        private ObservableCollection<Author> authors;
+        private ObservableCollection<BookViewModel> books = new ObservableCollection<BookViewModel>();
+        private ObservableCollection<PublisherViewModel> publishers = new ObservableCollection<PublisherViewModel>();
+        private ObservableCollection<GenreViewModel> genres = new ObservableCollection<GenreViewModel>();
+        private ObservableCollection<AuthorViewModel> authors = new ObservableCollection<AuthorViewModel>();
 
         private Collection<ResourceDictionary> resourceDictionary;
 
-        public ObservableCollection<Author> Authors
+        public ObservableCollection<AuthorViewModel> Authors
         {
             get { return authors; }
         }
 
-        public ObservableCollection<Book> Books
+        public ObservableCollection<BookViewModel> Books
         {
             get { return books; }
         }
 
-        public ObservableCollection<Publisher> Publishers
+        public ObservableCollection<PublisherViewModel> Publishers
         {
             get { return publishers; }
             set { publishers = value; }
         }
 
-        public ObservableCollection<Genre> Genres
+        public ObservableCollection<GenreViewModel> Genres
         {
             get { return genres; }
             set { genres = value; }
@@ -104,9 +104,9 @@ namespace School_library.ViewModels
             }
         }
 
-        private Genre? selectedGenre = null;
+        private GenreViewModel? selectedGenre = null;
 
-        public Genre? SelectedGenre
+        public GenreViewModel? SelectedGenre
         {
             get { return selectedGenre; }
             set 
@@ -117,9 +117,9 @@ namespace School_library.ViewModels
             }
         }
 
-        private Publisher? selectedPublisher = null;
+        private PublisherViewModel? selectedPublisher = null;
 
-        public Publisher? SelectedPublisher
+        public PublisherViewModel? SelectedPublisher
         {
             get { return selectedPublisher; }
             set
@@ -130,8 +130,8 @@ namespace School_library.ViewModels
             }
         }
 
-        private Author? selectedAuthor = null;
-        public Author? SelectedAuthor
+        private AuthorViewModel? selectedAuthor = null;
+        public AuthorViewModel? SelectedAuthor
         {
             get { return selectedAuthor; }
             set
@@ -168,8 +168,8 @@ namespace School_library.ViewModels
             }
         }
 
-        private Book? selectedBook = null;
-        public Book? SelectedBook
+        private BookViewModel? selectedBook = null;
+        public BookViewModel? SelectedBook
         {
             get { return selectedBook; }
             set
@@ -178,10 +178,8 @@ namespace School_library.ViewModels
                 if(value != null)
                 {
                     OnBookSelect();
-                    selectedBook = null;
-                    OnPropertyChange("SelectedBook");
-                    return;
                 }
+
                 OnPropertyChange("SelectedBook");
             }
         }
@@ -192,10 +190,16 @@ namespace School_library.ViewModels
         public BooksPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionary)
         {
             this.dbContext = dbContext;
-            this.books = new ObservableCollection<Book>(dbContext.Books.ToList());
+            foreach (Book b in dbContext.Books.ToList()) books.Add(new BookViewModel(b));
+            foreach (Publisher b in dbContext.Publishers.ToList()) publishers.Add(new PublisherViewModel(b));
+            foreach (Genre b in dbContext.Genres.ToList()) genres.Add(new GenreViewModel(b));
+            foreach (Author b in dbContext.Authors.ToList()) authors.Add(new AuthorViewModel(b));
+
+
+            /*this.books = new ObservableCollection<Book>(dbContext.Books.ToList());
             this.publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
             this.genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
-            this.authors = new ObservableCollection<Author>(dbContext.Authors.ToList());
+            this.authors = new ObservableCollection<Author>(dbContext.Authors.ToList());*/
             this.resourceDictionary = resourceDictionary;
 
             FilterBooksCommand = new FilterBooksCommand(this);
@@ -232,7 +236,7 @@ namespace School_library.ViewModels
             filtersClear = true;
 
             books.Clear();
-            foreach (Book b in dbContext.Books.ToList()) books.Add(b);
+            foreach (Book b in dbContext.Books.ToList()) books.Add(new BookViewModel(b));
         }
 
         private void OnBookSelect()
@@ -291,7 +295,7 @@ namespace School_library.ViewModels
                     }
 
                     if (available == true)
-                        books.Add(b);
+                        books.Add(new BookViewModel(b));
                 }
             }
           

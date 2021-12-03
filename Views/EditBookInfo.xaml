@@ -68,13 +68,13 @@
             <TextBox Grid.Column="0" Grid.Row="3" Text="{Binding Edition, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Grid.Column="2" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.AuthorTextBlock}"/>
-            <ComboBox Grid.Column="2" Grid.Row="3" FontWeight="Bold" ItemsSource="{Binding authors}" SelectedIndex="{Binding SelectedAuthorIndex}"/>
+            <ComboBox Grid.Column="2" Grid.Row="3" FontWeight="Bold" ItemsSource="{Binding authors}" SelectedItem="{Binding SelectedAuthor}"/>
 
             <TextBlock Grid.Column="4" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.PublisherNameTextblock}"/>
-            <ComboBox Grid.Column="4" Grid.Row="3" FontWeight="Bold" ItemsSource="{Binding publishers}" SelectedIndex="{Binding SelectedPublisherIndex}"/>
+            <ComboBox Grid.Column="4" Grid.Row="3" FontWeight="Bold" ItemsSource="{Binding publishers}" SelectedItem="{Binding SelectedPublisher}"/>
 
             <TextBlock Grid.Column="0" Grid.Row="4" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.GenreTextBlock}"/>
-            <ComboBox Grid.Column="0" Grid.Row="5" FontWeight="Bold" ItemsSource="{Binding genres}" SelectedIndex="{Binding SelectedGenreIndex}"/>
+            <ComboBox Grid.Column="0" Grid.Row="5" FontWeight="Bold" ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>
 
             <Expander Grid.Column="0" Grid.Row="6" Margin="0,20,0,0">
                 <Expander.Header>
@@ -94,7 +94,7 @@
             <Button Grid.Column="2" Grid.Row="7" Margin="0,20,30,0" Padding="10,10,10,10" Style="{DynamicResource ImportantActionButtonStyle}" Foreground="white" FontWeight="Bold" Command="{Binding editBookInfoCommand}" Content="{x:Static p:Resources.EditButton}"/>
         </Grid>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding bookCopies}" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedIndex="{Binding SelectedCopyIndex}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding bookCopies}" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedCopy}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Background" Value="{DynamicResource ListboxItemBackgroundColor}"/>
