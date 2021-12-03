@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -17,11 +16,11 @@ namespace School_library.ViewModels
         private string username = string.Empty;
         public LanguageAndFlag selectedLanguage { get; private set; }
 
-        private UserDAO userDao;
+        private readonly mydbContext dbContext;
 
         #region Properties
         public ObservableCollection<LanguageAndFlag> languages { get; set; } = new ObservableCollection<LanguageAndFlag>();
-        public User? user { get; private set; } = null;
+        public UserViewModel? user { get; private set; } = null;
         public string Username
         {
             get { return username; }
@@ -42,9 +41,9 @@ namespace School_library.ViewModels
         }
         #endregion
 
-        public LoginViewModel(UserDAO userDao, ObservableCollection<LanguageAndFlag> languages)
+        public LoginViewModel(mydbContext dbContext, ObservableCollection<LanguageAndFlag> languages)
         {
-            this.userDao = userDao;
+            this.dbContext = dbContext;
             this.languages = languages;
             selectedLanguage = languages[0];
         }
@@ -52,21 +51,21 @@ namespace School_library.ViewModels
 
         public void login(string password)
         {
-            User? userToFind = userDao.getUser(username);
+            User? userToFind = dbContext.Users.Where(u => u.Username.Equals(username)).FirstOrDefault();
 
-            if(userToFind == null || userToFind.userType.Equals(User.UserTypes.MEMBER))
+            if(userToFind == null || userToFind.UserType.Equals(AccountTypesEnum.MEMBER))
             {
                 MessageBox.Show(School_library.Resources.UsernameDoesntExist, "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(password.Equals(userToFind.password) == false)
+            if(password.Equals(userToFind.Password) == false)
             {
                 MessageBox.Show(School_library.Resources.IncorrectPassword, "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            this.user = userToFind;
+            this.user = new UserViewModel(userToFind, dbContext);
         }
     }
 }

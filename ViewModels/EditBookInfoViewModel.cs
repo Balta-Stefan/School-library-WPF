@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -14,12 +13,13 @@ namespace School_library.ViewModels
 {
     public class EditBookInfoViewModel
     {
+        private readonly mydbContext dbContext;
+
         public ObservableCollection<BookCopy> bookCopies { get; }
         public ObservableCollection<BookCondition> bookConditions { get; }
         public BookCondition? selectedCondition { get; set; } = null;
         public DateTime? selectedDate { get; set; } = DateTime.Now;
         private Book book;
-        private BookDAO bookDao;
 
         private string bookTitle;
         public string BookTitle
@@ -104,17 +104,17 @@ namespace School_library.ViewModels
         public ICommand editBookInfoCommand { get; }
         public ICommand addCopyCommand { get; }
         public bool copySelected { get; private set; } = false;
-        public EditBookInfoViewModel(BookDAO bookDao, GenreDAO genreDAO, PublisherDAO publisherDao, AuthorDAO authorDAO, Book book)
+        public EditBookInfoViewModel(mydbContext dbContext, Book book)
         {
-            this.bookDao = bookDao;
+            this.dbContext = dbContext;
             this.book = book;
-            this.bookCopies  = new ObservableCollection<BookCopy>(bookDao.getBookCopies(book));
-            this.bookConditions = new ObservableCollection<BookCondition>(bookDao.getBookConditions());
-            this.genres = new ObservableCollection<Genre>(genreDAO.getGenres());
-            this.publishers = new ObservableCollection<Publisher>(publisherDao.getPublishers());
-            this.authors = new ObservableCollection<Author>(authorDAO.getAuthors());
+            this.bookCopies  = new ObservableCollection<BookCopy>(dbContext.BookCopies.ToList());
+            this.bookConditions = new ObservableCollection<BookCondition>(dbContext.BookConditions.ToList());
+            this.genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
+            this.publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
+            this.authors = new ObservableCollection<Author>(dbContext.Authors.ToList());
 
-            selectedGenreIndex = genres.IndexOf(book.Genre);
+            selectedGenreIndex = genres.IndexOf(book.GenreNavigation);
             selectedAuthorIndex = authors.IndexOf(book.Author);
             selectedPublisherIndex = publishers.IndexOf(book.Publisher);
 
@@ -122,10 +122,10 @@ namespace School_library.ViewModels
             editBookInfoCommand = new EditBookInfoCommand(this);
             addCopyCommand = new AddBookCopyCommand(this);
 
-            isbn10 = book.ISBN10;
-            isbn13 = book.ISBN13;
+            isbn10 = book.Isbn10;
+            isbn13 = book.Isbn13;
             bookTitle = book.BookTitle;
-            edition = book.Edition;
+            edition = book.Edition.Value;
         }
 
         public void addCopy()
@@ -141,26 +141,40 @@ namespace School_library.ViewModels
                 return;
             }
 
-            BookCopy? newCopy = new BookCopy(-1, selectedCondition, selectedDate.Value, book, true);
-            newCopy = bookDao.addBookCopy(newCopy);
+            BookCopy newCopy = new BookCopy()
+            {
+                Condition = selectedCondition,
+                DeliveredAt = selectedDate.Value,
+                Book = book
+            };
 
-            if(newCopy == null)
+            dbContext.BookCopies.Add(newCopy);
+
+            try
+            {
+                dbContext.SaveChanges();
+            }
+
+            catch(Exception)
             {
                 MessageBox.Show(School_library.Resources.CouldntAddCopy, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            else
-            {
-                MessageBox.Show(School_library.Resources.CopyAddedMessage, "", MessageBoxButton.OK);
-                bookCopies.Add(newCopy);
-                book.NumberOfCopies++;
-            }
+           
+            MessageBox.Show(School_library.Resources.CopyAddedMessage, "", MessageBoxButton.OK);
+            bookCopies.Add(newCopy);
+            book.NumberOfCopies++;
+            
         }
 
         public void deleteCopy()
         {
             BookCopy selectedCopy = bookCopies.ElementAt(selectedCopyIndex);
-            if (bookDao.removeBookCopy(selectedCopy) == true)
+
+            dbContext.BookCopies.Remove(selectedCopy);
+            try
             {
+                dbContext.SaveChanges();
                 book.NumberOfCopies--;
                 bookCopies.RemoveAt(selectedCopyIndex);
                 selectedCopyIndex = -1;
@@ -168,6 +182,7 @@ namespace School_library.ViewModels
                 copySelected = false;
                 deleteCopyCommand.executeChanged();
             }
+            catch (Exception) { }
         }
 
         public void updateBookInfo()
@@ -176,23 +191,22 @@ namespace School_library.ViewModels
             Genre selectedGenre = genres.ElementAt(selectedGenreIndex);
             Publisher selectedPublisher = publishers.ElementAt(selectedPublisherIndex);
 
-            Book newBookData = new Book(book.BookID, isbn13, isbn10, bookTitle, edition, selectedAuthor, selectedPublisher, selectedGenre, book.NumberOfCopies);
-            bool updateStatus = bookDao.updateBook(newBookData);
+            book.Isbn13 = isbn13;
+            book.Isbn10 = isbn10;
+            book.BookTitle = bookTitle;
+            book.Edition = edition;
+            book.Author = selectedAuthor;
+            book.Publisher = selectedPublisher;
+            book.GenreNavigation = selectedGenre;
 
-            if(updateStatus == true)
+            try
             {
-                MessageBox.Show("Update successful", "Success", MessageBoxButton.OK);
-                book.ISBN13 = isbn13;
-                book.ISBN10 = isbn10;
-                book.BookTitle = bookTitle;
-                book.Edition = edition;
-                book.Author = selectedAuthor;
-                book.Publisher = selectedPublisher;
-                book.Genre = selectedGenre;
+                dbContext.SaveChanges();
             }
-            else
+            catch(Exception)
             {
                 MessageBox.Show("Update not successful", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
     }

@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class Accountant : User
+    public partial class Accountant
     {
-        public Accountant(int userID, string firstName, string lastName, string username, string password, string? localization, string? theme) : base(userID, firstName, lastName, username, password, User.UserTypes.ACCOUNTANT, localization, theme)
-        {
-        }
+        public int UserId { get; set; }
 
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
+        public virtual User User { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            return User.Equals(obj);
+        }
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return User.GetHashCode();
+        }
+        public override string ToString()
+        {
+            return User.ToString();
         }
     }
 }

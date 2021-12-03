@@ -1,36 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class Genre
+    public partial class Genre
     {
-        public int genreID { get; set; }
-        public string name { get; set; }
-
-        public Genre(int genreID, string name)
+        public Genre()
         {
-            this.genreID = genreID;
-            this.name = name;
+            Books = new HashSet<Book>();
         }
 
-        public override bool Equals(object? obj)
+        public int GenreId { get; set; }
+        public string GenreName { get; set; }
+
+        public virtual ICollection<Book> Books { get; set; }
+
+        public override bool Equals(object obj)
         {
             return obj is Genre genre &&
-                   genreID == genre.genreID;
+                   GenreId == genre.GenreId;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(genreID);
+            return HashCode.Combine(GenreId);
         }
 
         public override string ToString()
         {
-            return name;
+            return GenreName;
         }
     }
 }

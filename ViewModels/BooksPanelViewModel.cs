@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using School_library.Views;
 using System;
@@ -16,10 +15,7 @@ namespace School_library.ViewModels
 {
     public class BooksPanelViewModel : ViewModelBase
     {
-        private BookDAO bookDao;
-        private PublisherDAO publisherDao;
-        private GenreDAO genreDao;
-        private AuthorDAO authorDAO;
+        private readonly mydbContext dbContext;
 
         private bool filtersClear = true;
 
@@ -193,16 +189,13 @@ namespace School_library.ViewModels
         public ICommand ClearBookFiltersCommand { get; }
         public ICommand BooksPanel_AddNewBookCommand { get; }
 
-        public BooksPanelViewModel(BookDAO bookDao, PublisherDAO publisherDao, GenreDAO genreDao, AuthorDAO authorDAO, Collection<ResourceDictionary> resourceDictionary)
+        public BooksPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionary)
         {
-            this.books = new ObservableCollection<Book>(bookDao.getBooks());
-            this.publishers = new ObservableCollection<Publisher>(publisherDao.getPublishers());
-            this.genres = new ObservableCollection<Genre>(genreDao.getGenres());
-            this.authors = new ObservableCollection<Author>(authorDAO.getAuthors());
-            this.bookDao = bookDao;
-            this.publisherDao = publisherDao;
-            this.genreDao = genreDao;
-            this.authorDAO = authorDAO;
+            this.dbContext = dbContext;
+            this.books = new ObservableCollection<Book>(dbContext.Books.ToList());
+            this.publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
+            this.genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
+            this.authors = new ObservableCollection<Author>(dbContext.Authors.ToList());
             this.resourceDictionary = resourceDictionary;
 
             FilterBooksCommand = new FilterBooksCommand(this);
@@ -212,7 +205,7 @@ namespace School_library.ViewModels
 
         public void openAddBookWindow()
         {
-            AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(bookDao, genres, publishers, authors, books, publisherDao, authorDAO, genreDao);
+            AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(dbContext, genres, publishers, authors, books);
 
             AddNewBookWindow window = new AddNewBookWindow()
             {
@@ -239,15 +232,14 @@ namespace School_library.ViewModels
             filtersClear = true;
 
             books.Clear();
-            List<Book> newBooks = bookDao.getBooks();
-            foreach (Book b in newBooks) books.Add(b);
+            foreach (Book b in dbContext.Books.ToList()) books.Add(b);
         }
 
         private void OnBookSelect()
         {
             EditBookInfo editDataWindow = new EditBookInfo()
             {
-                DataContext = new EditBookInfoViewModel(bookDao, genreDao, publisherDao, authorDAO, selectedBook)
+                DataContext = new EditBookInfoViewModel(dbContext, selectedBook)
             };
             foreach (var c in resourceDictionary) editDataWindow.Resources.MergedDictionaries.Add(c);
             editDataWindow.ShowDialog();
@@ -273,44 +265,39 @@ namespace School_library.ViewModels
             if (areFiltersEmpty() == true)
                 return;
 
-            List<Book> allBooks = bookDao.getBooks();
 
             books.Clear();
 
-            foreach(Book b in allBooks)
-            {
-                if(isbn10Filter.Equals(string.Empty) == false && b.ISBN10.Equals(isbn10Filter) == false)
-                    continue;
-                if (isbn13Filter.Equals(string.Empty) == false && b.ISBN13.Equals(isbn13Filter) == false)
-                    continue;
-                if (nameFilter.Equals(string.Empty) == false && b.BookTitle.Equals(nameFilter) == false)
-                    continue;
-                if (numberOfCopiesFilter != -1 && b.NumberOfCopies != numberOfCopiesFilter)
-                    continue;
-                if(selectedPublisher != null && b.Publisher.Equals(selectedPublisher) == false)
-                    continue;
-                if(selectedGenre != null && b.Genre.Equals(selectedGenre) == false)
-                    continue;
-                if (selectedAuthor != null && b.Author.Equals(selectedAuthor) == false)
-                    continue;
-                if(onlyWithAvailableCopiesFilter == true)
-                {
-                    bool hasAvailableCopies = false;
+            var tempBooks = dbContext.Books.Where(b => (string.IsNullOrEmpty(isbn10Filter) || b.Isbn10.Equals(isbn10Filter)
+                                                     && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter)
+                                                     && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Equals(NameFilter)
+                                                     && (numberOfCopiesFilter == -1 || b.NumberOfCopies == numberOfCopiesFilter)
+                                                     && (selectedPublisher == null || b.Publisher.Equals(selectedPublisher))
+                                                     && (selectedGenre == null || b.Genre.Equals(selectedGenre))
+                                                     && (selectedAuthor == null || b.Author.Equals(selectedAuthor))))));
 
-                    List<BookCopy> copies = bookDao.getBookCopies(b);
-                    foreach(BookCopy c in copies)
+            if(onlyWithAvailableCopiesFilter == true)
+            {
+                foreach (Book b in tempBooks)
+                {
+                    bool available = true;
+                    foreach (BookCopy bc in b.BookCopies)
                     {
-                        if (c.available == true)
+                        if(bc.Available == 0)
                         {
-                            hasAvailableCopies = true;
+                            available = false;
                             break;
                         }
                     }
-                    if (hasAvailableCopies == false)
-                        continue;
+
+                    if (available == true)
+                        books.Add(b);
                 }
-                books.Add(b); // the book satisfies all filters
             }
+          
+                                                     
+
+            
         }
     }
 }

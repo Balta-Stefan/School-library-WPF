@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -15,14 +14,14 @@ namespace School_library.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private UserDAO userDao;
-        private User user;
+        private readonly mydbContext dbContext;
+        private UserViewModel user;
         private App app;
 
         public ICommand ChangeThemeCommand { get; }
-        public SettingsViewModel(UserDAO userDao, User user, App app)
+        public SettingsViewModel(mydbContext dbContext, UserViewModel user, App app)
         {
-            this.userDao = userDao;
+            this.dbContext = dbContext;
             this.user = user;
             this.app = app;
 
@@ -40,8 +39,13 @@ namespace School_library.ViewModels
                 ResourceDictionary dic = (ResourceDictionary)XamlReader.Load(fs);
                 app.changeTheme(dic);
             }
-            user.theme = theme;
-            userDao.updateUser(user);
+            user.Theme = theme;
+            
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (Exception) { }
         }
     }
 }

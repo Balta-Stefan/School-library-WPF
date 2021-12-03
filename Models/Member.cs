@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class Member : User
+    public partial class Member
     {
-        public Member(int userID, string firstName, string lastName, string username, string password, string? localization, string? theme) : base(userID, firstName, lastName, username, password, User.UserTypes.MEMBER, localization, theme)
+        public Member()
         {
-           
+            Loans = new HashSet<Loan>();
         }
 
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
+        public int UserId { get; set; }
 
+        public virtual User User { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return User.Equals(obj);
+        }
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return User.GetHashCode();
+        }
+        public override string ToString()
+        {
+            return User.ToString();
         }
     }
 }

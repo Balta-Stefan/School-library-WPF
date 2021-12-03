@@ -7,126 +7,109 @@ using System.Threading.Tasks;
 
 namespace School_library.ViewModels
 {
-    public class UserViewModel : ViewModelBase
+    public class AccountantViewModel : ViewModelBase
     {
-        private User user;
-        private mydbContext dbContext;
+        private Accountant accountant;
 
-        public User User
-        {
-            get { return user; }
-        }
         public int UserId
         {
-            get { return user.UserId; }
+            get { return accountant.User.UserId; }
             set
             {
-                user.UserId = value;
+                accountant.UserId = value;
                 OnPropertyChange("UserId");
             }
         }
-        public string FirstName
+        public string FirstName 
         {
-            get { return user.FirstName; }
+            get { return accountant.User.FirstName; }
             set
             {
-                user.FirstName = value;
+                accountant.User.FirstName = value;
                 OnPropertyChange("FirstName");
             }
         }
         public string LastName
         {
-            get { return user.LastName; }
+            get { return accountant.User.LastName; }
             set
             {
-                user.LastName = value;
+                accountant.User.LastName = value;
                 OnPropertyChange("LastName");
             }
         }
         public string Username
         {
-            get { return user.Username; }
+            get { return accountant.User.Username; }
             set
             {
-                user.Username = value;
+                accountant.User.Username = value;
                 OnPropertyChange("Username");
             }
         }
         public string Password
         {
-            get { return user.Password; }
+            get { return accountant.User.Password; }
             set
             {
-                user.Password = value;
+                accountant.User.Password = value;
                 OnPropertyChange("Password");
             }
         }
         public string UserType
         {
-            get { return user.UserType; }
+            get { return accountant.User.UserType; }
             set
             {
-                user.UserType = value;
+                accountant.User.UserType = value;
                 OnPropertyChange("UserType");
             }
         }
         public bool Active
         {
-            get
+            get 
             {
-                if (user.Active == 0)
+                if (accountant.User.Active == 0)
                     return false;
                 return true;
             }
             set
             {
-                byte oldValue = user.Active;
+                if (value == false)
+                    accountant.User.Active = 0;
+                else
+                    accountant.User.Active = 1;
 
-                try
-                {
-                    if (value == false)
-                        user.Active = 0;
-                    else
-                        user.Active = 1;
-
-                    dbContext.SaveChanges();
-                    OnPropertyChange("Active");
-                }
-                catch (Exception)
-                {
-                    user.Active = oldValue;
-                }
+                OnPropertyChange("Active");
             }
         }
         public string Localization
         {
-            get { return user.Localization; }
+            get { return accountant.User.Localization; }
             set
             {
-                user.Localization = value;
+                accountant.User.Localization = value;
                 OnPropertyChange("Localization");
             }
         }
         public string Theme
         {
-            get { return user.Theme; }
+            get { return accountant.User.Theme; }
             set
             {
-                user.Theme = value;
+                accountant.User.Theme = value;
                 OnPropertyChange("Theme");
             }
         }
 
-        public UserViewModel(User user, mydbContext dbContext)
+        public AccountantViewModel(Accountant accountant)
         {
-            this.user = user;
-            this.dbContext = dbContext;
+            this.accountant = accountant;
         }
-
 
         public override string ToString()
         {
-            return user.ToString();
+            return accountant.ToString();
         }
     }
 }

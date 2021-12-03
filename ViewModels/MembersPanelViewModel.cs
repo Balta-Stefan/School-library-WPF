@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using School_library.Views;
 using System;
@@ -15,7 +14,7 @@ namespace School_library.ViewModels
 {
     public class MembersPanelViewModel : ViewModelBase
     {
-        private UserDAO userDao;
+        private readonly mydbContext dbContext;
 
         private Collection<ResourceDictionary> resourceDictionaries;
 
@@ -70,14 +69,14 @@ namespace School_library.ViewModels
             }
         }*/
 
-        private ObservableCollection<User.UserTypes> types = new ObservableCollection<User.UserTypes>();
-        public ObservableCollection<User.UserTypes> UserTypesList
+        private ObservableCollection<AccountTypesEnum> types = new ObservableCollection<AccountTypesEnum>();
+        public ObservableCollection<AccountTypesEnum> UserTypesList
         {
             get { return types; }
         }
 
-        private User.UserTypes? selectedMemberType = null;
-        public User.UserTypes? SelectedMemberType
+        private AccountTypesEnum? selectedMemberType = null;
+        public AccountTypesEnum? SelectedMemberType
         {
             get { return selectedMemberType; }
             set
@@ -164,21 +163,21 @@ namespace School_library.ViewModels
         {
             get { return users; }
         }
-        public MembersPanelViewModel(UserDAO userDao, Collection<ResourceDictionary> resourceDictionaries)
+        public MembersPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionaries)
         {
+            this.dbContext = dbContext;
             this.resourceDictionaries = resourceDictionaries;
 
-            IEnumerable<User.UserTypes> allTypes = Enum.GetValues(typeof(User.UserTypes)).Cast<User.UserTypes>();
-            foreach (User.UserTypes t in allTypes) 
+            IEnumerable<AccountTypesEnum> allTypes = Enum.GetValues(typeof(AccountTypesEnum)).Cast<AccountTypesEnum>();
+            foreach (AccountTypesEnum t in allTypes) 
                 types.Add(t);
 
             ClearFilters = new ClearMembersPanelFilters(this);
             FilterMembers = new FilterMembersCommand(this);
-            AddMemberCommand = new OpenAddUserWindowCommand(this, userDao);
+            AddMemberCommand = new OpenAddUserWindowCommand(this);
 
-            this.userDao = userDao;
 
-            foreach (User u in userDao.getUsers()) users.Add(new UserViewModel(u, userDao));
+            foreach (User u in dbContext.Users.ToList()) users.Add(new UserViewModel(u, dbContext));
         }
 
         public void clearFilters()
@@ -188,9 +187,8 @@ namespace School_library.ViewModels
             //CardInputEnabled = true;
             OnlyActiveMembersFilter = false;
 
-            List<User> allUsers = userDao.getUsers();
             users.Clear();
-            foreach (User u in allUsers) users.Add(new UserViewModel(u, userDao));
+            foreach (User u in dbContext.Users.ToList()) users.Add(new UserViewModel(u, dbContext));
         }
 
         private bool areFiltersEmpty()
@@ -209,18 +207,18 @@ namespace School_library.ViewModels
             if (areFiltersEmpty() == true)
                 return;
 
-            List<User> allUsers = userDao.getUsers();
+            List<User> allUsers = dbContext.Users.ToList();
             users.Clear();
 
             foreach(User u in allUsers)
             {
-                if (userID != -1 && u.userID != userID)
+                if (userID != -1 && u.UserId != userID)
                     continue;
-                if (firstName.Equals(string.Empty) == false && u.firstName.Equals(firstName) == false)
+                if (firstName.Equals(string.Empty) == false && u.FirstName.Equals(firstName) == false)
                     continue;
-                if (lastName.Equals(string.Empty) == false && u.lastName.Equals(lastName) == false)
+                if (lastName.Equals(string.Empty) == false && u.LastName.Equals(lastName) == false)
                     continue;
-                if (onlyActiveMembers == true && u.active == false)
+                if (onlyActiveMembers == true && u.Active == 0)
                     continue;
                 /*if(CardNumber.Equals(string.Empty) == false)
                 {
@@ -233,17 +231,17 @@ namespace School_library.ViewModels
                     else
                         continue;
                 }*/
-                if (selectedMemberType != null && u.userType.Equals(selectedMemberType) == false)
+                if (selectedMemberType != null && u.UserType.Equals(selectedMemberType.ToString()) == false)
                     continue;
 
-                users.Add(new UserViewModel(u, userDao));
+                users.Add(new UserViewModel(u, dbContext));
             }
 
         }
     
         public void addMember()
         {
-            AddUserViewModel addUserViewModel = new AddUserViewModel(userDao, users);
+            AddUserViewModel addUserViewModel = new AddUserViewModel(dbContext, users);
             AddUserWindow addUserWindow = new AddUserWindow()
             {
                 DataContext = addUserViewModel

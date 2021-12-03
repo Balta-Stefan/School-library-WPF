@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using School_library.Views;
 using System;
@@ -15,10 +14,9 @@ namespace School_library.ViewModels
 {
     public class LoansPanelViewModel : ViewModelBase
     {
-        private readonly LoansDAO loanDao;
-        private readonly UserDAO userDao;
-        private readonly BookDAO bookDao;
-        private readonly User loggedInUser;
+        private readonly mydbContext dbContext;
+
+        private readonly UserViewModel loggedInUser;
 
         private Collection<ResourceDictionary> resourceDictionary;
 
@@ -32,9 +30,9 @@ namespace School_library.ViewModels
         private bool onlyActive = false;
         private bool onlyInactive = false;
         private bool onlyUnreturned = false;
-        private User? selectedMember = null;
+        private MemberViewModel? selectedMember = null;
         private int userID = -1;
-        private Book? selectedBook = null;
+        private BookViewModel? selectedBook = null;
         private bool onlyReturnedFilter = false;
 
         #region Properties
@@ -47,15 +45,15 @@ namespace School_library.ViewModels
                 OnPropertyChange("OnlyReturnedFilter");
             }
         }
-        public ObservableCollection<User> members { get; } = new ObservableCollection<User>();
-        public ObservableCollection<Book> books { get; }
-        public Book? SelectedBook
+        public ObservableCollection<MemberViewModel> members { get; private set; } = new ObservableCollection<MemberViewModel>();
+        public ObservableCollection<BookViewModel> books { get; private set; } = new ObservableCollection<BookViewModel>();
+        public BookViewModel? SelectedBook
         {
             get { return selectedBook; }
             set
             {
                 selectedBook = value;
-                isbn10 = value.ISBN10;
+                isbn10 = value.Isbn10;
                 bookTitle = value.BookTitle;
                 OnPropertyChange("ISBN10");
                 OnPropertyChange("SelectedBook");
@@ -63,8 +61,8 @@ namespace School_library.ViewModels
             }
         }
 
-        public ObservableCollection<LoanViewModel> Loans { get; }
-        public User? SelectedMember
+        public ObservableCollection<LoanViewModel> Loans { get; private set; } = new ObservableCollection<LoanViewModel>();
+        public MemberViewModel? SelectedMember
         {
             get { return selectedMember; }
             set
@@ -72,9 +70,9 @@ namespace School_library.ViewModels
                 selectedMember = value;
                 if(value != null)
                 {
-                    userID = value.userID;
-                    firstNameFilter = value.firstName;
-                    lastNameFilter = value.lastName;
+                    userID = value.UserId;
+                    firstNameFilter = value.FirstName;
+                    lastNameFilter = value.LastName;
                     OnPropertyChange("FirstNameFilter");
                     OnPropertyChange("LastNameFilter");
                     OnPropertyChange("UserID");
@@ -242,26 +240,21 @@ namespace School_library.ViewModels
         
         #endregion
 
-        public LoansPanelViewModel(LoansDAO loanDao, UserDAO userDao, BookDAO bookDao, User loggedInUser, Collection<ResourceDictionary> resourceDictionary)
+        public LoansPanelViewModel(mydbContext dbContext, UserViewModel loggedInUser, Collection<ResourceDictionary> resourceDictionary)
         {
-            this.loanDao = loanDao;
-            this.userDao = userDao;
-            this.bookDao = bookDao;
+            this.dbContext = dbContext;
             this.loggedInUser = loggedInUser;
             this.resourceDictionary = resourceDictionary;
 
-            books = new ObservableCollection<Book>(bookDao.getBooks());
+            foreach (Book b in dbContext.Books.ToList())
+                books.Add(new BookViewModel(b));
 
-            Loans = new ObservableCollection<LoanViewModel>();
-            foreach (Loan l in loanDao.getLoans())
-                Loans.Add(new LoanViewModel(l, loanDao));
+            foreach (Loan l in dbContext.Loans.ToList())
+                Loans.Add(new LoanViewModel(l));
 
-            List<User> users = userDao.getUsers();
-            foreach(User u in users)
-            {
-                if (u.userType.Equals(User.UserTypes.MEMBER))
-                    members.Add(u);
-            }
+            foreach (Member m in dbContext.Members.ToList())
+                members.Add(new MemberViewModel(m));
+           
 
             clearLoansFiltersCommand = new ClearLoansFiltersCommand(this);
             filterLoansCommand = new FilterLoansCommand(this);
@@ -271,15 +264,26 @@ namespace School_library.ViewModels
 
         public void returnLoan(LoanViewModel selectedLoan)
         {
-            if(selectedLoan.returnLoan(DateTime.Now, (Librarian)loggedInUser) == false)
+            selectedLoan.ReturnDateTIme = DateTime.Now;
+            selectedLoan.ReturnedToLibrarian = loggedInUser.User.Librarian;
+            
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch(Exception)
             {
                 MessageBox.Show("An error has occured while returning a loan", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                selectedLoan.ReturnDateTIme = null;
+                selectedLoan.ReturnedToLibrarian = null;
             }
         }
 
         public void openNewLoanWindow()
         {
-            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel((Librarian)loggedInUser, loanDao, userDao, books, Loans, bookDao);
+            Librarian lib = loggedInUser.User.Librarian;
+
+            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel(dbContext, books, Loans, new LibrarianViewModel(lib));
             AddNewLoanWindow newLoanWindow = new AddNewLoanWindow()
             {
                 DataContext = newLoanViewModel
@@ -292,7 +296,7 @@ namespace School_library.ViewModels
         public void clearFilters()
         {
             Loans.Clear();
-            foreach (Loan l in loanDao.getLoans()) Loans.Add(new LoanViewModel(l, loanDao));
+            foreach (Loan l in dbContext.Loans.ToList()) Loans.Add(new LoanViewModel(l));
 
 
             ISBN10 = BookTitle = CopyID = LastNameFilter = FirstNameFilter = UserID = string.Empty;
@@ -306,7 +310,7 @@ namespace School_library.ViewModels
             Loans.Clear();
 
             List<LoanViewModel> tempLoans = new List<LoanViewModel>();
-            foreach (Loan l in loanDao.getLoans()) tempLoans.Add(new LoanViewModel(l, loanDao));
+            foreach (Loan l in dbContext.Loans.ToList()) tempLoans.Add(new LoanViewModel(l));
 
             foreach (LoanViewModel l in tempLoans)
             {
@@ -314,43 +318,43 @@ namespace School_library.ViewModels
                     continue;
                 if(selectedMember != null)
                 {
-                    if (l.Borrower.Equals(selectedMember) == false)
+                    if (l.Borrower.Equals(selectedMember.User) == false)
                         continue;
                 }
                 else
                 {
                     if (userID != -1)
                     {
-                        if (l.Borrower.userID != userID)
+                        if (l.Borrower.UserId != userID)
                             continue;
                     }
                     else
                     {
-                        if (firstNameFilter.Equals(string.Empty) == false && l.Borrower.firstName.Equals(firstNameFilter) == false)
+                        if (firstNameFilter.Equals(string.Empty) == false && l.Borrower.User.FirstName.Equals(firstNameFilter) == false)
                             continue;
-                        if (lastNameFilter.Equals(string.Empty) == false && l.Borrower.lastName.Equals(lastNameFilter) == false)
+                        if (lastNameFilter.Equals(string.Empty) == false && l.Borrower.User.LastName.Equals(lastNameFilter) == false)
                             continue;
                     }
                  
                 }
                 if(selectedBook != null)
                 {
-                    if (l.BookCopy.book.Equals(selectedBook) == false)
+                    if (l.BookCopy.Book.Equals(selectedBook) == false)
                         continue;
                 }
                 else
                 {
-                    if (copyID != -1 && l.BookCopy.bookCopyID != copyID)
+                    if (copyID != -1 && l.BookCopy.BookCopyId != copyID)
                         continue;
-                    if (isbn10.Equals(string.Empty) == false && l.BookCopy.book.ISBN10.Equals(isbn10) == false)
+                    if (isbn10.Equals(string.Empty) == false && l.BookCopy.Book.Isbn10.Equals(isbn10) == false)
                         continue;
-                    if (bookTitle.Equals(string.Empty) == false && l.BookCopy.book.BookTitle.Equals(bookTitle) == false)
+                    if (bookTitle.Equals(string.Empty) == false && l.BookCopy.Book.BookTitle.Equals(bookTitle) == false)
                         continue;
                 }
 
-                if (onlyActive == true && l.Borrower.active == false)
+                if (onlyActive == true && l.Borrower.User.Active == 0)
                     continue;
-                if (onlyInactive == true && l.Borrower.active == true)
+                if (onlyInactive == true && l.Borrower.User.Active == 1)
                     continue;
                 if (onlyUnreturned == true && l.ReturnedToLibrarian != null)
                     continue;

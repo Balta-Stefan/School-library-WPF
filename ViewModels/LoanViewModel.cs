@@ -1,5 +1,4 @@
-﻿using School_library.DAO;
-using School_library.Models;
+﻿using School_library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +10,30 @@ namespace School_library.ViewModels
     public class LoanViewModel : ViewModelBase
     {
         private readonly Loan loan;
-        private readonly LoansDAO loansDao;
 
-        private int loanID;
+        /*private int loanID;
         private DateTime borrowDateTime;
         private Librarian borrowedFromLibrarian;
         private Member borrower;
         private BookCopy bookCopy;
         private Librarian? returnedToLibrarian;
-        private DateTime? returnDateTIme;
+        private DateTime? returnDateTIme;*/
         private bool isReturned = false;
 
         #region Properties
         public string BorrowedFromLibrarianFullName
         {
-            get {return borrowedFromLibrarian.firstName + " " + borrowedFromLibrarian.lastName; }
+            get { return loan.BorrowedFromLibrarianNavigation.User.FirstName + " " + loan.BorrowedFromLibrarianNavigation.User.LastName; }
         }
+       
         public string ReturnedToLibrarianFullName
         {
-            get { return returnedToLibrarian?.firstName + " " + returnedToLibrarian?.lastName; }
+            get 
+            {
+                if (isReturned == false)
+                    return string.Empty;
+                return loan.ReturnedToLibrarianNavigation.User.FirstName + " " + loan.ReturnedToLibrarianNavigation.User.LastName;
+            }
         }
         public bool IsReturned
         {
@@ -43,164 +47,125 @@ namespace School_library.ViewModels
 
         public int LoanID
         {
-            get { return loanID; }
+            get { return loan.LoanId; }
             set
             {
-                loan.loanID = value;
-                if(loansDao.updateLoan(loan) == true)
-                {
-                    loanID = value;
-                    OnPropertyChange("LoanID");
-                }
-                else
-                {
-                    loan.loanID = loanID;
-                }
+                loan.LoanId = value;
+                OnPropertyChange("LoanID");
             }
         }
 
+        public int UserID
+        {
+            get { return loan.BorrowerId; }
+        }
         public DateTime BorrowDateTime
         {
-            get { return borrowDateTime; }
+            get { return loan.BorrowDateTime; }
             set
             {
-                loan.borrowDateTime = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    borrowDateTime = value;
-                    OnPropertyChange("BorrowDateTime");
-                }
-                else
-                {
-                    loan.borrowDateTime = borrowDateTime;
-                }
+                loan.BorrowDateTime = value;
+                OnPropertyChange("BorrowDateTime");
             }
         }
 
         public Librarian BorrowedFromLibrarian
         {
-            get { return borrowedFromLibrarian; }
+            get { return loan.BorrowedFromLibrarianNavigation; }
             set
             {
-                loan.borrowedFromLibrarian = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    borrowedFromLibrarian = value;
-                    OnPropertyChange("BorrowedFromLibrarian");
-                }
-                else
-                {
-                    loan.borrowedFromLibrarian = borrowedFromLibrarian;
-                }
+                loan.BorrowedFromLibrarianNavigation = value;
+                OnPropertyChange("BorrowedFromLibrarian");
             }
         }
 
+        public string BorrowerFirstName
+        {
+            get { return loan.Borrower.User.FirstName; }
+        }
+        public string BorrowerLastName
+        {
+            get { return loan.Borrower.User.LastName; }
+        }
         public Member Borrower
         {
-            get { return borrower; }
+            get { return loan.Borrower.User.Member; }
             set
             {
-                loan.borrower = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    borrower = value;
-                    OnPropertyChange("Borrower");
-                }
-                else
-                {
-                    loan.borrower = borrower;
-                }
+                loan.Borrower = value;
+                OnPropertyChange("Borrower");
+
+
             }
         }
 
         public BookCopy BookCopy
         {
-            get { return bookCopy; }
+            get { return loan.BookCopy; }
             set
             {
-                loan.bookCopy = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    bookCopy = value;
-                    OnPropertyChange("BookCopy");
-                }
-                else
-                {
-                    loan.bookCopy = bookCopy;
-                }
+                loan.BookCopy = value;
+                OnPropertyChange("BookCopy");
+
+
             }
         }
         public Librarian? ReturnedToLibrarian
         {
-            get { return returnedToLibrarian; }
+            get { return loan.ReturnedToLibrarianNavigation; }
             set
             {
-                loan.returnedToLibrarian = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    returnedToLibrarian = value;
-                    OnPropertyChange("ReturnedToLibrarian");
-                }
+                loan.ReturnedToLibrarianNavigation = value;
+                if (value != null)
+                    isReturned = true;
                 else
-                {
-                    loan.returnedToLibrarian = returnedToLibrarian;
-                }
+                    isReturned = false;
+
+                OnPropertyChange("ReturnedToLibrarian");
+                OnPropertyChange("ReturnedToLibrarianFullName");
+
             }
         }
 
         public DateTime? ReturnDateTIme
         {
-            get { return returnDateTIme; }
+            get { return loan.ReturnDateTime; }
             set
             {
-                loan.returnDateTIme = value;
-                if (loansDao.updateLoan(loan) == true)
-                {
-                    returnDateTIme = value;
-                    OnPropertyChange("ReturnDateTIme");
-                }
-                else
-                {
-                    loan.returnDateTIme = returnDateTIme;
-                }
+                loan.ReturnDateTime = value;
+                OnPropertyChange("ReturnDateTIme");
+
             }
         }
         #endregion
 
-        public bool returnLoan(DateTime returnedDateTIme, Librarian returnedTo)
+        /*public bool returnLoan(DateTime returnedDateTIme, Librarian returnedTo)
         {
-            loan.returnDateTIme = returnedDateTIme;
-            loan.returnedToLibrarian = returnedTo;
+            loan.ReturnDateTime = returnedDateTIme;
+            loan.ReturnedToLibrarianNavigation = returnedTo;
 
-            if(loansDao.updateLoan(loan) == true)
+            try
             {
+                dbContext.SaveChanges();
                 returnDateTIme = returnedDateTIme;
                 returnedToLibrarian = returnedTo;
                 OnPropertyChange("ReturnDateTIme");
                 OnPropertyChange("ReturnedToLibrarian");
                 return true;
             }
-            else
+            catch (Exception)
             {
-                loan.returnedToLibrarian = returnedToLibrarian;
-                loan.returnDateTIme = returnDateTIme;
+                loan.ReturnedToLibrarianNavigation = returnedToLibrarian;
+                loan.ReturnDateTime = returnDateTIme;
                 return false;
             }
-        }
+        }*/
 
-        public LoanViewModel(Loan loan, LoansDAO loansDao)
+        public LoanViewModel(Loan loan)
         {
             this.loan = loan;
-            this.loansDao = loansDao;
 
-            loanID = loan.loanID;
-            borrowDateTime = loan.borrowDateTime;
-            borrowedFromLibrarian = loan.borrowedFromLibrarian;
-            borrower = loan.borrower;
-            bookCopy = loan.bookCopy;
-            returnedToLibrarian = loan.returnedToLibrarian;
-            returnDateTIme = loan.returnDateTIme;
-            if (ReturnedToLibrarian != null)
+            if (loan.ReturnDateTime != null)
                 isReturned = true;
         }
     }

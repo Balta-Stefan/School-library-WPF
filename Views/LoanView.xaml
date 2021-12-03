@@ -127,23 +127,23 @@
                         <StackPanel Grid.Column="0">
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_userID}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                 <TextBlock Text="{Binding Borrower.userID}" FontWeight="Regular"  Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                 <TextBlock Text="{Binding Borrower.UserId}" FontWeight="Regular"  Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="{x:Static p:Resources.Loans_listbox_firstName}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                <TextBlock Text="{Binding Borrower.firstName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{Binding BorrowerFirstName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_lastName}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                <TextBlock Text="{Binding Borrower.lastName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{Binding BorrowerLastName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_copyID}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                <TextBlock Text="{Binding BookCopy.bookCopyID}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{Binding BookCopy.BookCopyId}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_bookTitle}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                <TextBlock Text="{Binding BookCopy.book.BookTitle}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                <TextBlock Text="{Binding BookCopy.Book.BookTitle}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_BorrowedFrom}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
@@ -155,7 +155,7 @@
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_ReturnedTo}" Foreground="{DynamicResource TextBlockForegroundColor}"/>
-                                    <TextBlock Text="{Binding ReturnedToLibrarian}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
+                                    <TextBlock Text="{Binding ReturnedToLibrarianFullName}" FontWeight="Regular" Foreground="{DynamicResource TextBlockForegroundColor}"/>
                             </WrapPanel>
                             <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_returnedAt}" Foreground="{DynamicResource TextBlockForegroundColor}"/>

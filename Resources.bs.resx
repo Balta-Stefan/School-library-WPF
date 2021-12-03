@@ -282,6 +282,9 @@
   <data name="Loans_UserID" xml:space="preserve">
     <value>ID korisnika</value>
   </data>
+  <data name="LoginText" xml:space="preserve">
+    <value>Prijava</value>
+  </data>
   <data name="MembersTabName" xml:space="preserve">
     <value>Č_lanovi</value>
   </data>

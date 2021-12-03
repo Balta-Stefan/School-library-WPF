@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -10,27 +9,28 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace School_library.ViewModels
 {
     public class AddNewLoanViewModel : ViewModelBase
     {
-        private Member? selectedMember;
-        private Book? selectedBook;
-        private BookCopy? selectedCopy;
-        private Librarian loggedInLibrarian;
-        private LoansDAO loanDao;
-        private UserDAO userDao;
-        private BookDAO bookDao;
+        private MemberViewModel? selectedMember;
+        private BookViewModel? selectedBook;
+        private BookCopyViewModel? selectedCopy;
+        private LibrarianViewModel loggedInLibrarian;
         private ObservableCollection<LoanViewModel> loans;
 
+        private readonly mydbContext dbContext;
+
+
         #region Properties
-        public Member? SelectedMember
+        public MemberViewModel? SelectedMember
         {
             get { return selectedMember; }
             set
             {
                 // if the selected member is inactive, disable the button and display a message
-                if(value != null && value.active == false)
+                if(value != null && value.User.Active == 0)
                 {
                     MessageBox.Show(School_library.Resources.AddLoanWindow_userInactiveMessage, "", MessageBoxButton.OK, MessageBoxImage.Warning);
                     selectedMember = null;
@@ -43,7 +43,7 @@ namespace School_library.ViewModels
             }
         }
 
-        public Book? SelectedBook
+        public BookViewModel? SelectedBook
         {
             get { return selectedBook; }
             set
@@ -54,16 +54,13 @@ namespace School_library.ViewModels
                 Copies.Clear();
                 if(value != null)
                 {
-                    foreach (BookCopy bc in bookDao.getBookCopies(value))
-                    {
-                        if(bc.available == true)
-                            Copies.Add(bc);
-                    }
+                    var tmp = dbContext.BookCopies.Where(c => c.Available == 1).ToList();
+                    foreach (BookCopy c in tmp) Copies.Add(new BookCopyViewModel(c));
                 }
             }
         }
 
-        public BookCopy? SelectedCopy
+        public BookCopyViewModel? SelectedCopy
         {
             get { return selectedCopy; }
             set
@@ -72,28 +69,26 @@ namespace School_library.ViewModels
                 OnPropertyChange("SelectedCopy");
             }
         }
-        public ObservableCollection<Member> Members { get; } = new ObservableCollection<Member>();
-        public ObservableCollection<Book> Books { get; }
-        public ObservableCollection<BookCopy> Copies { get; } = new ObservableCollection<BookCopy>();
+        public ObservableCollection<MemberViewModel> Members { get; private set; } = new ObservableCollection<MemberViewModel>();
+        public ObservableCollection<BookViewModel> Books { get; }
+        public ObservableCollection<BookCopyViewModel> Copies { get; } = new ObservableCollection<BookCopyViewModel>();
         public ICommand addLoanCommand { get; }
         #endregion
 
-        public AddNewLoanViewModel(Librarian loggedInLibrarian, LoansDAO loanDao, UserDAO userDao, ObservableCollection<Book> books, ObservableCollection<LoanViewModel> loans, BookDAO bookDao)
+        public AddNewLoanViewModel(mydbContext dbContext, ObservableCollection<BookViewModel> books, ObservableCollection<LoanViewModel> loans, LibrarianViewModel loggedInLibrarian)
         {
             this.loggedInLibrarian = loggedInLibrarian;
-            this.loanDao = loanDao;
-            this.userDao = userDao;
             this.loans = loans;
-            this.bookDao = bookDao;
+            this.dbContext = dbContext;
 
             addLoanCommand = new AddLoanCommand(this);
 
             Books = books;
-            foreach(User u in userDao.getUsers())
-            {
-                if (u is Member)
-                    Members.Add((Member)u);
-            }
+
+            var mems = dbContext.Members.Where(m => m.User.Active == 1).ToList();
+
+            foreach (Member m in mems)
+                Members.Add(new MemberViewModel(m));
         }
 
         public void addLoan()
@@ -109,22 +104,32 @@ namespace School_library.ViewModels
                 return;
             }
 
-            Loan? newLoan = new Loan(-1, DateTime.Now, loggedInLibrarian, selectedMember, selectedCopy);
-            newLoan = loanDao.addLoan(newLoan);
+            Loan newLoan = new Loan()
+            {
+                BorrowDateTime = DateTime.Now,
+                BorrowedFromLibrarianNavigation = loggedInLibrarian.User.Librarian,
+                Borrower = selectedMember.User.Member,
+                BookCopy = selectedCopy.BookCopy
+            };
+            dbContext.Loans.Add(newLoan);
 
-            if(newLoan == null)
+            try
+            {
+                dbContext.SaveChanges();
+            }
+
+            catch(Exception)
             {
                 MessageBox.Show(School_library.Resources.AddLoanWindow_ErrorWhileAdding, School_library.Resources.AddLoanWindow_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            else
-            {
-                loans.Add(new LoanViewModel(newLoan, loanDao));
-                MessageBox.Show(School_library.Resources.AddLoanWindow_LoanAdded, School_library.Resources.AddLoanWindow_LoanSuccess, MessageBoxButton.OK);
+    
+            loans.Add(new LoanViewModel(newLoan));
+            MessageBox.Show(School_library.Resources.AddLoanWindow_LoanAdded, School_library.Resources.AddLoanWindow_LoanSuccess, MessageBoxButton.OK);
 
-                SelectedBook = null;
-                SelectedCopy = null;
-                SelectedMember = null;
-            }
+            SelectedBook = null;
+            SelectedCopy = null;
+            SelectedMember = null;
         }
     }
 }

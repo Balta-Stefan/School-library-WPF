@@ -1,5 +1,4 @@
-﻿using School_library.DAO;
-using School_library.Models;
+﻿using School_library.Models;
 using School_library.ViewModels;
 using School_library.Views;
 using System;
@@ -25,6 +24,7 @@ namespace School_library
     public partial class App : Application
     {
         private string? connectionString = null;//"Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
+        private readonly mydbContext dbContext = new mydbContext();
 
         private LoanView loanWiew;
         private BooksPanelView booksView;
@@ -38,7 +38,7 @@ namespace School_library
         {
             connectionString = ConfigurationManager.AppSettings["connection_string"];
         }
-        private User? login(UserDAO userDao)
+        private UserViewModel? login()
         {
             ObservableCollection<LanguageAndFlag> flags = new ObservableCollection<LanguageAndFlag>();
 
@@ -47,7 +47,7 @@ namespace School_library
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
 
-            LoginViewModel loginViewModel = new LoginViewModel(userDao, flags);
+            LoginViewModel loginViewModel = new LoginViewModel(dbContext, flags);
             LoginWindow loginWindow = new LoginWindow
             {
                 DataContext = loginViewModel
@@ -60,7 +60,7 @@ namespace School_library
                 return null;
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(loginViewModel.selectedLanguage.language);
-            loginViewModel.user.localization = loginViewModel.selectedLanguage.language;
+            loginViewModel.user.Localization = loginViewModel.selectedLanguage.language;
 
             return loginViewModel.user;
         }
@@ -103,14 +103,8 @@ namespace School_library
             }
             //User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass", "", "");
 
-            BookDAO bookDao = new BookDAO(connectionString);
-            PublisherDAO publisherDao = new PublisherDAO(connectionString);
-            GenreDAO genreDao = new GenreDAO(connectionString);
-            AuthorDAO authorDao = new AuthorDAO(connectionString);
-            UserDAO userDao = new UserDAO(connectionString);
-            LoansDAO loansDao = new LoansDAO(connectionString);
 
-            User? loggedInUser = login(userDao);
+            UserViewModel? loggedInUser = login();
             if (loggedInUser == null)
                 return;
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
@@ -122,7 +116,7 @@ namespace School_library
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
             loanWiew = new LoanView();
-            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(loansDao, userDao, bookDao, loggedInUser, loanWiew.Resources.MergedDictionaries);
+            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(dbContext, loggedInUser, loanWiew.Resources.MergedDictionaries);
             loanWiew.DataContext = loansViewModel;
             loansTab.Content = loanWiew;
 
@@ -131,7 +125,7 @@ namespace School_library
             TabItem booksTab = new TabItem();
             booksTab.Header = booksTabItemHotkey;//"_Books";
             booksView = new BooksPanelView();
-            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(bookDao, publisherDao, genreDao, authorDao, booksView.Resources.MergedDictionaries);
+            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(dbContext, booksView.Resources.MergedDictionaries);
             booksView.DataContext = booksPanelViewModel;
             booksTab.Content = booksView;
 
@@ -140,7 +134,7 @@ namespace School_library
             TabItem membersTab = new TabItem();
             membersTab.Header = membersTabItemHotkey;//"Members";
             membersPanel = new MembersPanel();
-            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(userDao, membersPanel.Resources.MergedDictionaries);
+            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(dbContext, membersPanel.Resources.MergedDictionaries);
             membersPanel.DataContext = membersViewModel;
             membersTab.Content = membersPanel;
 
@@ -148,7 +142,7 @@ namespace School_library
             settingsTabItemHotkey.Text = School_library.Resources.SettingsTabName;
             TabItem settingsTab = new TabItem();
             settingsTab.Header = settingsTabItemHotkey;// "Settings";
-            SettingsViewModel settingsViewModel = new SettingsViewModel(userDao, loggedInUser, this);
+            SettingsViewModel settingsViewModel = new SettingsViewModel(dbContext, loggedInUser, this);
             settingsView = new SettingsView()
             {
                 DataContext = settingsViewModel
@@ -167,7 +161,7 @@ namespace School_library
             {
                 DataContext = this
             };
-            setTheme(loggedInUser.theme);
+            setTheme(loggedInUser.Theme);
             mainWindow.Show();
 
 

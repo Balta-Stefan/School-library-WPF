@@ -1,5 +1,4 @@
 ﻿using School_library.Commands;
-using School_library.DAO;
 using School_library.Models;
 using System;
 using System.Collections.Generic;
@@ -14,10 +13,7 @@ namespace School_library.ViewModels
 {
     public class AddNewBookViewModel : ViewModelBase
     {
-        private BookDAO bookDao;
-        private PublisherDAO publisherDao;
-        private GenreDAO genreDAO;
-        private AuthorDAO authorDao;
+        private readonly mydbContext dbContext;
         private ObservableCollection<Book> books;
 
         private string isbn10 = string.Empty;
@@ -162,23 +158,18 @@ namespace School_library.ViewModels
         }
         
         public ICommand addBookCommand { get; }
-        public AddNewBookViewModel(BookDAO bookDao,
+        public AddNewBookViewModel(mydbContext dbContext,
             ObservableCollection<Genre> genres, 
             ObservableCollection<Publisher> publishers,
             ObservableCollection<Author> authors,
-            ObservableCollection<Book> books,
-            PublisherDAO publisherDao,
-            AuthorDAO authorDao,
-            GenreDAO genreDao)
+            ObservableCollection<Book> books)
         {
-            this.bookDao = bookDao;
+            this.dbContext = dbContext;
             this.genres = genres;
             this.publishers = publishers;
             this.authors = authors;
             this.books = books;
-            this.publisherDao = publisherDao;
-            this.authorDao = authorDao;
-            this.genreDAO = genreDao;
+           
 
             addBookCommand = new AddBookCommand(this);
         }
@@ -210,9 +201,17 @@ namespace School_library.ViewModels
                     MessageBox.Show("All fields for the new author must be filled out!", "", MessageBoxButton.OK);
                     return;
                 }
-                author = new Author(-1, newAuthorFirstName, newAuthorLastName);
-                author = authorDao.insertAuthor(author);
-                if(author == null)
+                author = new Author()
+                {
+                    FirstName = newAuthorFirstName,
+                    LastName = newAuthorLastName
+                };
+                dbContext.Authors.Add(author);
+                try
+                {
+                    dbContext.SaveChanges();
+                }
+                catch(Exception)
                 {
                     MessageBox.Show("Couldn't add new author!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -228,9 +227,17 @@ namespace School_library.ViewModels
                     MessageBox.Show("All fields for the new genre must be filled out!", "", MessageBoxButton.OK);
                     return;
                 }
-                genre = new Genre(-1, newGenreName);
-                genre = genreDAO.insertGenre(genre);
-                if(genre == null)
+                genre = new Genre()
+                {
+                    GenreName = newGenreName
+                };
+                dbContext.Genres.Add(genre);
+
+                try
+                {
+                    dbContext.SaveChanges();
+                }
+                catch(Exception)
                 {
                     MessageBox.Show("Couldn't add new genre!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -246,27 +253,47 @@ namespace School_library.ViewModels
                     MessageBox.Show("All fields for the new publisher must be filled out!", "", MessageBoxButton.OK);
                     return;
                 }
-                pub = new Publisher(-1, newPublisherName);
-                pub = publisherDao.insertPublisher(pub);
-                if (pub == null)
+                pub = new Publisher()
+                {
+                    PublisherName = newPublisherName
+                };
+                dbContext.Publishers.Add(pub);
+                try
+                {
+                    dbContext.SaveChanges();
+                }
+                catch(Exception)
                 {
                     MessageBox.Show("Couldn't add new publisher!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
 
-            Book? newBook = new Book(-1, isbn13, isbn10, title, edition, author, pub, genre, 1);
-            newBook = bookDao.addBook(newBook);
+            Book newBook = new Book()
+            {
+                Isbn13 = isbn13,
+                Isbn10 = isbn10,
+                BookTitle = title,
+                Edition = edition,
+                Author = author,
+                Publisher = pub,
+                GenreNavigation = genre,
+                NumberOfCopies = 1
+            };
 
-            if(newBook == null)
+            dbContext.Books.Add(newBook);
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch(Exception)
             {
                 MessageBox.Show("Couldn't add the book!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            else
-            {
-                books.Add(newBook);
-                MessageBox.Show("Book Added", "", MessageBoxButton.OK);
-            }
+
+            books.Add(newBook);
+            MessageBox.Show("Book Added", "", MessageBoxButton.OK);
         }
     }
 }

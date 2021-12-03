@@ -1,5 +1,4 @@
-﻿using School_library.DAO;
-using School_library.Models;
+﻿using School_library.Models;
 using School_library.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,7 +26,7 @@ namespace School_library.Commands
             viewModel.addMember();
         }
 
-        public OpenAddUserWindowCommand(MembersPanelViewModel viewModel, UserDAO userDao) 
+        public OpenAddUserWindowCommand(MembersPanelViewModel viewModel) 
         {
             this.viewModel = viewModel;
         }

@@ -1,51 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class User
+    public partial class User
     {
-        public enum UserTypes { LIBRARIAN, ACCOUNTANT, MEMBER}
-        public int userID { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string UserType { get; set; }
+        public byte Active { get; set; }
+        public string Localization { get; set; }
+        public string Theme { get; set; }
 
-        public UserTypes userType { get; set; }
-        public bool active { get; set; } = true;
-        public string? localization { get; set; }
-        public string? theme { get; set; }
+        public virtual Accountant Accountant { get; set; }
+        public virtual Librarian Librarian { get; set; }
+        public virtual Member Member { get; set; }
 
-        public User(int userID, string firstName, string lastName, string username, string password, UserTypes userType, string? localization, string? theme)
-        {
-            this.userID = userID;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.username = username;
-            this.password = password;
-            this.userType = userType;
-            this.localization = localization;
-            this.theme = theme;
-        }
-
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             return obj is User user &&
-                   userID == user.userID;
+                   UserId == user.UserId;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(userID);
+            return HashCode.Combine(UserId);
         }
 
         public override string ToString()
         {
-            return firstName + " " + lastName;
+            return FirstName + " " + LastName;
         }
     }
 }

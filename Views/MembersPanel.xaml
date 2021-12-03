@@ -141,7 +141,7 @@
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.Loans_listbox_userID}"/>
-                                    <TextBlock Text="{Binding UserID}" FontWeight="Regular"/>
+                                    <TextBlock Text="{Binding UserId}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.ActiveCheckboxText}"/>

@@ -43,7 +43,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Margin="0,15,0,0" Padding="10,10,10,10" Content="Login" Click="LoginButtonClick" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold"/>
+            <Button Margin="0,15,0,0" Padding="10,10,10,10" Content="{x:Static p:Resources.LoginText}" Click="LoginButtonClick" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </Window>

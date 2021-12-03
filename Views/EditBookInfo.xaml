@@ -122,19 +122,19 @@
                         <StackPanel Grid.Column="0">
                             <WrapPanel>
                                 <TextBlock Text="{x:Static p:Resources.Loans_listbox_copyID}"/>
-                                <TextBlock Text="{Binding bookCopyID}" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding BookCopyId}" FontWeight="Regular"/>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="{x:Static p:Resources.ConditionText}"/>
-                                <TextBlock Text="{Binding condition}" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding Condition}" FontWeight="Regular"/>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="{x:Static p:Resources.DeliveryDateText}"/>
-                                <TextBlock Text="{Binding deliveredAt}" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding DeliveredAt}" FontWeight="Regular"/>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="{x:Static p:Resources.AvailableText}"/>
-                                <CheckBox IsEnabled="False" IsChecked="{Binding available}" />
+                                <CheckBox IsEnabled="False" IsChecked="{Binding Available}" />
                             </WrapPanel>
                         </StackPanel>
 

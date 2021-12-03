@@ -1,36 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class Publisher
+    public partial class Publisher
     {
-        public int publisherID { get; set; }
-        public string name { get; set; }
-
-        public Publisher(int publisherID, string name)
+        public Publisher()
         {
-            this.publisherID = publisherID;
-            this.name = name;
+            Books = new HashSet<Book>();
         }
 
-        public override bool Equals(object? obj)
+        public int PublisherId { get; set; }
+        public string PublisherName { get; set; }
+
+        public virtual ICollection<Book> Books { get; set; }
+
+        public override bool Equals(object obj)
         {
             return obj is Publisher publisher &&
-                   publisherID == publisher.publisherID;
+                   PublisherId == publisher.PublisherId;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(publisherID);
+            return HashCode.Combine(PublisherId);
         }
 
         public override string ToString()
         {
-            return name;
+            return PublisherName;
         }
     }
 }

@@ -7,66 +7,65 @@ using System.Threading.Tasks;
 
 namespace School_library.ViewModels
 {
-    public class UserViewModel : ViewModelBase
+    public class LibrarianViewModel : ViewModelBase
     {
-        private User user;
-        private mydbContext dbContext;
+        private Librarian librarian;
 
         public User User
         {
-            get { return user; }
+            get { return librarian.User; }
         }
         public int UserId
         {
-            get { return user.UserId; }
+            get { return librarian.User.UserId; }
             set
             {
-                user.UserId = value;
+                librarian.UserId = value;
                 OnPropertyChange("UserId");
             }
         }
         public string FirstName
         {
-            get { return user.FirstName; }
+            get { return librarian.User.FirstName; }
             set
             {
-                user.FirstName = value;
+                librarian.User.FirstName = value;
                 OnPropertyChange("FirstName");
             }
         }
         public string LastName
         {
-            get { return user.LastName; }
+            get { return librarian.User.LastName; }
             set
             {
-                user.LastName = value;
+                librarian.User.LastName = value;
                 OnPropertyChange("LastName");
             }
         }
         public string Username
         {
-            get { return user.Username; }
+            get { return librarian.User.Username; }
             set
             {
-                user.Username = value;
+                librarian.User.Username = value;
                 OnPropertyChange("Username");
             }
         }
         public string Password
         {
-            get { return user.Password; }
+            get { return librarian.User.Password; }
             set
             {
-                user.Password = value;
+                librarian.User.Password = value;
                 OnPropertyChange("Password");
             }
         }
         public string UserType
         {
-            get { return user.UserType; }
+            get { return librarian.User.UserType; }
             set
             {
-                user.UserType = value;
+                librarian.User.UserType = value;
                 OnPropertyChange("UserType");
             }
         }
@@ -74,59 +73,47 @@ namespace School_library.ViewModels
         {
             get
             {
-                if (user.Active == 0)
+                if (librarian.User.Active == 0)
                     return false;
                 return true;
             }
             set
             {
-                byte oldValue = user.Active;
+                if (value == false)
+                    librarian.User.Active = 0;
+                else
+                    librarian.User.Active = 1;
 
-                try
-                {
-                    if (value == false)
-                        user.Active = 0;
-                    else
-                        user.Active = 1;
-
-                    dbContext.SaveChanges();
-                    OnPropertyChange("Active");
-                }
-                catch (Exception)
-                {
-                    user.Active = oldValue;
-                }
+                OnPropertyChange("Active");
             }
         }
         public string Localization
         {
-            get { return user.Localization; }
+            get { return librarian.User.Localization; }
             set
             {
-                user.Localization = value;
+                librarian.User.Localization = value;
                 OnPropertyChange("Localization");
             }
         }
         public string Theme
         {
-            get { return user.Theme; }
+            get { return librarian.User.Theme; }
             set
             {
-                user.Theme = value;
+                librarian.User.Theme = value;
                 OnPropertyChange("Theme");
             }
         }
 
-        public UserViewModel(User user, mydbContext dbContext)
+        public LibrarianViewModel(Librarian accountant)
         {
-            this.user = user;
-            this.dbContext = dbContext;
+            this.librarian = accountant;
         }
-
 
         public override string ToString()
         {
-            return user.ToString();
+            return librarian.ToString();
         }
     }
 }

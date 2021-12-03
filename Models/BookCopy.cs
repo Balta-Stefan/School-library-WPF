@@ -1,42 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace School_library.Models
 {
-    public class BookCopy
+    public partial class BookCopy
     {
-        public int bookCopyID { get; set; }
-        public BookCondition condition { get; set; }
-        public DateTime deliveredAt { get; set; }
-        public Book book { get; set; }
-        public bool available { get; set; }
-
-        public BookCopy(int bookCopyID, BookCondition condition, DateTime deliveredAt, Book book, bool available)
+        public BookCopy()
         {
-            this.bookCopyID = bookCopyID;
-            this.condition = condition;
-            this.deliveredAt = deliveredAt;
-            this.book = book;
-            this.available = available;
+            Loans = new HashSet<Loan>();
         }
 
-        public override bool Equals(object? obj)
+        public int BookCopyId { get; set; }
+        public int ConditionId { get; set; }
+        public DateTime? DeliveredAt { get; set; }
+        public int BookId { get; set; }
+        public byte Available { get; set; }
+
+        public virtual Book Book { get; set; }
+        public virtual BookCondition Condition { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
+
+        public override bool Equals(object obj)
         {
             return obj is BookCopy copy &&
-                   bookCopyID == copy.bookCopyID;
+                   BookCopyId == copy.BookCopyId;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(bookCopyID);
+            return HashCode.Combine(BookCopyId);
         }
 
         public override string ToString()
         {
-            return bookCopyID.ToString();
+            return "ID: " + BookCopyId;
         }
     }
 }

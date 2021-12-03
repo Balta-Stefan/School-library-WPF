@@ -7,66 +7,65 @@ using System.Threading.Tasks;
 
 namespace School_library.ViewModels
 {
-    public class UserViewModel : ViewModelBase
+    public class MemberViewModel : ViewModelBase
     {
-        private User user;
-        private mydbContext dbContext;
+        private Member member;
 
         public User User
         {
-            get { return user; }
+            get { return member.User; }
         }
         public int UserId
         {
-            get { return user.UserId; }
+            get { return member.User.UserId; }
             set
             {
-                user.UserId = value;
+                member.UserId = value;
                 OnPropertyChange("UserId");
             }
         }
         public string FirstName
         {
-            get { return user.FirstName; }
+            get { return member.User.FirstName; }
             set
             {
-                user.FirstName = value;
+                member.User.FirstName = value;
                 OnPropertyChange("FirstName");
             }
         }
         public string LastName
         {
-            get { return user.LastName; }
+            get { return member.User.LastName; }
             set
             {
-                user.LastName = value;
+                member.User.LastName = value;
                 OnPropertyChange("LastName");
             }
         }
         public string Username
         {
-            get { return user.Username; }
+            get { return member.User.Username; }
             set
             {
-                user.Username = value;
+                member.User.Username = value;
                 OnPropertyChange("Username");
             }
         }
         public string Password
         {
-            get { return user.Password; }
+            get { return member.User.Password; }
             set
             {
-                user.Password = value;
+                member.User.Password = value;
                 OnPropertyChange("Password");
             }
         }
         public string UserType
         {
-            get { return user.UserType; }
+            get { return member.User.UserType; }
             set
             {
-                user.UserType = value;
+                member.User.UserType = value;
                 OnPropertyChange("UserType");
             }
         }
@@ -74,59 +73,47 @@ namespace School_library.ViewModels
         {
             get
             {
-                if (user.Active == 0)
+                if (member.User.Active == 0)
                     return false;
                 return true;
             }
             set
             {
-                byte oldValue = user.Active;
+                if (value == false)
+                    member.User.Active = 0;
+                else
+                    member.User.Active = 1;
 
-                try
-                {
-                    if (value == false)
-                        user.Active = 0;
-                    else
-                        user.Active = 1;
-
-                    dbContext.SaveChanges();
-                    OnPropertyChange("Active");
-                }
-                catch (Exception)
-                {
-                    user.Active = oldValue;
-                }
+                OnPropertyChange("Active");
             }
         }
         public string Localization
         {
-            get { return user.Localization; }
+            get { return member.User.Localization; }
             set
             {
-                user.Localization = value;
+                member.User.Localization = value;
                 OnPropertyChange("Localization");
             }
         }
         public string Theme
         {
-            get { return user.Theme; }
+            get { return member.User.Theme; }
             set
             {
-                user.Theme = value;
+                member.User.Theme = value;
                 OnPropertyChange("Theme");
             }
         }
 
-        public UserViewModel(User user, mydbContext dbContext)
+        public MemberViewModel(Member accountant)
         {
-            this.user = user;
-            this.dbContext = dbContext;
+            this.member = accountant;
         }
-
 
         public override string ToString()
         {
-            return user.ToString();
+            return member.ToString();
         }
     }
 }
