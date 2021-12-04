@@ -25,6 +25,12 @@ namespace School_library.ViewModels
         private ObservableCollection<AuthorViewModel> authors = new ObservableCollection<AuthorViewModel>();
 
         private Collection<ResourceDictionary> resourceDictionary;
+        private Visibility CRUD_visibility = Visibility.Visible;
+
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
 
         public ObservableCollection<AuthorViewModel> Authors
         {
@@ -187,7 +193,7 @@ namespace School_library.ViewModels
         public ICommand ClearBookFiltersCommand { get; }
         public ICommand BooksPanel_AddNewBookCommand { get; }
 
-        public BooksPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionary)
+        public BooksPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionary, AccountTypesEnum LoggedInUserType)
         {
             this.dbContext = dbContext;
             foreach (Book b in dbContext.Books.ToList()) books.Add(new BookViewModel(b));
@@ -195,6 +201,16 @@ namespace School_library.ViewModels
             foreach (Genre b in dbContext.Genres.ToList()) genres.Add(new GenreViewModel(b));
             foreach (Author b in dbContext.Authors.ToList()) authors.Add(new AuthorViewModel(b));
 
+            switch(LoggedInUserType)
+            {
+                case AccountTypesEnum.LIBRARIAN:
+                    CRUD_visibility = Visibility.Visible;
+                    break;
+                default:
+                    CRUD_visibility = Visibility.Hidden;
+                    break;
+            }
+          
 
             /*this.books = new ObservableCollection<Book>(dbContext.Books.ToList());
             this.publishers = new ObservableCollection<Publisher>(dbContext.Publishers.ToList());
@@ -243,7 +259,7 @@ namespace School_library.ViewModels
         {
             EditBookInfo editDataWindow = new EditBookInfo()
             {
-                DataContext = new EditBookInfoViewModel(dbContext, selectedBook)
+                DataContext = new EditBookInfoViewModel(dbContext, selectedBook, CRUD_visibility)
             };
             foreach (var c in resourceDictionary) editDataWindow.Resources.MergedDictionaries.Add(c);
             editDataWindow.ShowDialog();

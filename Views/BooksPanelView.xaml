@@ -28,7 +28,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding BooksPanel_AddNewBookCommand}" Content="{x:Static p:Resources.AddNewBookButton}">
+            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding BooksPanel_AddNewBookCommand}" Content="{x:Static p:Resources.AddNewBookButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>

@@ -171,6 +171,9 @@
   <data name="AvailableText" xml:space="preserve">
     <value>Dostupno: </value>
   </data>
+  <data name="BigFontThemeText" xml:space="preserve">
+    <value>Veliki font</value>
+  </data>
   <data name="BookAdded" xml:space="preserve">
     <value>Nova knjiga je uspješno dodana.</value>
   </data>

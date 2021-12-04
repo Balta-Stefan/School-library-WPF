@@ -102,6 +102,17 @@ namespace School_library
                     changeTheme(dic);
                 }
             }
+            else if(theme.Equals("big font"))
+            {
+                using (FileStream fs = new FileStream(@"Themes\BigFontTheme.xaml", FileMode.Open))
+                {
+                    ResourceDictionary dic = (ResourceDictionary)XamlReader.Load(fs);
+                    Resources.MergedDictionaries.Clear();
+                    Resources.MergedDictionaries.Add(dic);
+
+                    changeTheme(dic);
+                }
+            }
         }
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -129,7 +140,7 @@ namespace School_library
                 return;
             }
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
-
+            AccountTypesEnum LoggedInUserType = (AccountTypesEnum)Enum.Parse<AccountTypesEnum>(loggedInUser.UserType);
 
             AccessText loansTabItemHotkey = new AccessText();
             loansTabItemHotkey.Text = School_library.Resources.LoansTabName;
@@ -137,7 +148,7 @@ namespace School_library
             TabItem loansTab = new TabItem();
             loansTab.Header = loansTabItemHotkey;//"_Loans";
             loanWiew = new LoanView();
-            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(dbContext, loggedInUser, loanWiew.Resources.MergedDictionaries);
+            LoansPanelViewModel loansViewModel = new LoansPanelViewModel(dbContext, loggedInUser, loanWiew.Resources.MergedDictionaries, LoggedInUserType);
             loanWiew.DataContext = loansViewModel;
             loansTab.Content = loanWiew;
 
@@ -146,7 +157,7 @@ namespace School_library
             TabItem booksTab = new TabItem();
             booksTab.Header = booksTabItemHotkey;//"_Books";
             booksView = new BooksPanelView();
-            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(dbContext, booksView.Resources.MergedDictionaries);
+            BooksPanelViewModel booksPanelViewModel = new BooksPanelViewModel(dbContext, booksView.Resources.MergedDictionaries, LoggedInUserType);
             booksView.DataContext = booksPanelViewModel;
             booksTab.Content = booksView;
 
@@ -155,7 +166,7 @@ namespace School_library
             TabItem membersTab = new TabItem();
             membersTab.Header = membersTabItemHotkey;//"Members";
             membersPanel = new MembersPanel();
-            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(dbContext, membersPanel.Resources.MergedDictionaries);
+            MembersPanelViewModel membersViewModel = new MembersPanelViewModel(dbContext, membersPanel.Resources.MergedDictionaries, LoggedInUserType);
             membersPanel.DataContext = membersViewModel;
             membersTab.Content = membersPanel;
 
@@ -198,7 +209,7 @@ namespace School_library
                 return;
             selectedTab = newTab;
 
-            UserControl uc = (UserControl)newTab.Content;
+            UserControl uc = (UserControl)selectedTab.Content;
             if(uc.DataContext is IWindowWithFilter)
             {
                 IWindowWithFilter viewModel = (IWindowWithFilter)uc.DataContext;

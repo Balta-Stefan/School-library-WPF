@@ -56,7 +56,8 @@ namespace School_library.ViewModels
                 LastName = LastName,
                 Username = Username,
                 Password = Password,
-                UserType = SelectedType.Value.ToString()
+                UserType = SelectedType.Value.ToString(),
+                Active = 1
             };
             dbContext.Users.Add(userToAdd);
             

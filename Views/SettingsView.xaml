@@ -26,6 +26,7 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.ThemesText}"/>
             <Button Background="#424242" Foreground="White" Command="{Binding ChangeThemeCommand}" CommandParameter="dark" Content="{x:Static p:Resources.DarkThemeText}"/>
             <Button Background="White" Command="{Binding ChangeThemeCommand}" CommandParameter="light" Content="{x:Static p:Resources.LightThemeText}"/>
+            <Button Background="#df314d" Foreground="White" Command="{Binding ChangeThemeCommand}" CommandParameter="big font" Content="{x:Static p:Resources.BigFontThemeText}"/>
         </StackPanel> 
     </Grid>
 </UserControl>

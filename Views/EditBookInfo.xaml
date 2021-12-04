@@ -76,7 +76,7 @@
             <TextBlock Grid.Column="0" Grid.Row="4" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.GenreTextBlock}"/>
             <ComboBox Grid.Column="0" Grid.Row="5" FontWeight="Bold" ItemsSource="{Binding genres}" SelectedItem="{Binding SelectedGenre}"/>
 
-            <Expander Grid.Column="0" Grid.Row="6" Margin="0,20,0,0">
+            <Expander Grid.Column="0" Grid.Row="6" Margin="0,20,0,0" Visibility="{Binding CRUD_Visibility}">
                 <Expander.Header>
                     <TextBlock Foreground="{DynamicResource ExpanderForegroundColor}" FontWeight="Bold" Text="{x:Static p:Resources.AddNewCopy}"/>
                 </Expander.Header>
@@ -91,7 +91,7 @@
                 </StackPanel>
             </Expander>
 
-            <Button Grid.Column="2" Grid.Row="7" Margin="0,20,30,0" Padding="10,10,10,10" Style="{DynamicResource ImportantActionButtonStyle}" Foreground="white" FontWeight="Bold" Command="{Binding editBookInfoCommand}" Content="{x:Static p:Resources.EditButton}"/>
+            <Button Grid.Column="2" Grid.Row="7" Margin="0,20,30,0" Padding="10,10,10,10" Visibility="{Binding CRUD_Visibility}" Style="{DynamicResource ImportantActionButtonStyle}" Foreground="white" FontWeight="Bold" Command="{Binding editBookInfoCommand}" Content="{x:Static p:Resources.EditButton}"/>
         </Grid>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding bookCopies}" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedCopy}">
@@ -144,6 +144,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Grid.Row="2" Command="{Binding deleteCopyCommand}" Padding="10,10,10,10" Style="{DynamicResource ImportantActionButtonStyle}" Foreground="white" FontWeight="Bold" Content="{x:Static p:Resources.DeleteSelectedCopy}"/>
+        <Button Grid.Row="2" Command="{Binding deleteCopyCommand}" Visibility="{Binding CRUD_Visibility}" Padding="10,10,10,10" Style="{DynamicResource ImportantActionButtonStyle}" Foreground="white" FontWeight="Bold" Content="{x:Static p:Resources.DeleteSelectedCopy}"/>
     </Grid>
 </Window>

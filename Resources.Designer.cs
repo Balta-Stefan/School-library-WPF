@@ -223,6 +223,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Big font.
+        /// </summary>
+        public static string BigFontThemeText {
+            get {
+                return ResourceManager.GetString("BigFontThemeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The book has been added..
         /// </summary>
         public static string BookAdded {

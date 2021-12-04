@@ -15,6 +15,12 @@ namespace School_library.ViewModels
     {
         private readonly mydbContext dbContext;
 
+        private Visibility CRUD_visibility;
+
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
         public ObservableCollection<BookCopyViewModel> bookCopies { get; } = new ObservableCollection<BookCopyViewModel>();
         public ObservableCollection<BookConditionViewModel> bookConditions { get; } = new ObservableCollection<BookConditionViewModel>();
         public BookConditionViewModel? selectedCondition { get; set; } = null;
@@ -116,10 +122,11 @@ namespace School_library.ViewModels
         public ICommand editBookInfoCommand { get; }
         public ICommand addCopyCommand { get; }
         public bool copySelected { get; private set; } = false;
-        public EditBookInfoViewModel(mydbContext dbContext, BookViewModel book)
+        public EditBookInfoViewModel(mydbContext dbContext, BookViewModel book, Visibility CRUD_visibility)
         {
             this.dbContext = dbContext;
             this.book = book;
+            this.CRUD_visibility = CRUD_visibility;
 
             foreach (Genre g in dbContext.Genres.ToList()) genres.Add(new GenreViewModel(g));
             foreach (Publisher g in dbContext.Publishers.ToList()) publishers.Add(new PublisherViewModel(g));

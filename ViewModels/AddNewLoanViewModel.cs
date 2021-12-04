@@ -22,7 +22,11 @@ namespace School_library.ViewModels
 
         private readonly mydbContext dbContext;
 
-
+        private Visibility CRUD_visibility;
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
         #region Properties
         public MemberViewModel? SelectedMember
         {
@@ -79,11 +83,12 @@ namespace School_library.ViewModels
         public ICommand addLoanCommand { get; }
         #endregion
 
-        public AddNewLoanViewModel(mydbContext dbContext, ObservableCollection<BookViewModel> books, ObservableCollection<LoanViewModel> loans, LibrarianViewModel loggedInLibrarian)
+        public AddNewLoanViewModel(mydbContext dbContext, ObservableCollection<BookViewModel> books, ObservableCollection<LoanViewModel> loans, LibrarianViewModel loggedInLibrarian, Visibility CRUD_visibility)
         {
             this.loggedInLibrarian = loggedInLibrarian;
             this.loans = loans;
             this.dbContext = dbContext;
+            this.CRUD_visibility = CRUD_visibility;
 
             addLoanCommand = new AddLoanCommand(this);
 
@@ -128,7 +133,7 @@ namespace School_library.ViewModels
                 return;
             }
     
-            loans.Add(new LoanViewModel(newLoan));
+            loans.Add(new LoanViewModel(newLoan, CRUD_visibility));
             MessageBox.Show(School_library.Resources.AddLoanWindow_LoanAdded, School_library.Resources.AddLoanWindow_LoanSuccess, MessageBoxButton.OK);
 
             SelectedBook = null;

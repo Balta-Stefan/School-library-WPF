@@ -27,8 +27,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}" Content="{x:Static p:Resources.Loans_AddLoanButton}">
+
+            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding openNewLoanWindowCommand}" Content="{x:Static p:Resources.Loans_AddLoanButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -193,7 +193,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                                <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}" Content="{x:Static p:Resources.Loans_returnLoan}"/>
+                                <Button Grid.Row="1" Background="#700101" Foreground="White" FontWeight="Bold" Visibility="{Binding CRUD_Visibility}" CommandParameter="{Binding}" Command="{Binding DataContext.returnLoanCommand,RelativeSource={RelativeSource AncestorType=ListBox}}" Content="{x:Static p:Resources.Loans_returnLoan}"/>
                             </Grid>
 
                         </Grid>

@@ -22,6 +22,12 @@ namespace School_library.ViewModels
 
         private LoanViewModel? selectedLoan = null;
 
+        private Visibility CRUD_visibility;
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
+
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
         private int copyID = -1;
@@ -240,17 +246,27 @@ namespace School_library.ViewModels
         
         #endregion
 
-        public LoansPanelViewModel(mydbContext dbContext, UserViewModel loggedInUser, Collection<ResourceDictionary> resourceDictionary)
+        public LoansPanelViewModel(mydbContext dbContext, UserViewModel loggedInUser, Collection<ResourceDictionary> resourceDictionary, AccountTypesEnum userType)
         {
             this.dbContext = dbContext;
             this.loggedInUser = loggedInUser;
             this.resourceDictionary = resourceDictionary;
 
+            switch(userType)
+            {
+                case AccountTypesEnum.LIBRARIAN:
+                    CRUD_visibility = Visibility.Visible;
+                    break;
+                default:
+                    CRUD_visibility = Visibility.Hidden;
+                    break;
+            }
+
             foreach (Book b in dbContext.Books.ToList())
                 books.Add(new BookViewModel(b));
 
             foreach (Loan l in dbContext.Loans.ToList())
-                Loans.Add(new LoanViewModel(l));
+                Loans.Add(new LoanViewModel(l, CRUD_visibility));
 
             foreach (Member m in dbContext.Members.ToList())
                 members.Add(new MemberViewModel(m));
@@ -283,7 +299,7 @@ namespace School_library.ViewModels
         {
             Librarian lib = loggedInUser.User.Librarian;
 
-            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel(dbContext, books, Loans, new LibrarianViewModel(lib));
+            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel(dbContext, books, Loans, new LibrarianViewModel(lib), CRUD_visibility);
             AddNewLoanWindow newLoanWindow = new AddNewLoanWindow()
             {
                 DataContext = newLoanViewModel
@@ -296,7 +312,7 @@ namespace School_library.ViewModels
         public void clearFilters()
         {
             Loans.Clear();
-            foreach (Loan l in dbContext.Loans.ToList()) Loans.Add(new LoanViewModel(l));
+            foreach (Loan l in dbContext.Loans.ToList()) Loans.Add(new LoanViewModel(l, CRUD_visibility));
 
 
             ISBN10 = BookTitle = CopyID = LastNameFilter = FirstNameFilter = UserID = string.Empty;
@@ -313,7 +329,7 @@ namespace School_library.ViewModels
             foreach (Loan l in dbContext.Loans.ToList())
             {
                 dbContext.Entry(l).Reload();
-                tempLoans.Add(new LoanViewModel(l));
+                tempLoans.Add(new LoanViewModel(l, CRUD_visibility));
             }
 
             foreach (LoanViewModel l in tempLoans)

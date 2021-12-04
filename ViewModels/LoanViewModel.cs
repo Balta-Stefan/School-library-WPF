@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace School_library.ViewModels
 {
@@ -19,6 +20,11 @@ namespace School_library.ViewModels
         private Librarian? returnedToLibrarian;
         private DateTime? returnDateTIme;*/
         private bool isReturned = false;
+        private Visibility CRUD_visibility;
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
 
         #region Properties
         public string BorrowedFromLibrarianFullName
@@ -161,9 +167,10 @@ namespace School_library.ViewModels
             }
         }*/
 
-        public LoanViewModel(Loan loan)
+        public LoanViewModel(Loan loan, Visibility CRUD_visibility)
         {
             this.loan = loan;
+            this.CRUD_visibility = CRUD_visibility;
 
             if (loan.ReturnDateTime != null)
                 isReturned = true;

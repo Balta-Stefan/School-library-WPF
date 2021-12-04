@@ -51,7 +51,7 @@ namespace School_library.ViewModels
 
         public void login(string password)
         {
-            User? userToFind = dbContext.Users.Where(u => u.Username.Equals(username)).FirstOrDefault();
+            User? userToFind = dbContext.Users.Where(u => u.Username.Equals(username) && u.UserType.Equals("MEMBER") == false).FirstOrDefault();
 
             if(userToFind == null || userToFind.UserType.Equals(AccountTypesEnum.MEMBER))
             {

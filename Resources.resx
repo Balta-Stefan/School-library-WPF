@@ -171,6 +171,9 @@
   <data name="AvailableText" xml:space="preserve">
     <value>Available: </value>
   </data>
+  <data name="BigFontThemeText" xml:space="preserve">
+    <value>Big font</value>
+  </data>
   <data name="BookAdded" xml:space="preserve">
     <value>The book has been added.</value>
   </data>

@@ -33,6 +33,8 @@ namespace School_library.ViewModels
             string path = @"Themes\DarkTheme.xaml";
             if (theme.Equals("light"))
                 path = @"Themes\LightTheme.xaml";
+            else if(theme.Equals("big font"))
+                path = @"Themes\BigFontTheme.xaml";
 
             using (FileStream fs = new FileStream(path, FileMode.Open))
             {

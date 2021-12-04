@@ -18,6 +18,15 @@ namespace School_library.ViewModels
 
         private Collection<ResourceDictionary> resourceDictionaries;
 
+        private Visibility CRUD_visibility;
+        public Visibility CRUD_Visibility
+        {
+            get { return CRUD_visibility; }
+        }
+        private bool canEditUserActivity;
+        public bool CanEditUserActivity
+        { get { return canEditUserActivity; } }
+
         private string firstName = string.Empty;
         public string FirstName
         {
@@ -163,10 +172,22 @@ namespace School_library.ViewModels
         {
             get { return users; }
         }
-        public MembersPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionaries)
+        public MembersPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionaries, AccountTypesEnum userType)
         {
             this.dbContext = dbContext;
             this.resourceDictionaries = resourceDictionaries;
+
+            switch(userType)
+            {
+                case AccountTypesEnum.LIBRARIAN:
+                    CRUD_visibility = Visibility.Visible;
+                    canEditUserActivity = true;
+                    break;
+                default:
+                    CRUD_visibility = Visibility.Hidden;
+                    canEditUserActivity = false;
+                    break;
+            }
 
             IEnumerable<AccountTypesEnum> allTypes = Enum.GetValues(typeof(AccountTypesEnum)).Cast<AccountTypesEnum>();
             foreach (AccountTypesEnum t in allTypes) 
