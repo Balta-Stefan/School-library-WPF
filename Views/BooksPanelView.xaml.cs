@@ -25,6 +25,17 @@ namespace School_library.Views
         public BooksPanelView()
         {
             InitializeComponent();
+            this.KeyDown += HandleKeyPress;
+        }
+
+        private void HandleKeyPress(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.F:
+                    BooksPanelFiltersExpander.IsExpanded = !BooksPanelFiltersExpander.IsExpanded;
+                    break;
+            }
         }
     }
 }

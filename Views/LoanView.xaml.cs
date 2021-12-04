@@ -23,6 +23,17 @@ namespace School_library.Views
         public LoanView()
         {
             InitializeComponent();
+            this.KeyDown += HandleKeyPress;
+        }
+
+        private void HandleKeyPress(object sender, KeyEventArgs e)
+        {
+            switch(e.Key)
+            {
+                case Key.F:
+                    LoanTabFilterExpander.IsExpanded = !LoanTabFilterExpander.IsExpanded;
+                    break;
+            }
         }
     }
 }

@@ -175,7 +175,7 @@
     <value>The book has been added.</value>
   </data>
   <data name="BooksTabName" xml:space="preserve">
-    <value>Books</value>
+    <value>_Books</value>
   </data>
   <data name="ClearFiltersButton" xml:space="preserve">
     <value>Clear filters</value>
@@ -244,7 +244,7 @@
     <value>Add loan</value>
   </data>
   <data name="Loans_BooksTextBlock" xml:space="preserve">
-    <value>_Books</value>
+    <value>Books</value>
   </data>
   <data name="Loans_BookTitle" xml:space="preserve">
     <value>Book title</value>
@@ -283,7 +283,7 @@
     <value>User ID: </value>
   </data>
   <data name="Loans_MembersTextBlock" xml:space="preserve">
-    <value>_Members</value>
+    <value>Members</value>
   </data>
   <data name="Loans_OnlyReturned" xml:space="preserve">
     <value>Only returned</value>

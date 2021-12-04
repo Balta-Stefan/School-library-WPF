@@ -232,7 +232,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Books.
+        ///   Looks up a localized string similar to _Books.
         /// </summary>
         public static string BooksTabName {
             get {
@@ -430,7 +430,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Books.
+        ///   Looks up a localized string similar to Books.
         /// </summary>
         public static string Loans_BooksTextBlock {
             get {
@@ -547,7 +547,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Members.
+        ///   Looks up a localized string similar to Members.
         /// </summary>
         public static string Loans_MembersTextBlock {
             get {

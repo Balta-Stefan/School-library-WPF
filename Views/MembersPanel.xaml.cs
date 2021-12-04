@@ -23,6 +23,17 @@ namespace School_library.Views
         public MembersPanel()
         {
             InitializeComponent();
+            this.KeyDown += HandleKeyPress;
+        }
+
+        private void HandleKeyPress(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.F:
+                    MembersTabFiltersExpander.IsExpanded = !MembersTabFiltersExpander.IsExpanded;
+                    break;
+            }
         }
     }
 }
