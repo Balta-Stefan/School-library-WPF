@@ -72,25 +72,49 @@
                     <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding members}" SelectedItem="{Binding SelectedMember}"/>
 
                     <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_UserID}"/>
-                    <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding UserID, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding UserID, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="5" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_FirstName}"/>
-                    <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding FirstNameFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding FirstNameFilter, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="7" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_LastName}"/>
-                    <TextBox Grid.Column="7" Grid.Row="1" Text="{Binding LastNameFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="7" Grid.Row="1" Text="{Binding LastNameFilter, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_BooksTextBlock}"/>
                     <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding books}" SelectedItem="{Binding SelectedBook}"/>
 
                     <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_CopyID}"/>
-                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding CopyID}"/>
+                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding CopyID}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="5" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_BookTitle}"/>
-                    <TextBox Grid.Column="5" Grid.Row="3" Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="5" Grid.Row="3" Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="7" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-10</TextBlock>
-                    <TextBox Grid.Column="7" Grid.Row="3" Text="{Binding ISBN10, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="7" Grid.Row="3" Text="{Binding ISBN10, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <CheckBox Grid.Column="3" Grid.Row="4" Margin="0,20,0,0" IsChecked="{Binding OnlyReturnedFilter}" Foreground="{DynamicResource TextBlockForegroundColor}" Content="{x:Static p:Resources.Loans_OnlyReturned}"/>
 

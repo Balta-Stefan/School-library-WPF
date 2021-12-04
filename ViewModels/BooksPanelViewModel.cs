@@ -56,7 +56,7 @@ namespace School_library.ViewModels
             set
             {
                 filtersClear = false;
-                nameFilter = value.Trim();
+                nameFilter = value;
                 OnPropertyChange("NameFilter");
             }
         }
@@ -266,19 +266,20 @@ namespace School_library.ViewModels
         public void filterBooks()
         {
             // if all filters are clear, return
-            if (areFiltersEmpty() == true)
-                return;
+            //if (areFiltersEmpty() == true)
+                //return;
 
 
             books.Clear();
 
-            var tempBooks = dbContext.Books.Where(b => (string.IsNullOrEmpty(isbn10Filter) || b.Isbn10.Equals(isbn10Filter)
-                                                     && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter)
-                                                     && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Equals(NameFilter)
+            var tempBooks = dbContext.Books.Where(b => (
+                                                        (string.IsNullOrEmpty(isbn10Filter) || b.Isbn10.Equals(isbn10Filter))
+                                                     && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter))
+                                                     && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Equals(NameFilter))
                                                      && (numberOfCopiesFilter == -1 || b.NumberOfCopies == numberOfCopiesFilter)
                                                      && (selectedPublisher == null || b.Publisher.Equals(selectedPublisher))
                                                      && (selectedGenre == null || b.Genre.Equals(selectedGenre))
-                                                     && (selectedAuthor == null || b.Author.Equals(selectedAuthor))))));
+                                                     && (selectedAuthor == null || b.Author.Equals(selectedAuthor)))).ToList();
 
             if(onlyWithAvailableCopiesFilter == true)
             {
@@ -298,7 +299,10 @@ namespace School_library.ViewModels
                         books.Add(new BookViewModel(b));
                 }
             }
-          
+            else
+            {
+                foreach (Book b in tempBooks) books.Add(new BookViewModel(b));
+            }
                                                      
 
             

@@ -15,6 +15,17 @@ namespace School_library.ViewModels
         {
             return author.ToString();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return author.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return author.GetHashCode();
+        }
+
         public Author Author
         {
             get { return author; }

@@ -72,10 +72,18 @@
                     </Grid.Resources>
 
                     <TextBlock Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_firstName}"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding FirstName}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding FilterMembers}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_lastName}"/>
-                    <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding LastName}"/>
+                    <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding FilterMembers}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <TextBlock Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.UserTypeText}"/>
                     <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding UserTypesList}" SelectedItem="{Binding SelectedMemberType}"/>
@@ -83,7 +91,11 @@
                     <!--<TextBlock Grid.Column="3" Grid.Row="2">Card number</TextBlock>
                     <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding CardInputEnabled, UpdateSourceTrigger=PropertyChanged}" Text="{Binding CardNumber}"/>-->
                     <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_listbox_userID}"/>
-                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding UserID}"/>
+                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding UserID, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding FilterMembers}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
 
                     <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding OnlyActiveMembersFilter}" Margin="0,10,0,0" Foreground="{DynamicResource TextBlockForegroundColor}">
                         <TextBlock Text="{x:Static p:Resources.OnlyActiveMembers}" TextWrapping="Wrap"/>

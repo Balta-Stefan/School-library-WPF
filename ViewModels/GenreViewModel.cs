@@ -11,10 +11,22 @@ namespace School_library.ViewModels
     {
         private Genre genre;
 
+       
         public override string ToString()
         {
             return genre.ToString();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return genre.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return genre.GetHashCode();
+        }
+
         public Genre Genre
         {
             get { return genre; }

@@ -11,10 +11,22 @@ namespace School_library.ViewModels
     {
         private Publisher publisher;
 
+
         public override string ToString()
         {
             return publisher.ToString();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return publisher.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return publisher.GetHashCode();
+        }
+
         public Publisher Publisher
         {
             get { return publisher; }
