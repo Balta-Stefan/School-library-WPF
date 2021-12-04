@@ -24,7 +24,7 @@ namespace School_library
     public partial class App : Application
     {
         private string? connectionString = null;//"Server=localhost;Database=mydb;Uid=root;Pwd=sigurnost;";
-        private readonly mydbContext dbContext = new mydbContext();
+        private mydbContext dbContext;
 
         private LoanView loanWiew;
         private BooksPanelView booksView;
@@ -37,6 +37,7 @@ namespace School_library
         private void loadResources()
         {
             connectionString = ConfigurationManager.AppSettings["connection_string"];
+            dbContext = new mydbContext(connectionString);
         }
         private UserViewModel? login()
         {
