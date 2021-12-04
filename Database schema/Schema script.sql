@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Loans` (
   CONSTRAINT `bookCopyID`
     FOREIGN KEY (`bookCopyID`)
     REFERENCES `mydb`.`Book_copies` (`bookCopyID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `returnedToLibrarian`
     FOREIGN KEY (`returnedToLibrarian`)

@@ -73,8 +73,10 @@ namespace School_library.ViewModels
             get { return selectedCopy; }
             set
             {
+                copySelected = true;
                 selectedCopy = value;
                 OnPropertyChange("SelectedCopy");
+                deleteCopyCommand.executeChanged();
             }
         }
         private GenreViewModel? selectedGenre = null;
@@ -187,9 +189,18 @@ namespace School_library.ViewModels
 
         public void deleteCopy()
         {
-            dbContext.BookCopies.Remove(selectedCopy.BookCopy);
+            if(selectedCopy.Available == false)
+            {
+                var result = MessageBox.Show(School_library.Resources.BookCopyTakenWarning, "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if(result.Equals(MessageBoxResult.No))
+                {
+                    return;
+                }
+            }
+
             try
             {
+                dbContext.BookCopies.Remove(selectedCopy.BookCopy);
                 dbContext.SaveChanges();
                 book.NumberOfCopies--;
                 bookCopies.Remove(selectedCopy);
@@ -198,7 +209,10 @@ namespace School_library.ViewModels
                 copySelected = false;
                 deleteCopyCommand.executeChanged();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                MessageBox.Show(School_library.Resources.CouldntDeleteBookCopy, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void updateBookInfo()

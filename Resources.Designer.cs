@@ -232,6 +232,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This copy is currently held by a member, deleting this copy will remove any record that the member is holding this book.Continue?.
+        /// </summary>
+        public static string BookCopyTakenWarning {
+            get {
+                return ResourceManager.GetString("BookCopyTakenWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Books.
         /// </summary>
         public static string BooksTabName {
@@ -309,6 +318,15 @@ namespace School_library {
         public static string couldntAddNewGenre {
             get {
                 return ResourceManager.GetString("couldntAddNewGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t delete selected copy..
+        /// </summary>
+        public static string CouldntDeleteBookCopy {
+            get {
+                return ResourceManager.GetString("CouldntDeleteBookCopy", resourceCulture);
             }
         }
         

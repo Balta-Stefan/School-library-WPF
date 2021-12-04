@@ -96,7 +96,7 @@
                     <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding books}" SelectedItem="{Binding SelectedBook}"/>
 
                     <TextBlock Grid.Column="3" Grid.Row="2" Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_CopyID}"/>
-                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding CopyID}">
+                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding CopyID, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Return" Command="{Binding filterLoansCommand}"/>
                         </TextBox.InputBindings>

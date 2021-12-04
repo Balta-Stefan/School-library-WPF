@@ -174,6 +174,9 @@
   <data name="BookAdded" xml:space="preserve">
     <value>Nova knjiga je uspješno dodana.</value>
   </data>
+  <data name="BookCopyTakenWarning" xml:space="preserve">
+    <value>Ovaj primjerak je trenutno posuđen članu.Brisanjem ovog podatka brišete i podatak da taj član posjeduje ovaj primjerak.Da li želite nastaviti sa brisanjem?</value>
+  </data>
   <data name="BooksTabName" xml:space="preserve">
     <value>_Knjige</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="couldntAddNewGenre" xml:space="preserve">
     <value>Dodavanje novog žanra neuspješno</value>
+  </data>
+  <data name="CouldntDeleteBookCopy" xml:space="preserve">
+    <value>Brisanje odabranog primjerka neuspješno.</value>
   </data>
   <data name="DarkThemeText" xml:space="preserve">
     <value>Mračno</value>

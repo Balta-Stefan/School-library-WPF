@@ -174,6 +174,9 @@
   <data name="BookAdded" xml:space="preserve">
     <value>The book has been added.</value>
   </data>
+  <data name="BookCopyTakenWarning" xml:space="preserve">
+    <value>This copy is currently held by a member, deleting this copy will remove any record that the member is holding this book.Continue?</value>
+  </data>
   <data name="BooksTabName" xml:space="preserve">
     <value>_Books</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="couldntAddNewGenre" xml:space="preserve">
     <value>Couldn't add new genre!</value>
+  </data>
+  <data name="CouldntDeleteBookCopy" xml:space="preserve">
+    <value>Couldn't delete selected copy.</value>
   </data>
   <data name="DarkThemeText" xml:space="preserve">
     <value>Dark theme</value>
