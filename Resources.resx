@@ -238,13 +238,13 @@
     <value>Light theme</value>
   </data>
   <data name="LoansTabName" xml:space="preserve">
-    <value>Loans</value>
+    <value>_Loans</value>
   </data>
   <data name="Loans_AddLoanButton" xml:space="preserve">
     <value>Add loan</value>
   </data>
   <data name="Loans_BooksTextBlock" xml:space="preserve">
-    <value>Books</value>
+    <value>_Books</value>
   </data>
   <data name="Loans_BookTitle" xml:space="preserve">
     <value>Book title</value>
@@ -283,7 +283,7 @@
     <value>User ID: </value>
   </data>
   <data name="Loans_MembersTextBlock" xml:space="preserve">
-    <value>Members</value>
+    <value>_Members</value>
   </data>
   <data name="Loans_OnlyReturned" xml:space="preserve">
     <value>Only returned</value>
@@ -304,7 +304,7 @@
     <value>Login</value>
   </data>
   <data name="MembersTabName" xml:space="preserve">
-    <value>Members</value>
+    <value>_Members</value>
   </data>
   <data name="NewAuthorEmptyInputs" xml:space="preserve">
     <value>All fields for the new author must be filled out</value>
@@ -361,7 +361,7 @@
     <value>Date must be selected!</value>
   </data>
   <data name="SettingsTabName" xml:space="preserve">
-    <value>Settings</value>
+    <value>_Settings</value>
   </data>
   <data name="ShowHideFilters" xml:space="preserve">
     <value>Click to show/hide filters...</value>
