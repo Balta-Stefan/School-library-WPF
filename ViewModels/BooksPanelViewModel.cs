@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace School_library.ViewModels
 {
-    public class BooksPanelViewModel : ViewModelBase
+    public class BooksPanelViewModel : ViewModelBase, IWindowWithFilter
     {
         private readonly mydbContext dbContext;
 
@@ -263,7 +263,7 @@ namespace School_library.ViewModels
             return false;
         }
 
-        public void filterBooks()
+        public void filter()
         {
             // if all filters are clear, return
             //if (areFiltersEmpty() == true)
@@ -285,6 +285,7 @@ namespace School_library.ViewModels
             {
                 foreach (Book b in tempBooks)
                 {
+                    dbContext.Entry(b).Reload();
                     bool available = true;
                     foreach (BookCopy bc in b.BookCopies)
                     {
@@ -301,7 +302,11 @@ namespace School_library.ViewModels
             }
             else
             {
-                foreach (Book b in tempBooks) books.Add(new BookViewModel(b));
+                foreach (Book b in tempBooks)
+                {
+                    dbContext.Entry(b).Reload();
+                    books.Add(new BookViewModel(b));
+                }
             }
                                                      
 

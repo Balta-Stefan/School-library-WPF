@@ -22,7 +22,7 @@ namespace School_library.Commands
 
         public void Execute(object? parameter)
         {
-            booksViewModel.filterBooks();
+            booksViewModel.filter();
         }
 
         public FilterBooksCommand(BooksPanelViewModel booksViewModel) => this.booksViewModel = booksViewModel;

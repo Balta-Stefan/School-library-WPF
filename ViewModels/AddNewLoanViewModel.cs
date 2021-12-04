@@ -55,7 +55,11 @@ namespace School_library.ViewModels
                 if(value != null)
                 {
                     var tmp = dbContext.BookCopies.Where(c => c.Available == 1).ToList();
-                    foreach (BookCopy c in tmp) Copies.Add(new BookCopyViewModel(c));
+                    foreach (BookCopy c in tmp)
+                    {
+                        //dbContext.Entry(c).Reload();
+                        Copies.Add(new BookCopyViewModel(c));
+                    }
                 }
             }
         }

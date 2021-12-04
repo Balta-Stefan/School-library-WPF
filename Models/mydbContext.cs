@@ -244,7 +244,7 @@ namespace School_library.Models
                 entity.HasOne(d => d.BookCopy)
                     .WithMany(p => p.Loans)
                     .HasForeignKey(d => d.BookCopyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("bookCopyID");
 
                 entity.HasOne(d => d.BorrowedFromLibrarianNavigation)

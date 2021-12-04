@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace School_library.ViewModels
 {
-    public class MembersPanelViewModel : ViewModelBase
+    public class MembersPanelViewModel : ViewModelBase, IWindowWithFilter
     {
         private readonly mydbContext dbContext;
 
@@ -202,7 +202,7 @@ namespace School_library.ViewModels
             return false;
         }
 
-        public void filterMembers()
+        public void filter()
         {
             if (areFiltersEmpty() == true)
                 return;
@@ -212,6 +212,7 @@ namespace School_library.ViewModels
 
             foreach(User u in allUsers)
             {
+                dbContext.Entry(u).Reload();
                 if (userID != -1 && u.UserId != userID)
                     continue;
                 if (firstName.Equals(string.Empty) == false && u.FirstName.Equals(firstName) == false)

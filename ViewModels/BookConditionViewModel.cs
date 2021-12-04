@@ -36,5 +36,10 @@ namespace School_library.ViewModels
         {
             this.condition = condition;
         }
+
+        public override string ToString()
+        {
+            return condition.ToString();
+        }
     }
 }

@@ -32,6 +32,8 @@ namespace School_library
         private MainWindow mainWindow;
         private SettingsView settingsView;
 
+        private TabItem? selectedTab = null;
+
         public List<TabItem> tabs { get; } = new List<TabItem>();
 
         private void loadResources()
@@ -167,7 +169,7 @@ namespace School_library
                 DataContext = settingsViewModel
             };
             settingsTab.Content = settingsView;
-
+            
 
 
             tabs.Add(loansTab);
@@ -180,11 +182,28 @@ namespace School_library
             {
                 DataContext = this
             };
+            mainWindow.TempTabControl.SelectionChanged += TempTabControl_SelectionChanged;
             setTheme(loggedInUser.Theme);
             mainWindow.Show();
 
 
             base.OnStartup(e);
+        }
+
+        private void TempTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabControl tc = (TabControl)sender;
+            TabItem newTab = (TabItem)tc.SelectedItem;
+            if (newTab == selectedTab)
+                return;
+            selectedTab = newTab;
+
+            UserControl uc = (UserControl)newTab.Content;
+            if(uc.DataContext is IWindowWithFilter)
+            {
+                IWindowWithFilter viewModel = (IWindowWithFilter)uc.DataContext;
+                viewModel.filter();
+            }
         }
 
         public void changeTheme(ResourceDictionary dic)

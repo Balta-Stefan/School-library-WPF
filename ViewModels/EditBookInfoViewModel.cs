@@ -125,7 +125,11 @@ namespace School_library.ViewModels
             foreach (Publisher g in dbContext.Publishers.ToList()) publishers.Add(new PublisherViewModel(g));
             foreach (Author g in dbContext.Authors.ToList()) authors.Add(new AuthorViewModel(g));
             foreach (BookCondition g in dbContext.BookConditions.ToList()) bookConditions.Add(new BookConditionViewModel(g));
-            foreach (BookCopy g in dbContext.BookCopies.ToList()) bookCopies.Add(new BookCopyViewModel(g));
+            foreach (BookCopy g in dbContext.BookCopies.ToList())
+            {
+                dbContext.Entry(g).Reload();
+                bookCopies.Add(new BookCopyViewModel(g));
+            }
 
             SelectedAuthor = new AuthorViewModel(book.Author);
             SelectedGenre = new GenreViewModel(book.GenreNavigation);
@@ -165,7 +169,8 @@ namespace School_library.ViewModels
             {
                 Condition = selectedCondition.BookCondition,
                 DeliveredAt = selectedDate.Value,
-                Book = book.Book
+                Book = book.Book,
+                Available = 1
             };
 
             dbContext.BookCopies.Add(newCopy);

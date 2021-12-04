@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace School_library.ViewModels
 {
-    public class LoansPanelViewModel : ViewModelBase
+    public class LoansPanelViewModel : ViewModelBase, IWindowWithFilter
     {
         private readonly mydbContext dbContext;
 
@@ -310,7 +310,11 @@ namespace School_library.ViewModels
             Loans.Clear();
 
             List<LoanViewModel> tempLoans = new List<LoanViewModel>();
-            foreach (Loan l in dbContext.Loans.ToList()) tempLoans.Add(new LoanViewModel(l));
+            foreach (Loan l in dbContext.Loans.ToList())
+            {
+                dbContext.Entry(l).Reload();
+                tempLoans.Add(new LoanViewModel(l));
+            }
 
             foreach (LoanViewModel l in tempLoans)
             {

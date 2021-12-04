@@ -21,7 +21,7 @@ namespace School_library.Commands
 
         public void Execute(object? parameter)
         {
-            viewModel.filterMembers();
+            viewModel.filter();
         }
 
         public FilterMembersCommand(MembersPanelViewModel viewModel) => this.viewModel = viewModel;
