@@ -268,6 +268,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t access the database.
+        /// </summary>
+        public static string CouldntAccessDatabase {
+            get {
+                return ResourceManager.GetString("CouldntAccessDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t add copy..
         /// </summary>
         public static string CouldntAddCopy {

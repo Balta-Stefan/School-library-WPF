@@ -186,6 +186,9 @@
   <data name="CopyAddedMessage" xml:space="preserve">
     <value>Primjerak dodan.</value>
   </data>
+  <data name="CouldntAccessDatabase" xml:space="preserve">
+    <value>Pristup bazi podataka je onemogućen.</value>
+  </data>
   <data name="CouldntAddCopy" xml:space="preserve">
     <value>Primjerak nije mogao biti dodan.</value>
   </data>
@@ -358,7 +361,7 @@
     <value>Datum mora biti odabran!</value>
   </data>
   <data name="SettingsTabName" xml:space="preserve">
-    <value>P_ostavke</value>
+    <value>_Postavke</value>
   </data>
   <data name="ShowHideFilters" xml:space="preserve">
     <value>Kliknite za pokazivanje filtera...</value>

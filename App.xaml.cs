@@ -123,7 +123,7 @@ namespace School_library
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't access the database", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(School_library.Resources.CouldntAccessDatabase, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");

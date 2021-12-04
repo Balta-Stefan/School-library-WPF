@@ -186,6 +186,9 @@
   <data name="CopyAddedMessage" xml:space="preserve">
     <value>Copy added.</value>
   </data>
+  <data name="CouldntAccessDatabase" xml:space="preserve">
+    <value>Couldn't access the database</value>
+  </data>
   <data name="CouldntAddCopy" xml:space="preserve">
     <value>Couldn't add copy.</value>
   </data>
