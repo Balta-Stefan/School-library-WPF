@@ -54,8 +54,16 @@ namespace School_library
                 DataContext = loginViewModel
             };
             
-
-            loginWindow.ShowDialog();
+           
+            try
+            {
+                loginWindow.ShowDialog();
+            }
+            catch(Exception)
+            {
+                loginWindow.Close();
+                throw new Exception("Login error");
+            }
 
             if (loginViewModel.user == null)
                 return null;
@@ -105,9 +113,19 @@ namespace School_library
             //User loggedInUser = new Librarian(4, "ime", "prezime", "username", "pass", "", "");
 
 
-            UserViewModel? loggedInUser = login();
-            if (loggedInUser == null)
+            UserViewModel? loggedInUser = null;
+
+            try
+            {
+                loggedInUser = login();
+                if (loggedInUser == null)
+                    return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't access the database", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("bs");
 
 
