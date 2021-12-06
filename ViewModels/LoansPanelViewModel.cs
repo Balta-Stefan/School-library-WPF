@@ -359,7 +359,7 @@ namespace School_library.ViewModels
                 }
                 if(selectedBook != null)
                 {
-                    if (l.BookCopy.Book.Equals(selectedBook) == false)
+                    if(selectedBook.Equals(l.BookCopy.Book) == false)
                         continue;
                 }
                 else

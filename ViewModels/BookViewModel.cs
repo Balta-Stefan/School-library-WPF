@@ -130,5 +130,15 @@ namespace School_library.ViewModels
         {
             return book.ToString();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return book.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return book.GetHashCode();
+        }
     }
 }

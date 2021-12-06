@@ -77,5 +77,15 @@ namespace School_library.ViewModels
         {
             return copy.ToString();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return copy.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return copy.GetHashCode();
+        }
     }
 }
