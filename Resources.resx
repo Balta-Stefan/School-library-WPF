@@ -405,4 +405,13 @@
   <data name="UserTypeText" xml:space="preserve">
     <value>User type: </value>
   </data>
+  <data name="AddBookWindowTitle" xml:space="preserve">
+    <value>Add new book</value>
+  </data>
+  <data name="AddLoanWindowTitle" xml:space="preserve">
+    <value>Add new loan</value>
+  </data>
+  <data name="AddUserWindowTitle" xml:space="preserve">
+    <value>Add new user</value>
+  </data>
 </root>

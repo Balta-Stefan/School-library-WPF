@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:School_library.Views"
         xmlns:p="clr-namespace:School_library"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.AddNewBookButton}" Height="450" Width="800">
+        Title="{x:Static p:Resources.AddBookWindowTitle}" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

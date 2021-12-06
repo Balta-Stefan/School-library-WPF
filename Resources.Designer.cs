@@ -70,6 +70,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new book.
+        /// </summary>
+        public static string AddBookWindowTitle {
+            get {
+                return ResourceManager.GetString("AddBookWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Book.
         /// </summary>
         public static string AddLoanWindow_book {
@@ -160,6 +169,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new loan.
+        /// </summary>
+        public static string AddLoanWindowTitle {
+            get {
+                return ResourceManager.GetString("AddLoanWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Add new book.
         /// </summary>
         public static string AddNewBookButton {
@@ -192,6 +210,15 @@ namespace School_library {
         public static string AddUserFormRequirementsMessage {
             get {
                 return ResourceManager.GetString("AddUserFormRequirementsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new user.
+        /// </summary>
+        public static string AddUserWindowTitle {
+            get {
+                return ResourceManager.GetString("AddUserWindowTitle", resourceCulture);
             }
         }
         

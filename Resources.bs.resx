@@ -120,6 +120,12 @@
   <data name="ActiveCheckboxText" xml:space="preserve">
     <value>Aktivan</value>
   </data>
+  <data name="AddBookWindowTitle" xml:space="preserve">
+    <value>Dodaj knjigu</value>
+  </data>
+  <data name="AddLoanWindowTitle" xml:space="preserve">
+    <value>Zaduži</value>
+  </data>
   <data name="AddLoanWindow_book" xml:space="preserve">
     <value>Knjiga</value>
   </data>
@@ -154,13 +160,16 @@
     <value>_Dodaj novu knjigu</value>
   </data>
   <data name="AddNewCopy" xml:space="preserve">
-    <value>_Dodaj novi primjerak</value>
+    <value>Dodaj novi primjerak</value>
   </data>
   <data name="AddNewMemberText" xml:space="preserve">
     <value>_Novi član</value>
   </data>
   <data name="AddUserFormRequirementsMessage" xml:space="preserve">
     <value>Morate ispuniti sva polja i odabrati tip korisnika</value>
+  </data>
+  <data name="AddUserWindowTitle" xml:space="preserve">
+    <value>Dodaj korisnika</value>
   </data>
   <data name="AppInitFailed" xml:space="preserve">
     <value>Inicijalizacija aplikacije je neuspješna.Konfiguracioni fajl nije pronađen.</value>
