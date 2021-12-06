@@ -159,7 +159,7 @@
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.GenreTextBlock}"/>
-                                    <TextBlock Text="{Binding Genre}" FontWeight="Regular"/>
+                                    <TextBlock Text="{Binding GenreNavigation}" FontWeight="Regular"/>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="{x:Static p:Resources.NumberOfCopiesTextBlock}"/>
