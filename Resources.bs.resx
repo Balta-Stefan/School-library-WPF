@@ -349,7 +349,7 @@
     <value>Stanje nije odabrano</value>
   </data>
   <data name="NumberOfCopiesTextBlock" xml:space="preserve">
-    <value>_Broj kopija: </value>
+    <value>Broj kopija: </value>
   </data>
   <data name="OnlyActiveMembers" xml:space="preserve">
     <value>_Samo aktivni članovi</value>
