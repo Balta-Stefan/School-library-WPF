@@ -151,13 +151,13 @@
     <value>Selected member is inactive</value>
   </data>
   <data name="AddNewBookButton" xml:space="preserve">
-    <value>Add new book</value>
+    <value>_Add new book</value>
   </data>
   <data name="AddNewCopy" xml:space="preserve">
     <value>Add new copy</value>
   </data>
   <data name="AddNewMemberText" xml:space="preserve">
-    <value>Add new member</value>
+    <value>_Add new member</value>
   </data>
   <data name="AddUserFormRequirementsMessage" xml:space="preserve">
     <value>You must fill all the fields and choose a user type.</value>
@@ -184,7 +184,7 @@
     <value>_Books</value>
   </data>
   <data name="ClearFiltersButton" xml:space="preserve">
-    <value>Clear filters</value>
+    <value>_Clear filters</value>
   </data>
   <data name="ConditionText" xml:space="preserve">
     <value>Condition: </value>
@@ -250,13 +250,13 @@
     <value>_Loans</value>
   </data>
   <data name="Loans_AddLoanButton" xml:space="preserve">
-    <value>Add loan</value>
+    <value>_Add loan</value>
   </data>
   <data name="Loans_BooksTextBlock" xml:space="preserve">
     <value>Books</value>
   </data>
   <data name="Loans_BookTitle" xml:space="preserve">
-    <value>Book title</value>
+    <value>Book _title</value>
   </data>
   <data name="Loans_BorrowedAtDate" xml:space="preserve">
     <value>Borrowed at date: </value>
@@ -265,13 +265,13 @@
     <value>Borrowed from: </value>
   </data>
   <data name="Loans_CopyID" xml:space="preserve">
-    <value>Copy ID</value>
+    <value>_Copy ID</value>
   </data>
   <data name="Loans_FirstName" xml:space="preserve">
-    <value>First name</value>
+    <value>_First name</value>
   </data>
   <data name="Loans_LastName" xml:space="preserve">
-    <value>Last name</value>
+    <value>Last _name</value>
   </data>
   <data name="Loans_listbox_bookTitle" xml:space="preserve">
     <value>Book title: </value>
@@ -282,8 +282,14 @@
   <data name="Loans_listbox_firstName" xml:space="preserve">
     <value>First name: </value>
   </data>
+  <data name="FirstNameLabel" xml:space="preserve">
+    <value>_First name: </value>
+  </data>
   <data name="Loans_listbox_lastName" xml:space="preserve">
     <value>Last name: </value>
+  </data>
+  <data name="LastNameLabel" xml:space="preserve">
+    <value>Last _name: </value>
   </data>
   <data name="Loans_listbox_returnedAt" xml:space="preserve">
     <value>Returned at date: </value>
@@ -291,11 +297,14 @@
   <data name="Loans_listbox_userID" xml:space="preserve">
     <value>User ID: </value>
   </data>
+  <data name="UserIDLabel" xml:space="preserve">
+    <value>_User ID: </value>
+  </data>
   <data name="Loans_MembersTextBlock" xml:space="preserve">
     <value>Members</value>
   </data>
   <data name="Loans_OnlyReturned" xml:space="preserve">
-    <value>Only returned</value>
+    <value>_Only returned</value>
   </data>
   <data name="Loans_ReturnDate" xml:space="preserve">
     <value>Returned at date:</value>
@@ -307,7 +316,7 @@
     <value>Return loan</value>
   </data>
   <data name="Loans_UserID" xml:space="preserve">
-    <value>User ID</value>
+    <value>_User ID</value>
   </data>
   <data name="LoginText" xml:space="preserve">
     <value>Login</value>
@@ -342,11 +351,14 @@
   <data name="NumberOfCopiesTextBlock" xml:space="preserve">
     <value>Number of copies: </value>
   </data>
+  <data name="FilterNumberOfCopiesLabel" xml:space="preserve">
+    <value>_Number of copies: </value>
+  </data>
   <data name="OnlyActiveMembers" xml:space="preserve">
-    <value>Only active members</value>
+    <value>_Only active members</value>
   </data>
   <data name="OnlyWithAvailableCopiesText" xml:space="preserve">
-    <value>Only with available copies</value>
+    <value>_Only with available copies</value>
   </data>
   <data name="PasswordText" xml:space="preserve">
     <value>Password: </value>

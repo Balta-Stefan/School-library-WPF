@@ -160,7 +160,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new book.
+        ///   Looks up a localized string similar to _Add new book.
         /// </summary>
         public static string AddNewBookButton {
             get {
@@ -178,7 +178,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new member.
+        ///   Looks up a localized string similar to _Add new member.
         /// </summary>
         public static string AddNewMemberText {
             get {
@@ -259,7 +259,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear filters.
+        ///   Looks up a localized string similar to _Clear filters.
         /// </summary>
         public static string ClearFiltersButton {
             get {
@@ -412,6 +412,24 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Number of copies: .
+        /// </summary>
+        public static string FilterNumberOfCopiesLabel {
+            get {
+                return ResourceManager.GetString("FilterNumberOfCopiesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _First name: .
+        /// </summary>
+        public static string FirstNameLabel {
+            get {
+                return ResourceManager.GetString("FirstNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Genre name: .
         /// </summary>
         public static string GenreNameTextblock {
@@ -439,6 +457,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last _name: .
+        /// </summary>
+        public static string LastNameLabel {
+            get {
+                return ResourceManager.GetString("LastNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Light theme.
         /// </summary>
         public static string LightThemeText {
@@ -448,7 +475,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add loan.
+        ///   Looks up a localized string similar to _Add loan.
         /// </summary>
         public static string Loans_AddLoanButton {
             get {
@@ -466,7 +493,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Book title.
+        ///   Looks up a localized string similar to Book _title.
         /// </summary>
         public static string Loans_BookTitle {
             get {
@@ -493,7 +520,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy ID.
+        ///   Looks up a localized string similar to _Copy ID.
         /// </summary>
         public static string Loans_CopyID {
             get {
@@ -502,7 +529,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First name.
+        ///   Looks up a localized string similar to _First name.
         /// </summary>
         public static string Loans_FirstName {
             get {
@@ -511,7 +538,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last name.
+        ///   Looks up a localized string similar to Last _name.
         /// </summary>
         public static string Loans_LastName {
             get {
@@ -583,7 +610,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only returned.
+        ///   Looks up a localized string similar to _Only returned.
         /// </summary>
         public static string Loans_OnlyReturned {
             get {
@@ -619,7 +646,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User ID.
+        ///   Looks up a localized string similar to _User ID.
         /// </summary>
         public static string Loans_UserID {
             get {
@@ -736,7 +763,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only active members.
+        ///   Looks up a localized string similar to _Only active members.
         /// </summary>
         public static string OnlyActiveMembers {
             get {
@@ -745,7 +772,7 @@ namespace School_library {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only with available copies.
+        ///   Looks up a localized string similar to _Only with available copies.
         /// </summary>
         public static string OnlyWithAvailableCopiesText {
             get {
@@ -849,6 +876,15 @@ namespace School_library {
         public static string UserAddedMessage {
             get {
                 return ResourceManager.GetString("UserAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _User ID: .
+        /// </summary>
+        public static string UserIDLabel {
+            get {
+                return ResourceManager.GetString("UserIDLabel", resourceCulture);
             }
         }
         

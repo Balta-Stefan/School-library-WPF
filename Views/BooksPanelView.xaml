@@ -71,35 +71,33 @@
 
 
 
-                    <TextBlock Grid.Column="2" Grid.Row="0"  Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.Loans_BookTitle}"/>
-                    <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}">
+                    <Label Grid.Column="2" Grid.Row="0"  Foreground="{DynamicResource TextBlockForegroundColor}" Content="{x:Static p:Resources.Loans_BookTitle}" Target="{Binding ElementName=BookTitleTextBox}"/>
+                    <TextBox Name="BookTitleTextBox" Grid.Column="2" Grid.Row="1" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
                         </TextBox.InputBindings>
                     </TextBox>
-                    <TextBlock Grid.Column="2" Grid.Row="2"  Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.NumberOfCopiesTextBlock}"/>
-                    <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding NumberOfCopiesFilter, UpdateSourceTrigger=PropertyChanged}" >
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
-
-                    <TextBlock Grid.Column="4" Grid.Row="0"  Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-10</TextBlock>
-                    <TextBox Grid.Column="4" Grid.Row="1" Text="{Binding Isbn10Filter, UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
-                    <TextBlock Grid.Column="4" Grid.Row="2"  Foreground="{DynamicResource TextBlockForegroundColor}">ISBN-13</TextBlock>
-                    <TextBox Grid.Column="4" Grid.Row="3" Text="{Binding Isbn13Filter, UpdateSourceTrigger=PropertyChanged}">
+                    <Label Grid.Column="2" Grid.Row="2"  Foreground="{DynamicResource TextBlockForegroundColor}" Content="{x:Static p:Resources.FilterNumberOfCopiesLabel}" Target="{Binding ElementName=NumOfCopiesTextBox}"/>
+                    <TextBox Name="NumOfCopiesTextBox" Grid.Column="2" Grid.Row="3" Text="{Binding NumberOfCopiesFilter, UpdateSourceTrigger=PropertyChanged}" >
                         <TextBox.InputBindings>
                             <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
                         </TextBox.InputBindings>
                     </TextBox>
 
-                    <CheckBox Grid.Column="2" Grid.Row="6" Margin="0,20,0,20" HorizontalAlignment="Center" IsChecked="{Binding OnlyWithAvailableCopiesFilter}"  Foreground="{DynamicResource TextBlockForegroundColor}">
-                        <TextBlock Text="{x:Static p:Resources.OnlyWithAvailableCopiesText}" TextWrapping="Wrap"/>
-                    </CheckBox>
+                    <Label Grid.Column="4" Grid.Row="0"  Foreground="{DynamicResource TextBlockForegroundColor}" Target="{Binding ElementName=ISBN10TextBox}">_ISBN-10</Label>
+                    <TextBox Name="ISBN10TextBox" Grid.Column="4" Grid.Row="1" Text="{Binding Isbn10Filter, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Label Grid.Column="4" Grid.Row="2"  Foreground="{DynamicResource TextBlockForegroundColor}" Target="{Binding ElementName=ISBN13TextBox}">_ISBN-13</Label>
+                    <TextBox Name="ISBN13TextBox" Grid.Column="4" Grid.Row="3" Text="{Binding Isbn13Filter, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding FilterBooksCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+
+                    <CheckBox Content="{x:Static p:Resources.OnlyWithAvailableCopiesText}" Name="OnlyWithCopiesCheckBox" Grid.Column="2" Grid.Row="6" Margin="0,20,0,20" HorizontalAlignment="Center" IsChecked="{Binding OnlyWithAvailableCopiesFilter}"  Foreground="{DynamicResource TextBlockForegroundColor}"/>
 
                     <TextBlock Grid.Column="6" Grid.Row="0"  Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.GenreTextBlock}"/>
                     <ComboBox Grid.Column="6" Grid.Row="1" ItemsSource="{Binding Genres}" SelectedItem="{Binding SelectedGenre}"/>

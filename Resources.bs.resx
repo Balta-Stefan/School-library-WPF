@@ -151,13 +151,13 @@
     <value>Odabrani član je neaktivan</value>
   </data>
   <data name="AddNewBookButton" xml:space="preserve">
-    <value>Dodaj novu knjigu</value>
+    <value>_Dodaj novu knjigu</value>
   </data>
   <data name="AddNewCopy" xml:space="preserve">
-    <value>Dodaj novi primjerak</value>
+    <value>_Dodaj novi primjerak</value>
   </data>
   <data name="AddNewMemberText" xml:space="preserve">
-    <value>Dodaj novog člana</value>
+    <value>_Novi član</value>
   </data>
   <data name="AddUserFormRequirementsMessage" xml:space="preserve">
     <value>Morate ispuniti sva polja i odabrati tip korisnika</value>
@@ -184,7 +184,7 @@
     <value>_Knjige</value>
   </data>
   <data name="ClearFiltersButton" xml:space="preserve">
-    <value>Obriši filtre</value>
+    <value>_Obriši filtre</value>
   </data>
   <data name="ConditionText" xml:space="preserve">
     <value>Stanje: </value>
@@ -234,6 +234,12 @@
   <data name="Error" xml:space="preserve">
     <value>Greška</value>
   </data>
+  <data name="FilterNumberOfCopiesLabel" xml:space="preserve">
+    <value>_Broj kopija: </value>
+  </data>
+  <data name="FirstNameLabel" xml:space="preserve">
+    <value>I_me: </value>
+  </data>
   <data name="GenreNameTextblock" xml:space="preserve">
     <value>Ime žanra: </value>
   </data>
@@ -243,6 +249,9 @@
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Unesena lozinka je neispravna!</value>
   </data>
+  <data name="LastNameLabel" xml:space="preserve">
+    <value>P_rezime: </value>
+  </data>
   <data name="LightThemeText" xml:space="preserve">
     <value>Svijetlo</value>
   </data>
@@ -250,13 +259,13 @@
     <value>_Zaduživanja</value>
   </data>
   <data name="Loans_AddLoanButton" xml:space="preserve">
-    <value>Zaduži</value>
+    <value>Z_aduži</value>
   </data>
   <data name="Loans_BooksTextBlock" xml:space="preserve">
     <value>Knjige</value>
   </data>
   <data name="Loans_BookTitle" xml:space="preserve">
-    <value>Naziv knjige</value>
+    <value>_Naziv knjige</value>
   </data>
   <data name="Loans_BorrowedAtDate" xml:space="preserve">
     <value>Posuđeno: </value>
@@ -265,13 +274,13 @@
     <value>Posuđeno od: </value>
   </data>
   <data name="Loans_CopyID" xml:space="preserve">
-    <value>ID kopije</value>
+    <value>ID kopij_e</value>
   </data>
   <data name="Loans_FirstName" xml:space="preserve">
-    <value>Ime</value>
+    <value>I_me</value>
   </data>
   <data name="Loans_LastName" xml:space="preserve">
-    <value>Prezime</value>
+    <value>P_rezime</value>
   </data>
   <data name="Loans_listbox_bookTitle" xml:space="preserve">
     <value>Naziv knjige: </value>
@@ -292,10 +301,10 @@
     <value>ID korisnika: </value>
   </data>
   <data name="Loans_MembersTextBlock" xml:space="preserve">
-    <value>Članovi</value>
+    <value>_Članovi</value>
   </data>
   <data name="Loans_OnlyReturned" xml:space="preserve">
-    <value>Samo vraćeno</value>
+    <value>_Samo vraćeno</value>
   </data>
   <data name="Loans_ReturnDate" xml:space="preserve">
     <value>Vraćeno datuma: </value>
@@ -307,7 +316,7 @@
     <value>Razduži</value>
   </data>
   <data name="Loans_UserID" xml:space="preserve">
-    <value>ID korisnika</value>
+    <value>I_D korisnika</value>
   </data>
   <data name="LoginText" xml:space="preserve">
     <value>Prijava</value>
@@ -340,13 +349,13 @@
     <value>Stanje nije odabrano</value>
   </data>
   <data name="NumberOfCopiesTextBlock" xml:space="preserve">
-    <value>Broj kopija: </value>
+    <value>_Broj kopija: </value>
   </data>
   <data name="OnlyActiveMembers" xml:space="preserve">
-    <value>Samo aktivni članovi</value>
+    <value>_Samo aktivni članovi</value>
   </data>
   <data name="OnlyWithAvailableCopiesText" xml:space="preserve">
-    <value>Samo sa raspoloživim primjercima</value>
+    <value>_Samo sa raspoloživim primjercima</value>
   </data>
   <data name="PasswordText" xml:space="preserve">
     <value>Lozinka: </value>
@@ -380,6 +389,9 @@
   </data>
   <data name="UserAddedMessage" xml:space="preserve">
     <value>Korisnik uspješno dodan.</value>
+  </data>
+  <data name="UserIDLabel" xml:space="preserve">
+    <value>I_D korisnika: </value>
   </data>
   <data name="UsernameDoesntExist" xml:space="preserve">
     <value>Dato korisničko ime ne postoji!</value>
