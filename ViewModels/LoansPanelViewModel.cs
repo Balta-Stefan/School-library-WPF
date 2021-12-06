@@ -368,7 +368,7 @@ namespace School_library.ViewModels
                         continue;
                     if (isbn10.Equals(string.Empty) == false && l.BookCopy.Book.Isbn10.Equals(isbn10) == false)
                         continue;
-                    if (bookTitle.Equals(string.Empty) == false && l.BookCopy.Book.BookTitle.Equals(bookTitle) == false)
+                    if (bookTitle.Equals(string.Empty) == false && l.BookCopy.Book.BookTitle.Contains(bookTitle) == false)
                         continue;
                 }
 

@@ -291,7 +291,7 @@ namespace School_library.ViewModels
             var tempBooks = dbContext.Books.Where(b => (
                                                         (string.IsNullOrEmpty(isbn10Filter) || b.Isbn10.Equals(isbn10Filter))
                                                      && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter))
-                                                     && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Equals(NameFilter))
+                                                     && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Contains(NameFilter))
                                                      && (numberOfCopiesFilter == -1 || b.NumberOfCopies == numberOfCopiesFilter)
                                                      && (selectedPublisher == null || b.Publisher.Equals(selectedPublisher))
                                                      && (selectedGenre == null || b.Genre.Equals(selectedGenre))
