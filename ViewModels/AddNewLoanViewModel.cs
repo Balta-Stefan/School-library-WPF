@@ -78,12 +78,12 @@ namespace School_library.ViewModels
             }
         }
         public ObservableCollection<MemberViewModel> Members { get; private set; } = new ObservableCollection<MemberViewModel>();
-        public ObservableCollection<BookViewModel> Books { get; }
+        public ObservableCollection<BookViewModel> Books { get; } = new ObservableCollection<BookViewModel>();
         public ObservableCollection<BookCopyViewModel> Copies { get; } = new ObservableCollection<BookCopyViewModel>();
         public ICommand addLoanCommand { get; }
         #endregion
 
-        public AddNewLoanViewModel(mydbContext dbContext, ObservableCollection<BookViewModel> books, ObservableCollection<LoanViewModel> loans, LibrarianViewModel loggedInLibrarian, Visibility CRUD_visibility)
+        public AddNewLoanViewModel(mydbContext dbContext, ObservableCollection<LoanViewModel> loans, LibrarianViewModel loggedInLibrarian, Visibility CRUD_visibility)
         {
             this.loggedInLibrarian = loggedInLibrarian;
             this.loans = loans;
@@ -92,12 +92,12 @@ namespace School_library.ViewModels
 
             addLoanCommand = new AddLoanCommand(this);
 
-            Books = books;
-
             var mems = dbContext.Members.Where(m => m.User.Active == 1).ToList();
 
             foreach (Member m in mems)
                 Members.Add(new MemberViewModel(m));
+            foreach (Book b in dbContext.Books.ToList())
+                Books.Add(new BookViewModel(b));
         }
 
         public void addLoan()

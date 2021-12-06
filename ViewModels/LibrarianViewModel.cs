@@ -106,9 +106,9 @@ namespace School_library.ViewModels
             }
         }
 
-        public LibrarianViewModel(Librarian accountant)
+        public LibrarianViewModel(Librarian librarian)
         {
-            this.librarian = accountant;
+            this.librarian = librarian;
         }
 
         public override string ToString()

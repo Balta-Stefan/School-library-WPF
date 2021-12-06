@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Book_copies` (
   CONSTRAINT `bookID`
     FOREIGN KEY (`bookID`)
     REFERENCES `mydb`.`Books` (`bookID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `conditionID`
     FOREIGN KEY (`conditionID`)

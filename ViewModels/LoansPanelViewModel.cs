@@ -264,6 +264,7 @@ namespace School_library.ViewModels
 
             foreach (Book b in dbContext.Books.ToList())
                 books.Add(new BookViewModel(b));
+            
 
             foreach (Loan l in dbContext.Loans.ToList())
                 Loans.Add(new LoanViewModel(l, CRUD_visibility));
@@ -299,7 +300,7 @@ namespace School_library.ViewModels
         {
             Librarian lib = loggedInUser.User.Librarian;
 
-            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel(dbContext, books, Loans, new LibrarianViewModel(lib), CRUD_visibility);
+            AddNewLoanViewModel newLoanViewModel = new AddNewLoanViewModel(dbContext, Loans, new LibrarianViewModel(lib), CRUD_visibility);
             AddNewLoanWindow newLoanWindow = new AddNewLoanWindow()
             {
                 DataContext = newLoanViewModel
@@ -329,6 +330,11 @@ namespace School_library.ViewModels
             foreach (Loan l in dbContext.Loans.ToList())
             {
                 dbContext.Entry(l).Reload();
+                try
+                {
+                    dbContext.Entry(l.BookCopy).Reload();
+                }
+                catch (Exception) { }
                 tempLoans.Add(new LoanViewModel(l, CRUD_visibility));
             }
 

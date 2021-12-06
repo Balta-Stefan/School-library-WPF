@@ -414,4 +414,10 @@
   <data name="AddUserWindowTitle" xml:space="preserve">
     <value>Add new user</value>
   </data>
+  <data name="ViewBookInfoButtonText" xml:space="preserve">
+    <value>View book info</value>
+  </data>
+  <data name="DeleteBookText" xml:space="preserve">
+    <value>Delete book</value>
+  </data>
 </root>

@@ -21,14 +21,29 @@
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="0,0,25,15">
+        <Grid Grid.Row="1" Margin="10,0,25,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="3" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding BooksPanel_AddNewBookCommand}" Content="{x:Static p:Resources.AddNewBookButton}">
+            <Button Grid.Column="2" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding deleteBookCommand}" Content="{x:Static p:Resources.DeleteBookText}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="0" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding viewInfoCommand}" Content="{x:Static p:Resources.ViewBookInfoButtonText}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="4" Style="{DynamicResource ImportantActionButtonStyle}" Visibility="{Binding CRUD_Visibility}" FontWeight="Bold" Command="{Binding BooksPanel_AddNewBookCommand}" Content="{x:Static p:Resources.AddNewBookButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>

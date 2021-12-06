@@ -177,7 +177,7 @@ namespace School_library.Models
                 entity.HasOne(d => d.Book)
                     .WithMany(p => p.BookCopies)
                     .HasForeignKey(d => d.BookId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("bookID");
 
                 entity.HasOne(d => d.Condition)

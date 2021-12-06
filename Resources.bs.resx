@@ -225,6 +225,9 @@
   <data name="DataInputsEmpty" xml:space="preserve">
     <value>Polja ne smiju biti prazna!</value>
   </data>
+  <data name="DeleteBookText" xml:space="preserve">
+    <value>Ukloni knjigu</value>
+  </data>
   <data name="DeleteSelectedCopy" xml:space="preserve">
     <value>Ukloni odabrani primjerak</value>
   </data>
@@ -413,5 +416,8 @@
   </data>
   <data name="UserTypeText" xml:space="preserve">
     <value>Tip korisnika: </value>
+  </data>
+  <data name="ViewBookInfoButtonText" xml:space="preserve">
+    <value>Pregled informacija o knjizi</value>
   </data>
 </root>

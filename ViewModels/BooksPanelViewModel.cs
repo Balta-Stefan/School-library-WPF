@@ -80,7 +80,7 @@ namespace School_library.ViewModels
             }
             set
             {
-                if(value.Equals(string.Empty))
+                if (value.Equals(string.Empty))
                 {
                     numberOfCopiesFilter = -1;
                     OnPropertyChange("NumberOfCopiesFilter");
@@ -115,7 +115,7 @@ namespace School_library.ViewModels
         public GenreViewModel? SelectedGenre
         {
             get { return selectedGenre; }
-            set 
+            set
             {
                 filtersClear = false;
                 selectedGenre = value;
@@ -181,17 +181,16 @@ namespace School_library.ViewModels
             set
             {
                 selectedBook = value;
-                if(value != null)
-                {
-                    OnBookSelect();
-                }
-
+                viewInfoCommand.changeSelection();
+                deleteBookCommand.changeSelection();
                 OnPropertyChange("SelectedBook");
             }
         }
         public ICommand FilterBooksCommand { get; }
         public ICommand ClearBookFiltersCommand { get; }
         public ICommand BooksPanel_AddNewBookCommand { get; }
+        public ViewBookInfoCommand viewInfoCommand { get; }
+        public DeleteBookCommand deleteBookCommand { get; }
 
         public BooksPanelViewModel(mydbContext dbContext, Collection<ResourceDictionary> resourceDictionary, AccountTypesEnum LoggedInUserType)
         {
@@ -221,8 +220,31 @@ namespace School_library.ViewModels
             FilterBooksCommand = new FilterBooksCommand(this);
             ClearBookFiltersCommand = new ClearBookFiltersCommand(this);
             BooksPanel_AddNewBookCommand = new BooksPanel_AddNewBookCommand(this);
+            viewInfoCommand = new ViewBookInfoCommand(this);
+            deleteBookCommand = new DeleteBookCommand(this);
         }
 
+        public void deleteBook()
+        {
+            for(int i = 0; i < books.Count; i++)
+            {
+                if(books.ElementAt(i).Equals(selectedBook.Book))
+                {
+                    try
+                    {
+                        dbContext.Books.Remove(selectedBook.Book);
+                        dbContext.SaveChanges();
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show(School_library.Resources.Error, School_library.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    books.RemoveAt(i);
+                    return;
+                }
+            }
+        }
         public void openAddBookWindow()
         {
             AddNewBookViewModel addBookViewModel = new AddNewBookViewModel(dbContext, genres, publishers, authors, books);
@@ -255,7 +277,7 @@ namespace School_library.ViewModels
             foreach (Book b in dbContext.Books.ToList()) books.Add(new BookViewModel(b));
         }
 
-        private void OnBookSelect()
+        public void OnBookSelect()
         {
             EditBookInfo editDataWindow = new EditBookInfo()
             {
@@ -293,9 +315,9 @@ namespace School_library.ViewModels
                                                      && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter))
                                                      && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Contains(NameFilter))
                                                      && (numberOfCopiesFilter == -1 || b.NumberOfCopies == numberOfCopiesFilter)
-                                                     && (selectedPublisher == null || b.Publisher.Equals(selectedPublisher))
-                                                     && (selectedGenre == null || b.Genre.Equals(selectedGenre))
-                                                     && (selectedAuthor == null || b.Author.Equals(selectedAuthor)))).ToList();
+                                                     && (selectedPublisher == null || selectedPublisher.Equals(b.Publisher))
+                                                     && (selectedGenre == null || selectedGenre.Equals(b.Genre))
+                                                     && (selectedAuthor == null || selectedAuthor.Equals(b.Author)))).ToList();
 
             if(onlyWithAvailableCopiesFilter == true)
             {

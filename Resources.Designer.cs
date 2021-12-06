@@ -385,6 +385,15 @@ namespace School_library {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete book.
+        /// </summary>
+        public static string DeleteBookText {
+            get {
+                return ResourceManager.GetString("DeleteBookText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete selected copy.
         /// </summary>
         public static string DeleteSelectedCopy {
@@ -948,6 +957,15 @@ namespace School_library {
         public static string UserTypeText {
             get {
                 return ResourceManager.GetString("UserTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View book info.
+        /// </summary>
+        public static string ViewBookInfoButtonText {
+            get {
+                return ResourceManager.GetString("ViewBookInfoButtonText", resourceCulture);
             }
         }
     }
