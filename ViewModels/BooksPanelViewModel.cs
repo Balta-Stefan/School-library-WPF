@@ -315,9 +315,9 @@ namespace School_library.ViewModels
                                                      && (string.IsNullOrEmpty(isbn13Filter) || b.Isbn13.Equals(isbn13Filter))
                                                      && (string.IsNullOrEmpty(NameFilter) || b.BookTitle.Contains(NameFilter))
                                                      && (numberOfCopiesFilter == -1 || b.NumberOfCopies == numberOfCopiesFilter)
-                                                     && (selectedPublisher == null || selectedPublisher.Equals(b.Publisher))
-                                                     && (selectedGenre == null || selectedGenre.Equals(b.Genre))
-                                                     && (selectedAuthor == null || selectedAuthor.Equals(b.Author)))).ToList();
+                                                     && (selectedPublisher == null || selectedPublisher.Publisher.PublisherId == b.PublisherId)
+                                                     && (selectedGenre == null || selectedGenre.Genre.GenreId == b.Genre)
+                                                     && (selectedAuthor == null || selectedAuthor.AuthorId == b.AuthorId))).ToList();
 
             if(onlyWithAvailableCopiesFilter == true)
             {
