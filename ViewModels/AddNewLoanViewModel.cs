@@ -20,6 +20,8 @@ namespace School_library.ViewModels
         private LibrarianViewModel loggedInLibrarian;
         private ObservableCollection<LoanViewModel> loans;
 
+        private string filterBookValue;
+
         private readonly mydbContext dbContext;
 
         private Visibility CRUD_visibility;
@@ -46,7 +48,26 @@ namespace School_library.ViewModels
                 OnPropertyChange("SelectedMember");
             }
         }
-
+        public string FilterBookValue
+        {
+            get { return filterBookValue; }
+            set
+            {
+                filterBookValue = value;
+                SelectedBook = null;
+                Books.Clear();
+                if(value.Equals(string.Empty))
+                {
+                    foreach (Book b in dbContext.Books.ToList())
+                        Books.Add(new BookViewModel(b));
+                }
+                else
+                {
+                    foreach (Book b in dbContext.Books.Where(b => b.BookTitle.Contains(value)))
+                        Books.Add(new BookViewModel(b));
+                }
+            }
+        }
         public BookViewModel? SelectedBook
         {
             get { return selectedBook; }

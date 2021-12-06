@@ -26,7 +26,8 @@
             <ComboBox ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedMember}" IsTextSearchEnabled="True"/>
 
             <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.AddLoanWindow_book}"/>
-            <ComboBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}"/>
+            <TextBox Text="{Binding FilterBookValue, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListBox MaxHeight="100" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}"/>
 
             <TextBlock Foreground="{DynamicResource TextBlockForegroundColor}" Text="{x:Static p:Resources.AddLoanWindow_copy}"/>
             <ComboBox ItemsSource="{Binding Copies}" SelectedItem="{Binding SelectedCopy}"/>
